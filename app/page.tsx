@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectLabel, SelectItem } from "@/components/ui/select";
-import { ArrowDown, Search, MapPin, SlidersHorizontal } from "lucide-react";
+import { ArrowDown, Search, MapPin, SlidersHorizontal, ChartBarStacked, House, CircleDollarSign, MapPinHouse, Headset } from "lucide-react";
 import { Caveat } from "next/font/google";
 import { Exo_2 } from "next/font/google";
 import { Button } from "@/components/ui/button";
@@ -58,7 +58,7 @@ export default function Home() {
                   <Select >
                     <SelectTrigger className="relative bg-white font-medium text-[18px] border-gray-200 hover:border-blue-300 transition-all duration-200 w-[240px] py-7 rounded-lg">
                       <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-blue-500 text-2xl font-bold" />
+                        <ChartBarStacked />
                         <SelectValue placeholder="Category" />
                       </div>
                     
@@ -79,7 +79,7 @@ export default function Home() {
                   <Select>
                     <SelectTrigger className="relative font-medium text-[18px] bg-white border-gray-200 hover:border-blue-300 transition-all duration-200 w-60 py-7  h-12 rounded-lg">
                       <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-cyan-500 text-black" />
+                       <House />
                         <SelectValue placeholder="Property Type" />
                       </div>
                     
@@ -104,7 +104,7 @@ export default function Home() {
                   <Select>
                     <SelectTrigger className="relative text-[18px] font-medium bg-white border-gray-200 hover:border-blue-300 transition-all duration-200 w-60  py-7 h-12 rounded-lg">
                       <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-green-500" />
+                        <CircleDollarSign />
                         <SelectValue placeholder="Price Range" />
                       </div> 
                      
@@ -125,10 +125,10 @@ export default function Home() {
                   <Select>
                     <SelectTrigger className="relative text-[18px] font-meduim bg-white border-gray-200 hover:border-blue-300 transition-all duration-200 w-60 py-7 h-12 rounded-lg">
                       <div className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4 text-gray-500" />
+                        <MapPinHouse />
                         <SelectValue placeholder="Location" />
                       </div>
-                      <ArrowDown className="h-4 w-4 opacity-50" />
+                    
                     </SelectTrigger>
                     <SelectContent className="bg-white border-gray-200 shadow-xl rounded-xl">
                       <SelectGroup>
@@ -158,9 +158,8 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
             <div className="flex flex-col items-center text-center space-y-4">
-              <div className="p-4 rounded-xl bg-linear-to-br from-blue-50 to-cyan-50 group-hover:from-blue-100 group-hover:to-cyan-100 transition-all duration-300">
-                <div className="text-3xl">🏠</div>
-              </div>
+                <House className="text-black h-22 w-13"/>
+              
               <h3 className={`${exo2.className} text-xl font-bold text-gray-900`}>Premium Properties</h3>
               <p className="text-gray-600">Hand-picked homes with luxury amenities and modern design</p>
             </div>
@@ -168,9 +167,7 @@ export default function Home() {
 
           <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
             <div className="flex flex-col items-center text-center space-y-4">
-              <div className="p-4 rounded-xl bg-linear-to-br from-blue-50 to-cyan-50 group-hover:from-blue-100 group-hover:to-cyan-100 transition-all duration-300">
-                <div className="text-3xl">📍</div>
-              </div>
+              <MapPinHouse className="text-black h-22 w-13"/>
               <h3 className={`${exo2.className} text-xl font-bold text-gray-900`}>Prime Locations</h3>
               <p className="text-gray-600">Best neighborhoods with excellent connectivity and amenities</p>
             </div>
@@ -178,9 +175,7 @@ export default function Home() {
 
           <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
             <div className="flex flex-col items-center text-center space-y-4">
-              <div className="p-4 rounded-xl bg-linear-to-br from-blue-50 to-cyan-50 group-hover:from-blue-100 group-hover:to-cyan-100 transition-all duration-300">
-                <div className="text-3xl">🤝</div>
-              </div>
+              <Headset className="text-black h-22 w-13"/>
               <h3 className={`${exo2.className} text-xl font-bold text-gray-900`}>Expert Support</h3>
               <p className="text-gray-600">Dedicated team to guide you through every step</p>
             </div>
