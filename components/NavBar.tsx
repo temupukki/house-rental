@@ -3,14 +3,12 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ReactNode } from "react";
-import { Exo_2 } from "next/font/google"
+import { Exo_2 } from "next/font/google";
 
 const exo2 = Exo_2({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
-})
-
-
+});
 
 type NavItem = {
   label: string;
@@ -37,7 +35,7 @@ const navItems: NavItem[] = [
 ];
 export default function NavBar() {
   return (
-    <div className="bg-white" >
+    <div className="bg-white">
       <nav className="flex gap-140 pl-30 pt-3">
         <Link href="/">
           <motion.img
@@ -49,8 +47,9 @@ export default function NavBar() {
           />
         </Link>
 
-        <div className={`text-black font-medium flex justify-center gap-8 pt-9 text-xl ${exo2.className}`}
- >
+        <div
+          className={`text-black font-medium flex justify-center gap-8 pt-9 text-xl ${exo2.className}`}
+        >
           {navItems.map((items) => (
             <motion.div
               key={items.href}
