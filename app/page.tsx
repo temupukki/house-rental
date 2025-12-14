@@ -136,6 +136,16 @@ export default function Home() {
       description: "",
     },
   });
+
+  type FormValues = z.infer<typeof formSchema>;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+  });
   function onSubmit(values: any) {
     console.log("Submitted:", values);
   }
@@ -543,9 +553,9 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="grid grid-cols-2 bg-linear-to-r from-blue-400 via-blue-100 to-gray-600 h-90 mt-20">
+      <div className="grid grid-cols-2 bg-linear-to-r from-blue-400 via-blue-100 to-gray-600 h-190 mt-20">
         <div>
-          <Card className="mx-20 mt-10 bg-linear-to-r from-gray-800 to-black">
+          <Card className="ml-60 mt-20 bg-linear-to-r from-gray-800 to-black w-140 ">
             <h1
               className={`${exo2.className} text-3xl font-bold text-white pl-14 pt-4`}
             >
@@ -556,8 +566,55 @@ export default function Home() {
             >
               We’d love to hear from you. Send us a message anytime
             </p>
-          
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="text-white ml-14 mt-3">
+              
+              <input
+                className="border px-4 py-6 rounded-md w-110  text-white bg-white placeholder:text-gray-600 placeholder:text-xl   " 
+                {...register("name")}
+                placeholder="Your name"
+              />
+              {errors.name && (
+                <p className="text-red-500 text-sm">{errors.name.message}</p>
+              )}
+            </div>
+            <div className="ml-14 mt-6">
+             
+              <input
+                className="border px-4 py-6 rounded-md w-110  text-white bg-white placeholder:text-gray-600 placeholder:text-xl"
+                {...register("email")}
+                placeholder="Your email"
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm">{errors.email.message}</p>
+              )}
+            </div>
+            <div className="ml-14 mt-6">
+              
+              <textarea
+                className="border px-4 py-6 rounded-md w-110  h-49 text-white bg-white placeholder:text-gray-600 placeholder:text-xl"
+                {...register("description")}
+                placeholder="Your message"
+              />
+              {errors.description && (
+                <p className="text-red-500 text-sm">
+                  {errors.description.message}
+                </p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="bg-blue-600 text-white px-6 py-4  ml-14 mt-1 font-medium text-xl rounded-lg"
+            >
+              Send message
+            </button>
+          </form>
           </Card>
+          
+        </div>
+        <div>
+          
         </div>
       </div>
     </div>
