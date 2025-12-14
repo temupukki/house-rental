@@ -626,7 +626,7 @@ export default function Home() {
         <h1 className="text-7xl font-bold">What city you live in ?</h1>
         <p className={`${caveat.className} mt-6 text-2xl font-medium`}>Let us know which city you live in so we can serve you better and match you with the right local options.</p>
       </div>
-      <div className="grid grid-cols-[80%_20%] mt-18">
+      <div className="grid grid-cols-[80%_20%] mt-18 -mb-18">
         <div className="h-240 grid grid-rows-2">
           <div className=" grid grid-cols-[70%_30%]">
             <div className="mx-6  ">
@@ -666,8 +666,6 @@ export default function Home() {
               <img src="/mekelle.jfif" alt="Mekelle" className="rounded-xl w-[310px] h-[760px] mx-3"  />
               <span className="absolute z-10 text-2xl font-bold -mt-23 ml-9 text-white tracking-[2px]">Mekelle</span>
               <span className="absolute z-10 text-xl font-meduim -mt-13 ml-9 text-white tracking-[2px]">60 Properties</span>
-
-
          </div>
 
       </div>
