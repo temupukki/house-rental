@@ -28,6 +28,7 @@ import {
   Headset,
   BedDouble,
   Bath,
+  Expand,
 } from "lucide-react";
 import { Caveat } from "next/font/google";
 import { Exo_2 } from "next/font/google";
@@ -336,9 +337,9 @@ export default function Home() {
           Fast, verified, and made for modern Ethiopia.
         </p>
       </div>
-      <div className="grid grid-cols-3 gap-3.5 mx-42 mt-8 ">
+      <div className="grid grid-cols-3   mx-53 mt-8  ">
         {properties.map((property) => (
-          <Card key={property.id} className="overflow-hidden p-0 rounded-sm ">
+          <Card key={property.id} className="overflow-hidden p-0 rounded-sm w-100 ">
             <span
               className={`absolute m-4 px-4 py-1 text-sm rounded-lg font-semibold z-10 ${
                 property.status === "for-sale"
@@ -367,13 +368,16 @@ export default function Home() {
                   {property.price} {property.priceUnit}
                 </span>
                 <hr className="my-3" />
-                <div className="text-sm text-muted-foreground flex gap-3.5 mt-3">
-                 <BedDouble /> {property.bedrooms}  
-                 <Bath />{property .bathrooms} 
+                <div className="text-sm text-black flex gap-14.5 mt-3">
+                 <span className="flex gap-1.5"><BedDouble />{property.bedrooms}</span>  
+                 <span className="flex gap-1.5"><Bath />{property.bathrooms}</span> 
+                 <span className="flex gap-1.5"><Expand />{property.area}</span> 
                 </div>
-                <div className="flex flex-col-4 gap-3.5 ">
+                <div className="flex flex-col-4 gap-7.5 text-sm mt-1">
                   <p>Bedrooms</p>
                   <p>Bathrooms</p>
+                  <p>Total area</p>
+
 
                 </div>
               </div>
