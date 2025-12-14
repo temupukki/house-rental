@@ -36,6 +36,9 @@ import { Exo_2 } from "next/font/google";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 
 const caveat = Caveat({
   subsets: ["latin"],
@@ -101,6 +104,13 @@ const properties: Property[] = [
     isFeatured: true,
   },
 ];
+const formScema=z.object({
+  name:z.string().min(3,{message:"Name must be atleast 2 characters"}),
+  email:z.email("Please enter the correct email format."),
+  description:z.string().min(10,{message:"descrtion mustbe atleast 10 chars "})
+                .max(160,{message:"The limit is 160 cahracters"})
+})
+
 
 export default function Home() {
   return (
@@ -441,7 +451,7 @@ export default function Home() {
           </Card>
         </div>
       </div>
-      <div className="grid grid-cols-2 h-100 w-full bg-gray-800">
+      <div className="grid grid-cols-2 h-110 w-full bg-gray-800">
         <div className="">
           <img src="logo.png" 
           alt="logo"
@@ -460,7 +470,7 @@ export default function Home() {
         
 
       </div>
-      <div className="grid grid-cols-2  mt-40 ">
+      <div className="grid grid-cols-2  mt-30 ">
         <div className="ml-90 mt-16">
           <h1 className={`${exo2.className} text-5xl  font-black`}> What our clients say  </h1>
           <h1 className={`${exo2.className} text-5xl ml-33  mt-4 font-black`}> about us  </h1>
