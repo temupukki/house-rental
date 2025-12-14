@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Card,
   CardContent,
@@ -36,9 +35,24 @@ import { Exo_2 } from "next/font/google";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  ControllerFieldState,
+  ControllerRenderProps,
+  FieldValues,
+  Form,
+  useForm,
+  UseFormStateReturn,
+} from "react-hook-form";
+import { z } from "zod";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 const caveat = Caveat({
   subsets: ["latin"],
@@ -104,15 +118,27 @@ const properties: Property[] = [
     isFeatured: true,
   },
 ];
-const formScema=z.object({
-  name:z.string().min(3,{message:"Name must be atleast 2 characters"}),
-  email:z.email("Please enter the correct email format."),
-  description:z.string().min(10,{message:"descrtion mustbe atleast 10 chars "})
-                .max(160,{message:"The limit is 160 cahracters"})
-})
-
+const formSchema = z.object({
+  name: z.string().min(3, { message: "Name must be atleast 2 characters" }),
+  email: z.email("Please enter the correct email format."),
+  description: z
+    .string()
+    .min(10, { message: "descrtion mustbe atleast 10 chars " })
+    .max(160, { message: "The limit is 160 cahracters" }),
+});
 
 export default function Home() {
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      description: "",
+    },
+  });
+  function onSubmit(values: any) {
+    console.log("Submitted:", values);
+  }
   return (
     <div className="bg-white min-h-screen">
       <div className="relative bg-linear-to-r from-gray-900 via-gray-800 to-gray-900 mx-4 md:mx-10 mt-4 rounded-3xl overflow-hidden">
@@ -351,7 +377,10 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-3   mx-53 mt-8  ">
         {properties.map((property) => (
-          <Card key={property.id} className="overflow-hidden p-0 rounded-sm w-100 ">
+          <Card
+            key={property.id}
+            className="overflow-hidden p-0 rounded-sm w-100 "
+          >
             <span
               className={`absolute m-4 px-4 py-1 text-sm rounded-lg font-semibold z-10 ${
                 property.status === "for-sale"
@@ -375,29 +404,37 @@ export default function Home() {
             </CardHeader>
 
             <CardContent>
-              <div >
+              <div>
                 <span className="font-bold text-primary ">
                   {property.price} {property.priceUnit}
                 </span>
                 <hr className="my-3" />
                 <div className="text-sm text-black flex gap-14.5 mt-3">
-                 <span className="flex gap-1.5"><BedDouble />{property.bedrooms}</span>  
-                 <span className="flex gap-1.5"><Bath />{property.bathrooms}</span> 
-                 <span className="flex gap-1.5"><Expand />{property.area}</span> 
-                 <motion.button className="-ml-4"
-                 whileHover={{scale:1.2}}
-                 whileTap={{scale:0.94}}
-                 whileInView={{scale:1.1}}
-                 ><BadgeInfo /></motion.button> 
-
+                  <span className="flex gap-1.5">
+                    <BedDouble />
+                    {property.bedrooms}
+                  </span>
+                  <span className="flex gap-1.5">
+                    <Bath />
+                    {property.bathrooms}
+                  </span>
+                  <span className="flex gap-1.5">
+                    <Expand />
+                    {property.area}
+                  </span>
+                  <motion.button
+                    className="-ml-4"
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.94 }}
+                    whileInView={{ scale: 1.1 }}
+                  >
+                    <BadgeInfo />
+                  </motion.button>
                 </div>
                 <div className="flex flex-col-4 gap-7.5 text-sm mt-1">
                   <p>Bedrooms</p>
                   <p>Bathrooms</p>
                   <p>Total area</p>
-                 
-
-
                 </div>
               </div>
             </CardContent>
@@ -453,41 +490,76 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-2 h-110 w-full bg-gray-800">
         <div className="">
-          <img src="logo.png" 
-          alt="logo"
-          className="ml-88 my-19 w-70 h-60 rounded-md"
+          <img
+            src="logo.png"
+            alt="logo"
+            className="ml-88 my-19 w-70 h-60 rounded-md"
           />
-          
         </div>
         <div className="mt-30 w-130">
-          <h1 className={`${exo2.className} text-white mb-4 text-3xl text font-bold`}>
+          <h1
+            className={`${exo2.className} text-white mb-4 text-3xl text font-bold`}
+          >
             Putting a plan in action,to assure your satisifaction.
           </h1>
-          <p className={`${caveat.className} text-xl text-white`}>Putting a plan into action is more than a promise — it’s our standard. Every step is crafted with care, precision, and a focus on what matters to you. Your satisfaction isn’t the goal; it’s the outcome we build for from day one.</p>
-
-
+          <p className={`${caveat.className} text-xl text-white`}>
+            Putting a plan into action is more than a promise — it’s our
+            standard. Every step is crafted with care, precision, and a focus on
+            what matters to you. Your satisfaction isn’t the goal; it’s the
+            outcome we build for from day one.
+          </p>
         </div>
-        
-
       </div>
       <div className="grid grid-cols-2  mt-30 ">
         <div className="ml-90 mt-16">
-          <h1 className={`${exo2.className} text-5xl  font-black`}> What our clients say  </h1>
-          <h1 className={`${exo2.className} text-5xl ml-33  mt-4 font-black`}> about us  </h1>
-          <h1 className={`${exo2.className} text-9xl mt-1 ml-53 font-black`}> "</h1>
-          <p className={`${caveat.className} -mt-9 text-2xl`}>" Working with this team was one of the best decisions I’ve made. 
-                     They understood exactly what I needed and delivered with care and precision.
-                      The entire experience felt smooth, professional, and genuinely supportive "</p>
-             <h1 className={`${exo2.className} ml-42 font-semibold mt-4 text-3xl`}>Pukki T.</h1>
-             <p className="text-gray-800 ml-49">Buyer</p>
-             
-    </div>
-    <div>
-      <img src="/home.jfif" alt="home image" className="mx-36 h-140 w-140 rounded-md" />
-    </div>
-
+          <h1 className={`${exo2.className} text-5xl  font-black`}>
+            {" "}
+            What our clients say{" "}
+          </h1>
+          <h1 className={`${exo2.className} text-5xl ml-33  mt-4 font-black`}>
+            {" "}
+            about us{" "}
+          </h1>
+          <h1 className={`${exo2.className} text-9xl mt-1 ml-53 font-black`}>
+            {" "}
+            "
+          </h1>
+          <p className={`${caveat.className} -mt-9 text-2xl`}>
+            " Working with this team was one of the best decisions I’ve made.
+            They understood exactly what I needed and delivered with care and
+            precision. The entire experience felt smooth, professional, and
+            genuinely supportive "
+          </p>
+          <h1 className={`${exo2.className} ml-42 font-semibold mt-4 text-3xl`}>
+            Pukki T.
+          </h1>
+          <p className="text-gray-800 ml-49">Buyer</p>
+        </div>
+        <div>
+          <img
+            src="/home.jfif"
+            alt="home image"
+            className="mx-36 h-140 w-140 rounded-md"
+          />
+        </div>
       </div>
-
+      <div className="grid grid-cols-2 bg-linear-to-r from-blue-400 via-blue-100 to-gray-600 h-90 mt-20">
+        <div>
+          <Card className="mx-20 mt-10 bg-linear-to-r from-gray-800 to-black">
+            <h1
+              className={`${exo2.className} text-3xl font-bold text-white pl-14 pt-4`}
+            >
+              Get in touch
+            </h1>
+            <p
+              className={`${caveat.className} text-white -mt-3 ml-14 text-2xl `}
+            >
+              We’d love to hear from you. Send us a message anytime
+            </p>
+          
+          </Card>
+        </div>
+      </div>
     </div>
   );
-  }
+}
