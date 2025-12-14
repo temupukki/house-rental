@@ -457,8 +457,27 @@ export default function Home() {
 
 
         </div>
+        
 
       </div>
+      <div className="grid grid-cols-2  mt-40 ">
+        <div className="ml-90 mt-16">
+          <h1 className={`${exo2.className} text-5xl  font-black`}> What our clients say  </h1>
+          <h1 className={`${exo2.className} text-5xl ml-33  mt-4 font-black`}> about us  </h1>
+          <h1 className={`${exo2.className} text-9xl mt-1 ml-53 font-black`}> "</h1>
+          <p className={`${caveat.className} -mt-9 text-2xl`}>" Working with this team was one of the best decisions I’ve made. 
+                     They understood exactly what I needed and delivered with care and precision.
+                      The entire experience felt smooth, professional, and genuinely supportive "</p>
+             <h1 className={`${exo2.className} ml-42 font-semibold mt-4 text-3xl`}>Pukki T.</h1>
+             <p className="text-gray-800 ml-49">Buyer</p>
+             
+    </div>
+    <div>
+      <img src="/home.jfif" alt="home image" className="mx-36 h-140 w-140 rounded-md" />
+    </div>
+
+      </div>
+
     </div>
   );
-}
+  }
