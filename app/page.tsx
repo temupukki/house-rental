@@ -53,6 +53,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { p } from "framer-motion/client";
 
 const caveat = Caveat({
   subsets: ["latin"],
@@ -553,7 +554,7 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="grid grid-cols-2 bg-linear-to-r from-blue-400 via-blue-100 to-gray-600 h-190 mt-20">
+      <div className="grid grid-cols-2 bg-linear-to-r from-gray-900 via-blue-600 to-gray-900 h-190 mt-20">
         <div>
           <Card className="ml-60 mt-20 bg-linear-to-r from-gray-800 to-black w-140 ">
             <h1
@@ -614,8 +615,61 @@ export default function Home() {
           
         </div>
         <div>
+          <h1 className={`${exo2.className} text-5xl tracking-[4px] font-bold text-white flex  mt-80 justify-center items-center  `}>Putting aplan to action,
+            to assure your satisifaction
+          </h1>
+          <p className={`${caveat.className} text-3xl mt-6 text-white`}>Your comfort starts with a conversation — let’s find the right place for you</p>
           
         </div>
+      </div> 
+      <div className="flex flex-col items-center mt-28 ">
+        <h1 className="text-7xl font-bold">What city you live in ?</h1>
+        <p className={`${caveat.className} mt-6 text-2xl font-medium`}>Let us know which city you live in so we can serve you better and match you with the right local options.</p>
+      </div>
+      <div className="grid grid-cols-[80%_20%] mt-18">
+        <div className="h-240 grid grid-rows-2">
+          <div className=" grid grid-cols-[70%_30%]">
+            <div className="mx-6  ">
+              <img src="addis.jfif" alt="Addis Ababa" className="rounded-xl  h-96 w-[900px]" />
+              <span className="absolute z-10 text-2xl font-bold -mt-27 ml-9 text-white tracking-[2px]">Addis Ababa</span>
+              <span className="absolute z-10 text-xl font-meduim -mt-18 ml-9 text-white tracking-[2px]">130 Properties</span>
+
+            </div>
+            <div className="">
+              <img src="/gondar.jfif" alt="Gondar" className="rounded-xl h-96 w-[400px]" />
+              <span className="absolute z-10 text-2xl font-bold -mt-23 ml-9 text-white tracking-[2px]">Gondar</span>
+              <span className="absolute z-10 text-xl font-meduim -mt-13 ml-9 text-white tracking-[2px]">30 Properties</span>
+
+
+            </div>
+
+          </div>
+          <div className="grid grid-cols-[30%_70%] -mt-16">
+               <div className="mx-6">
+              <img src="/hawassa.jfif" alt="Hawassa" className="rounded-xl h-86 w-[420px]" />
+              <span className="absolute z-10 text-2xl font-bold -mt-23 ml-9 text-white tracking-[2px]">Hawassa</span>
+              <span className="absolute z-10 text-xl font-meduim -mt-13 ml-9 text-white tracking-[2px]">60 Properties</span>
+
+
+            </div>
+            <div className="">
+              <img src="/bahir.jfif" alt="Bahir dar" className="rounded-xl  h-86 w-[942px]" />
+              <span className="absolute z-10 text-2xl font-bold -mt-27 ml-9 text-white tracking-[2px]">Bahir dar </span>
+              <span className="absolute z-10 text-xl font-meduim -mt-18 ml-9 text-white tracking-[2px]">80 Properties</span>
+
+            </div>
+
+          </div>
+
+        </div>
+        <div className="">
+              <img src="/mekelle.jfif" alt="Mekelle" className="rounded-xl w-[310px] h-[760px] mx-3"  />
+              <span className="absolute z-10 text-2xl font-bold -mt-23 ml-9 text-white tracking-[2px]">Mekelle</span>
+              <span className="absolute z-10 text-xl font-meduim -mt-13 ml-9 text-white tracking-[2px]">60 Properties</span>
+
+
+         </div>
+
       </div>
     </div>
   );
