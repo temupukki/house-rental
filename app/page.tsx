@@ -29,11 +29,13 @@ import {
   BedDouble,
   Bath,
   Expand,
+  BadgeInfo,
 } from "lucide-react";
 import { Caveat } from "next/font/google";
 import { Exo_2 } from "next/font/google";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 
 const caveat = Caveat({
   subsets: ["latin"],
@@ -372,11 +374,18 @@ export default function Home() {
                  <span className="flex gap-1.5"><BedDouble />{property.bedrooms}</span>  
                  <span className="flex gap-1.5"><Bath />{property.bathrooms}</span> 
                  <span className="flex gap-1.5"><Expand />{property.area}</span> 
+                 <motion.button className="-ml-4"
+                 whileHover={{scale:1.2}}
+                 whileTap={{scale:0.94}}
+                 whileInView={{scale:1.1}}
+                 ><BadgeInfo /></motion.button> 
+
                 </div>
                 <div className="flex flex-col-4 gap-7.5 text-sm mt-1">
                   <p>Bedrooms</p>
                   <p>Bathrooms</p>
                   <p>Total area</p>
+                 
 
 
                 </div>
@@ -431,6 +440,24 @@ export default function Home() {
             </div>
           </Card>
         </div>
+      </div>
+      <div className="grid grid-cols-2 h-100 w-full bg-gray-800">
+        <div className="">
+          <img src="logo.png" 
+          alt="logo"
+          className="ml-88 my-19 w-70 h-60 rounded-md"
+          />
+          
+        </div>
+        <div className="mt-30 w-130">
+          <h1 className={`${exo2.className} text-white mb-4 text-3xl text font-bold`}>
+            Putting a plan in action,to assure your satisifaction.
+          </h1>
+          <p className={`${caveat.className} text-xl text-white`}>Putting a plan into action is more than a promise — it’s our standard. Every step is crafted with care, precision, and a focus on what matters to you. Your satisfaction isn’t the goal; it’s the outcome we build for from day one.</p>
+
+
+        </div>
+
       </div>
     </div>
   );
