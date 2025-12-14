@@ -1,6 +1,6 @@
 'use client'
 
-import { Card } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectLabel, SelectItem } from "@/components/ui/select";
 import { ArrowDown, Search, MapPin, SlidersHorizontal, ChartBarStacked, House, CircleDollarSign, MapPinHouse, Headset } from "lucide-react";
 import { Caveat } from "next/font/google";
@@ -17,6 +17,60 @@ const exo2 = Exo_2({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
 });
+type Property = {
+  id: string;
+  title: string;
+  location: string;
+  price: number;
+  priceUnit: string;
+  status: string;
+  image: string;
+  bedrooms: number;
+  bathrooms: number;
+  area: string;
+  isFeatured: boolean;
+};
+  const properties:Property[] = [
+    {
+      id: "prop_001",
+      title: "Modern 2‑Bedroom Apartment",
+      location: "Bole, Addis Ababa",
+      price: 18000,
+      priceUnit: "ETB/month",
+      status: "for-rent",
+      image: "https://via.placeholder.com/400x250",
+      bedrooms: 2,
+      bathrooms: 2,
+      area: "95 sqm",
+      isFeatured: true
+    },
+    {
+      id: "prop_002",
+      title: "Cozy Single Room",
+      location: "4 Kilo, Addis Ababa",
+      price: 6500,
+      priceUnit: "ETB/month",
+      status: "for-rent",
+      image: "https://via.placeholder.com/400x250",
+      bedrooms: 1,
+      bathrooms: 1,
+      area: "28 sqm",
+      isFeatured: false
+    },
+    {
+      id: "prop_003",
+      title: "Family House with Garden",
+      location: "Ayat, Addis Ababa",
+      price: 4_500_000,
+      priceUnit: "ETB",
+      status: "for-sale",
+      image: "https://via.placeholder.com/400x250",
+      bedrooms: 4,
+      bathrooms: 3,
+      area: "210 sqm",
+      isFeatured: true
+    }
+  ];
 
 export default function Home() {
   return (
@@ -152,6 +206,46 @@ export default function Home() {
             </div>
           </div>
         </Card>
+      </div>
+      <div className="flex flex-col justify-center items-center">
+        <h1 className="text-4xl  font-bold my-6" >Discover your feautred property</h1>
+        <p className={`${caveat.className} text-xl`}>Fast, verified, and made for modern Ethiopia.</p>
+      </div>
+      <div className="grid grid-cols-3 gap-3.5 mx-42 mt-8">
+           {properties.map((property) => (
+        <Card key={properties.id} className="overflow-hidden ">
+           <span
+              className={`px-4 py-1 ml-4 text-l w-26.5 rounded-lg font-semibold  ${
+                properties.status === "for-sale"
+                  ? "bg-red-600 text-white"
+                  : "bg-green-600 text-white"
+              }`}
+            >
+              {properties.status === "for-sale" ? "For Sale" : "For Rent"}
+            </span>
+          <img src={properties.image} alt="property image"  className="h-40 w-full object-cover"/>
+          
+           <CardHeader>
+            <CardTitle className="text-lg">{properties.title}</CardTitle>
+            <p className="text-sm text-muted-foreground">{properties.location}</p>
+          </CardHeader>
+
+          <CardContent>
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-primary">
+                {properties.price} {properties.priceUnit}
+              </span>
+              <span className="text-sm text-muted-foreground">
+                {properties.bedrooms} bd • {properties.bathrooms} ba
+              </span>
+            </div>
+          </CardContent>
+
+          
+          
+
+
+        </Card> ))}
       </div>
 
       <div className="max-w-6xl mx-auto px-4 md:px-8 mt-16 mb-20">
