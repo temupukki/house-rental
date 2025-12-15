@@ -122,16 +122,8 @@ export default function Footer(){
                             Get exclusive property listings and market insights
                         </p>
                         <div className="space-y-4">
-                            <div className="relative">
-                                <Input 
-                                    placeholder="Enter your email" 
-                                    className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-400 pr-24"
-                                />
-                                <Button className="absolute right-1 top-1 bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700">
-                                    Subscribe
-                                </Button>
-                            </div>
-                            <div className="space-y-3 pt-4">
+                        
+                            <div className="space-y-3 pt-2">
                                 <div className="flex items-center gap-3">
                                     <Phone className="h-4 w-4 text-blue-400" />
                                     <a href="tel:+251911234567" className="text-gray-300 hover:text-white transition-colors duration-300">
