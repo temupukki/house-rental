@@ -28,6 +28,7 @@ import {
   Award,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -106,23 +107,12 @@ export default function LoginPage() {
     if (!validateForm()) {
       return;
     }
-
     setIsSubmitting(true);
-
-    if (rememberMe) {
-      localStorage.setItem("rental_app_email", email);
-    } else {
-      localStorage.removeItem("rental_app_email");
-    }
-
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    setIsSubmitting(false);
-    setIsSuccess(true);
-
-    setTimeout(() => {
-      router.push("/dashboard");
-    }, 1500);
+    const { data, error } = await authClient.signIn.email({
+      email,
+      password,
+      callbackURL: "/dashboard",
+    });
   };
 
   const handleSocialLogin = (provider: string) => {
