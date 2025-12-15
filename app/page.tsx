@@ -387,293 +387,353 @@ export default function Home() {
         </p>
       </div>
       <section id="properties">
-      <div className="grid grid-cols-3   mx-53 my-18  ">
-        {properties.map((property) => (
-          <Card
-            key={property.id}
-            className="overflow-hidden p-0 rounded-sm w-100 "
-          >
-            <span
-              className={`absolute m-4 px-4 py-1 text-sm rounded-lg font-semibold z-10 ${
-                property.status === "for-sale"
-                  ? "bg-red-600 text-white"
-                  : "bg-green-600 text-white"
-              }`}
+        <div className="grid grid-cols-3   mx-53 my-18  ">
+          {properties.map((property) => (
+            <Card
+              key={property.id}
+              className="overflow-hidden p-0 rounded-sm w-100 "
             >
-              {property.status === "for-sale" ? "For Sale" : "For Rent"}
-            </span>
-            <img
-              src={property.image}
-              alt="property image"
-              className="h-40 w-full object-cover"
-            />
+              <span
+                className={`absolute m-4 px-4 py-1 text-sm rounded-lg font-semibold z-10 ${
+                  property.status === "for-sale"
+                    ? "bg-red-600 text-white"
+                    : "bg-green-600 text-white"
+                }`}
+              >
+                {property.status === "for-sale" ? "For Sale" : "For Rent"}
+              </span>
+              <img
+                src={property.image}
+                alt="property image"
+                className="h-40 w-full object-cover"
+              />
 
-            <CardHeader>
-              <CardTitle className="text-lg">{property.title}</CardTitle>
-              <p className="text-sm text-muted-foreground">
-                {property.location}
-              </p>
-            </CardHeader>
+              <CardHeader>
+                <CardTitle className="text-lg">{property.title}</CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  {property.location}
+                </p>
+              </CardHeader>
 
-            <CardContent>
-              <div>
-                <span className="font-bold text-primary ">
-                  {property.price} {property.priceUnit}
-                </span>
-                <hr className="my-3" />
-                <div className="text-sm text-black flex gap-14.5 mt-3">
-                  <span className="flex gap-1.5">
-                    <BedDouble />
-                    {property.bedrooms}
+              <CardContent>
+                <div>
+                  <span className="font-bold text-primary ">
+                    {property.price} {property.priceUnit}
                   </span>
-                  <span className="flex gap-1.5">
-                    <Bath />
-                    {property.bathrooms}
-                  </span>
-                  <span className="flex gap-1.5">
-                    <Expand />
-                    {property.area}
-                  </span>
-                  <motion.button
-                    className="-ml-4"
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.94 }}
-                    whileInView={{ scale: 1.1 }}
-                  >
-                    <BadgeInfo />
-                  </motion.button>
+                  <hr className="my-3" />
+                  <div className="text-sm text-black flex gap-14.5 mt-3">
+                    <span className="flex gap-1.5">
+                      <BedDouble />
+                      {property.bedrooms}
+                    </span>
+                    <span className="flex gap-1.5">
+                      <Bath />
+                      {property.bathrooms}
+                    </span>
+                    <span className="flex gap-1.5">
+                      <Expand />
+                      {property.area}
+                    </span>
+                    <motion.button
+                      className="-ml-4"
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.94 }}
+                      whileInView={{ scale: 1.1 }}
+                    >
+                      <BadgeInfo />
+                    </motion.button>
+                  </div>
+                  <div className="flex flex-col-4 gap-7.5 text-sm mt-1">
+                    <p>Bedrooms</p>
+                    <p>Bathrooms</p>
+                    <p>Total area</p>
+                  </div>
                 </div>
-                <div className="flex flex-col-4 gap-7.5 text-sm mt-1">
-                  <p>Bedrooms</p>
-                  <p>Bathrooms</p>
-                  <p>Total area</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+              </CardContent>
+              <CardFooter>
+                <motion.button
+                  animate={{
+                    scale: [1, 1.08, 1], 
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    ease: "easeInOut",
+                  }}
+                  whileHover={{
+                    scale: 1.12, 
+                    transition: { duration: 0.2 },
+                  }}
+                  whileTap={{scale:1.2}}
+                  className="px-4 py-2 rounded-md bg-primary text-white font-medium mb-4"
+                >
+                  See Details
+                </motion.button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
       </section>
 
-    <section id="about">
-      <div className="grid grid-cols-2 h-110 w-full bg-linear-to-r from-gray-900 via-blue-600 to-gray-900">
-        <div className="">
-          <img
-            src="logo.png"
-            alt="logo"
-            className="ml-88 my-19 w-70 h-60 rounded-md"
-          />
+      <section id="about">
+        <div className="grid grid-cols-2 h-110 w-full bg-linear-to-r from-gray-900 via-blue-600 to-gray-900">
+          <div className="">
+            <img
+              src="logo.png"
+              alt="logo"
+              className="ml-88 my-19 w-70 h-60 rounded-md"
+            />
+          </div>
+          <div className="mt-30 w-130">
+            <h1
+              className={`${exo2.className} text-white mb-4 text-3xl text font-bold`}
+            >
+              Putting a plan in action,to assure your satisifaction.
+            </h1>
+            <p className={`${caveat.className} text-xl text-white`}>
+              Putting a plan into action is more than a promise — it’s our
+              standard. Every step is crafted with care, precision, and a focus
+              on what matters to you. Your satisfaction isn’t the goal; it’s the
+              outcome we build for from day one.
+            </p>
+          </div>
         </div>
-        <div className="mt-30 w-130">
-          <h1
-            className={`${exo2.className} text-white mb-4 text-3xl text font-bold`}
-          >
-            Putting a plan in action,to assure your satisifaction.
-          </h1>
-          <p className={`${caveat.className} text-xl text-white`}>
-            Putting a plan into action is more than a promise — it’s our
-            standard. Every step is crafted with care, precision, and a focus on
-            what matters to you. Your satisfaction isn’t the goal; it’s the
-            outcome we build for from day one.
-          </p>
+        <div className="grid grid-cols-2  mt-30 ">
+          <div className="ml-90 mt-16">
+            <h1 className={`${exo2.className} text-5xl  font-black`}>
+              {" "}
+              What our clients say{" "}
+            </h1>
+            <h1 className={`${exo2.className} text-5xl ml-33  mt-4 font-black`}>
+              {" "}
+              about us{" "}
+            </h1>
+            <h1 className={`${exo2.className} text-9xl mt-1 ml-53 font-black`}>
+              {" "}
+              "
+            </h1>
+            <p className={`${caveat.className} -mt-9 text-2xl`}>
+              " Working with this team was one of the best decisions I’ve made.
+              They understood exactly what I needed and delivered with care and
+              precision. The entire experience felt smooth, professional, and
+              genuinely supportive "
+            </p>
+            <h1
+              className={`${exo2.className} ml-42 font-semibold mt-4 text-3xl`}
+            >
+              Pukki T.
+            </h1>
+            <p className="text-gray-800 ml-49">Buyer</p>
+          </div>
+          <div>
+            <img
+              src="/home.jfif"
+              alt="home image"
+              className="mx-36 h-140 w-140 rounded-md"
+            />
+          </div>
         </div>
-      </div>
-      <div className="grid grid-cols-2  mt-30 ">
-        <div className="ml-90 mt-16">
-          <h1 className={`${exo2.className} text-5xl  font-black`}>
-            {" "}
-            What our clients say{" "}
-          </h1>
-          <h1 className={`${exo2.className} text-5xl ml-33  mt-4 font-black`}>
-            {" "}
-            about us{" "}
-          </h1>
-          <h1 className={`${exo2.className} text-9xl mt-1 ml-53 font-black`}>
-            {" "}
-            "
-          </h1>
-          <p className={`${caveat.className} -mt-9 text-2xl`}>
-            " Working with this team was one of the best decisions I’ve made.
-            They understood exactly what I needed and delivered with care and
-            precision. The entire experience felt smooth, professional, and
-            genuinely supportive "
-          </p>
-          <h1 className={`${exo2.className} ml-42 font-semibold mt-4 text-3xl`}>
-            Pukki T.
-          </h1>
-          <p className="text-gray-800 ml-49">Buyer</p>
-        </div>
-        <div>
-          <img
-            src="/home.jfif"
-            alt="home image"
-            className="mx-36 h-140 w-140 rounded-md"
-          />
-        </div>
-      </div>
       </section>
       <section id="contact">
-      <div className="grid grid-cols-2 bg-linear-to-r from-gray-900 via-blue-600 to-gray-900 h-207 mt-20">
-        <div>
-          <Card className="ml-60 mt-20 bg-linear-to-r from-gray-800 to-black w-140 ">
+        <div className="grid grid-cols-2 bg-linear-to-r from-gray-900 via-blue-600 to-gray-900 h-207 mt-20">
+          <div>
+            <Card className="ml-60 mt-20 bg-linear-to-r from-gray-800 to-black w-140 ">
+              <h1
+                className={`${exo2.className} text-3xl font-bold text-white pl-14 pt-4`}
+              >
+                Get in touch
+              </h1>
+              <p
+                className={`${caveat.className} text-white -mt-3 ml-14 text-2xl `}
+              >
+                We’d love to hear from you. Send us a message anytime
+              </p>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                <div className="text-white ml-14 mt-3">
+                  <input
+                    className="border px-4 py-6 rounded-md w-110  text-white bg-white placeholder:text-gray-600 placeholder:text-xl   "
+                    {...register("name")}
+                    placeholder="Your name"
+                  />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm">
+                      {errors.name.message}
+                    </p>
+                  )}
+                </div>
+                <div className="ml-14 mt-6">
+                  <input
+                    className="border px-4 py-6 rounded-md w-110  text-white bg-white placeholder:text-gray-600 placeholder:text-xl"
+                    {...register("email")}
+                    placeholder="Your email"
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+                <div className="ml-14 mt-6">
+                  <textarea
+                    className="border px-4 py-6 rounded-md w-110  h-49 text-white bg-white placeholder:text-gray-600 placeholder:text-xl"
+                    {...register("description")}
+                    placeholder="Your message"
+                  />
+                  {errors.description && (
+                    <p className="text-red-500 text-sm">
+                      {errors.description.message}
+                    </p>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  className="bg-blue-600 text-white px-6 py-4  ml-14 mt-1 font-medium text-xl rounded-lg"
+                >
+                  Send message
+                </button>
+              </form>
+            </Card>
+          </div>
+          <div>
             <h1
-              className={`${exo2.className} text-3xl font-bold text-white pl-14 pt-4`}
+              className={`${exo2.className} text-5xl tracking-[4px] font-bold text-white flex  mt-80 justify-center items-center  `}
             >
-              Get in touch
+              Putting aplan to action, to assure your satisifaction
             </h1>
-            <p
-              className={`${caveat.className} text-white -mt-3 ml-14 text-2xl `}
-            >
-              We’d love to hear from you. Send us a message anytime
+            <p className={`${caveat.className} text-3xl mt-6 text-white`}>
+              Your comfort starts with a conversation — let’s find the right
+              place for you
             </p>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div className="text-white ml-14 mt-3">
-              
-              <input
-                className="border px-4 py-6 rounded-md w-110  text-white bg-white placeholder:text-gray-600 placeholder:text-xl   " 
-                {...register("name")}
-                placeholder="Your name"
-              />
-              {errors.name && (
-                <p className="text-red-500 text-sm">{errors.name.message}</p>
-              )}
-            </div>
-            <div className="ml-14 mt-6">
-             
-              <input
-                className="border px-4 py-6 rounded-md w-110  text-white bg-white placeholder:text-gray-600 placeholder:text-xl"
-                {...register("email")}
-                placeholder="Your email"
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
-              )}
-            </div>
-            <div className="ml-14 mt-6">
-              
-              <textarea
-                className="border px-4 py-6 rounded-md w-110  h-49 text-white bg-white placeholder:text-gray-600 placeholder:text-xl"
-                {...register("description")}
-                placeholder="Your message"
-              />
-              {errors.description && (
-                <p className="text-red-500 text-sm">
-                  {errors.description.message}
-                </p>
-              )}
-            </div>
-
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-6 py-4  ml-14 mt-1 font-medium text-xl rounded-lg"
-            >
-              Send message
-            </button>
-          </form>
-          </Card>
-          
+          </div>
         </div>
-        <div>
-          <h1 className={`${exo2.className} text-5xl tracking-[4px] font-bold text-white flex  mt-80 justify-center items-center  `}>Putting aplan to action,
-            to assure your satisifaction
-          </h1>
-          <p className={`${caveat.className} text-3xl mt-6 text-white`}>Your comfort starts with a conversation — let’s find the right place for you</p>
-          
-        </div>
-      </div> 
         <div className="max-w-6xl mx-auto px-4 md:px-8 mt-16 mb-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
-            <div className="flex flex-col items-center text-center space-y-4">
-              <House className="text-black h-22 w-13" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
+              <div className="flex flex-col items-center text-center space-y-4">
+                <House className="text-black h-22 w-13" />
 
-              <h3
-                className={`${exo2.className} text-xl font-bold text-gray-900`}
-              >
-                Premium Properties
-              </h3>
-              <p className="text-gray-600">
-                Hand-picked homes with luxury amenities and modern design
-              </p>
-            </div>
-          </Card>
+                <h3
+                  className={`${exo2.className} text-xl font-bold text-gray-900`}
+                >
+                  Premium Properties
+                </h3>
+                <p className="text-gray-600">
+                  Hand-picked homes with luxury amenities and modern design
+                </p>
+              </div>
+            </Card>
 
-          <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
-            <div className="flex flex-col items-center text-center space-y-4">
-              <MapPinHouse className="text-black h-22 w-13" />
-              <h3
-                className={`${exo2.className} text-xl font-bold text-gray-900`}
-              >
-                Prime Locations
-              </h3>
-              <p className="text-gray-600">
-                Best neighborhoods with excellent connectivity and amenities
-              </p>
-            </div>
-          </Card>
+            <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
+              <div className="flex flex-col items-center text-center space-y-4">
+                <MapPinHouse className="text-black h-22 w-13" />
+                <h3
+                  className={`${exo2.className} text-xl font-bold text-gray-900`}
+                >
+                  Prime Locations
+                </h3>
+                <p className="text-gray-600">
+                  Best neighborhoods with excellent connectivity and amenities
+                </p>
+              </div>
+            </Card>
 
-          <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
-            <div className="flex flex-col items-center text-center space-y-4">
-              <Headset className="text-black h-22 w-13" />
-              <h3
-                className={`${exo2.className} text-xl font-bold text-gray-900`}
-              >
-                Expert Support
-              </h3>
-              <p className="text-gray-600">
-                Dedicated team to guide you through every step
-              </p>
-            </div>
-          </Card>
+            <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
+              <div className="flex flex-col items-center text-center space-y-4">
+                <Headset className="text-black h-22 w-13" />
+                <h3
+                  className={`${exo2.className} text-xl font-bold text-gray-900`}
+                >
+                  Expert Support
+                </h3>
+                <p className="text-gray-600">
+                  Dedicated team to guide you through every step
+                </p>
+              </div>
+            </Card>
+          </div>
         </div>
-      </div>
       </section>
       <div className="flex flex-col items-center mt-28 ">
         <h1 className="text-7xl font-bold">What city you live in ?</h1>
-        <p className={`${caveat.className} mt-6 text-2xl font-medium`}>Let us know which city you live in so we can serve you better and match you with the right local options.</p>
+        <p className={`${caveat.className} mt-6 text-2xl font-medium`}>
+          Let us know which city you live in so we can serve you better and
+          match you with the right local options.
+        </p>
       </div>
       <div className="grid grid-cols-[80%_20%] mt-18 -mb-18">
         <div className="h-240 grid grid-rows-2">
           <div className=" grid grid-cols-[70%_30%]">
             <div className="mx-6  ">
-              <img src="addis.jfif" alt="Addis Ababa" className="rounded-xl  h-96 w-[900px]" />
-              <span className="absolute z-10 text-2xl font-bold -mt-27 ml-9 text-white tracking-[2px]">Addis Ababa</span>
-              <span className="absolute z-10 text-xl font-meduim -mt-18 ml-9 text-white tracking-[2px]">130 Properties</span>
-
+              <img
+                src="addis.jfif"
+                alt="Addis Ababa"
+                className="rounded-xl  h-96 w-[900px]"
+              />
+              <span className="absolute z-10 text-2xl font-bold -mt-27 ml-9 text-white tracking-[2px]">
+                Addis Ababa
+              </span>
+              <span className="absolute z-10 text-xl font-meduim -mt-18 ml-9 text-white tracking-[2px]">
+                130 Properties
+              </span>
             </div>
             <div className="">
-              <img src="/gondar.jfif" alt="Gondar" className="rounded-xl h-96 w-[400px]" />
-              <span className="absolute z-10 text-2xl font-bold -mt-23 ml-9 text-white tracking-[2px]">Gondar</span>
-              <span className="absolute z-10 text-xl font-meduim -mt-13 ml-9 text-white tracking-[2px]">30 Properties</span>
-
-
+              <img
+                src="/gondar.jfif"
+                alt="Gondar"
+                className="rounded-xl h-96 w-[400px]"
+              />
+              <span className="absolute z-10 text-2xl font-bold -mt-23 ml-9 text-white tracking-[2px]">
+                Gondar
+              </span>
+              <span className="absolute z-10 text-xl font-meduim -mt-13 ml-9 text-white tracking-[2px]">
+                30 Properties
+              </span>
             </div>
-
           </div>
           <div className="grid grid-cols-[30%_70%] -mt-16">
-               <div className="mx-6">
-              <img src="/hawassa.jfif" alt="Hawassa" className="rounded-xl h-86 w-[420px]" />
-              <span className="absolute z-10 text-2xl font-bold -mt-23 ml-9 text-white tracking-[2px]">Hawassa</span>
-              <span className="absolute z-10 text-xl font-meduim -mt-13 ml-9 text-white tracking-[2px]">60 Properties</span>
-
-
+            <div className="mx-6">
+              <img
+                src="/hawassa.jfif"
+                alt="Hawassa"
+                className="rounded-xl h-86 w-[420px]"
+              />
+              <span className="absolute z-10 text-2xl font-bold -mt-23 ml-9 text-white tracking-[2px]">
+                Hawassa
+              </span>
+              <span className="absolute z-10 text-xl font-meduim -mt-13 ml-9 text-white tracking-[2px]">
+                60 Properties
+              </span>
             </div>
             <div className="">
-              <img src="/bahir.jfif" alt="Bahir dar" className="rounded-xl  h-86 w-[942px]" />
-              <span className="absolute z-10 text-2xl font-bold -mt-27 ml-9 text-white tracking-[2px]">Bahir dar </span>
-              <span className="absolute z-10 text-xl font-meduim -mt-18 ml-9 text-white tracking-[2px]">80 Properties</span>
-
+              <img
+                src="/bahir.jfif"
+                alt="Bahir dar"
+                className="rounded-xl  h-86 w-[942px]"
+              />
+              <span className="absolute z-10 text-2xl font-bold -mt-27 ml-9 text-white tracking-[2px]">
+                Bahir dar{" "}
+              </span>
+              <span className="absolute z-10 text-xl font-meduim -mt-18 ml-9 text-white tracking-[2px]">
+                80 Properties
+              </span>
             </div>
-
           </div>
-
         </div>
         <div className="">
-              <img src="/mekelle.jfif" alt="Mekelle" className="rounded-xl w-[310px] h-[760px] mx-3"  />
-              <span className="absolute z-10 text-2xl font-bold -mt-23 ml-9 text-white tracking-[2px]">Mekelle</span>
-              <span className="absolute z-10 text-xl font-meduim -mt-13 ml-9 text-white tracking-[2px]">60 Properties</span>
-         </div>
-
+          <img
+            src="/mekelle.jfif"
+            alt="Mekelle"
+            className="rounded-xl w-[310px] h-[760px] mx-3"
+          />
+          <span className="absolute z-10 text-2xl font-bold -mt-23 ml-9 text-white tracking-[2px]">
+            Mekelle
+          </span>
+          <span className="absolute z-10 text-xl font-meduim -mt-13 ml-9 text-white tracking-[2px]">
+            60 Properties
+          </span>
+        </div>
       </div>
     </div>
   );
