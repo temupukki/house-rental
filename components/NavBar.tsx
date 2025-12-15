@@ -32,27 +32,17 @@ const navItems: NavItem[] = [
   },
   {
     label: "Properties",
-    href: "/properties",
-    submenu: [
-      { label: "For Sale", href: "/properties/sale" },
-      { label: "For Rent", href: "/properties/rent" },
-      { label: "Luxury Homes", href: "/properties/luxury" },
-      { label: "Commercial", href: "/properties/commercial" },
-    ],
+    href: "#properties",
+ 
   },
   {
     label: "About",
-    href: "/about",
-    submenu: [
-      { label: "Our Story", href: "/about/story" },
-      { label: "Our Team", href: "/about/team" },
-      { label: "Testimonials", href: "/about/testimonials" },
-      { label: "Careers", href: "/about/careers" },
-    ],
+    href: "#about",
+  
   },
   {
     label: "Contact",
-    href: "/contact",
+    href: "#contact",
   },
 ];
 

@@ -386,7 +386,8 @@ export default function Home() {
           Fast, verified, and made for modern Ethiopia.
         </p>
       </div>
-      <div className="grid grid-cols-3   mx-53 mt-8  ">
+      <section id="properties">
+      <div className="grid grid-cols-3   mx-53 my-18  ">
         {properties.map((property) => (
           <Card
             key={property.id}
@@ -452,54 +453,10 @@ export default function Home() {
           </Card>
         ))}
       </div>
+      </section>
 
-      <div className="max-w-6xl mx-auto px-4 md:px-8 mt-16 mb-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
-            <div className="flex flex-col items-center text-center space-y-4">
-              <House className="text-black h-22 w-13" />
-
-              <h3
-                className={`${exo2.className} text-xl font-bold text-gray-900`}
-              >
-                Premium Properties
-              </h3>
-              <p className="text-gray-600">
-                Hand-picked homes with luxury amenities and modern design
-              </p>
-            </div>
-          </Card>
-
-          <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
-            <div className="flex flex-col items-center text-center space-y-4">
-              <MapPinHouse className="text-black h-22 w-13" />
-              <h3
-                className={`${exo2.className} text-xl font-bold text-gray-900`}
-              >
-                Prime Locations
-              </h3>
-              <p className="text-gray-600">
-                Best neighborhoods with excellent connectivity and amenities
-              </p>
-            </div>
-          </Card>
-
-          <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
-            <div className="flex flex-col items-center text-center space-y-4">
-              <Headset className="text-black h-22 w-13" />
-              <h3
-                className={`${exo2.className} text-xl font-bold text-gray-900`}
-              >
-                Expert Support
-              </h3>
-              <p className="text-gray-600">
-                Dedicated team to guide you through every step
-              </p>
-            </div>
-          </Card>
-        </div>
-      </div>
-      <div className="grid grid-cols-2 h-110 w-full bg-gray-800">
+    <section id="about">
+      <div className="grid grid-cols-2 h-110 w-full bg-linear-to-r from-gray-900 via-blue-600 to-gray-900">
         <div className="">
           <img
             src="logo.png"
@@ -554,7 +511,9 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="grid grid-cols-2 bg-linear-to-r from-gray-900 via-blue-600 to-gray-900 h-190 mt-20">
+      </section>
+      <section id="contact">
+      <div className="grid grid-cols-2 bg-linear-to-r from-gray-900 via-blue-600 to-gray-900 h-207 mt-20">
         <div>
           <Card className="ml-60 mt-20 bg-linear-to-r from-gray-800 to-black w-140 ">
             <h1
@@ -622,6 +581,53 @@ export default function Home() {
           
         </div>
       </div> 
+        <div className="max-w-6xl mx-auto px-4 md:px-8 mt-16 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
+            <div className="flex flex-col items-center text-center space-y-4">
+              <House className="text-black h-22 w-13" />
+
+              <h3
+                className={`${exo2.className} text-xl font-bold text-gray-900`}
+              >
+                Premium Properties
+              </h3>
+              <p className="text-gray-600">
+                Hand-picked homes with luxury amenities and modern design
+              </p>
+            </div>
+          </Card>
+
+          <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
+            <div className="flex flex-col items-center text-center space-y-4">
+              <MapPinHouse className="text-black h-22 w-13" />
+              <h3
+                className={`${exo2.className} text-xl font-bold text-gray-900`}
+              >
+                Prime Locations
+              </h3>
+              <p className="text-gray-600">
+                Best neighborhoods with excellent connectivity and amenities
+              </p>
+            </div>
+          </Card>
+
+          <Card className="p-6 border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group">
+            <div className="flex flex-col items-center text-center space-y-4">
+              <Headset className="text-black h-22 w-13" />
+              <h3
+                className={`${exo2.className} text-xl font-bold text-gray-900`}
+              >
+                Expert Support
+              </h3>
+              <p className="text-gray-600">
+                Dedicated team to guide you through every step
+              </p>
+            </div>
+          </Card>
+        </div>
+      </div>
+      </section>
       <div className="flex flex-col items-center mt-28 ">
         <h1 className="text-7xl font-bold">What city you live in ?</h1>
         <p className={`${caveat.className} mt-6 text-2xl font-medium`}>Let us know which city you live in so we can serve you better and match you with the right local options.</p>

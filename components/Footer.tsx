@@ -1,5 +1,4 @@
 "use client"
-
 import Link from "next/link"
 import { 
   MapPin, 
@@ -68,26 +67,22 @@ export default function Footer(){
                                 <ArrowRight className="h-4 w-4 text-blue-500 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                                 Home
                             </Link>
-                            <Link href="/properties" className="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300">
+                            <Link href="#properties" className="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300">
                                 <ArrowRight className="h-4 w-4 text-blue-500 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                                 Properties
                             </Link>
-                            <Link href="/about" className="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300">
+                            <Link href="#about" className="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300">
                                 <ArrowRight className="h-4 w-4 text-blue-500 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                                 About Us
                             </Link>
-                            <Link href="/contact" className="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300">
+                            <Link href="#contact" className="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300">
                                 <ArrowRight className="h-4 w-4 text-blue-500 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                                 Contact
                             </Link>
-                            <Link href="/agents" className="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300">
-                                <ArrowRight className="h-4 w-4 text-blue-500 opacity-0 group-hover:opacity-100 transition-all duration-300" />
-                                Our Agents
-                            </Link>
+                          
                         </div>
                     </div>
 
-                    {/* Property Types */}
                     <div className="space-y-6">
                         <h3 className="text-xl font-semibold flex items-center gap-2">
                             <Building className="h-5 w-5 text-blue-400" />
@@ -167,8 +162,8 @@ export default function Footer(){
                             </div>
                             <div className="space-y-2 ml-8">
                                 <p className="text-gray-300">Bole, Ednamall • 3rd Floor</p>
-                                <p className="text-gray-300">Kazanchis, Kafdem Plaza • Suite 405</p>
-                                <p className="text-gray-300">4 Kilo, Commercial Center</p>
+                                <p className="text-gray-300">Kality, Kafdem Plaza • Suite 405</p>
+                                <p className="text-gray-300">4 Kilo, Ambassador</p>
                             </div>
                         </div>
                         <div className="space-y-4">
