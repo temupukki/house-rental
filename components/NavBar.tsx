@@ -146,6 +146,7 @@ export default function NavBar() {
           </nav>
           <div className="hidden lg:flex items-center space-x-3">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link href="/login">
               <Button 
                 variant="outline" 
                 className="flex items-center gap-2 border-gray-300 hover:border-blue-500 hover:text-blue-600"
@@ -153,12 +154,13 @@ export default function NavBar() {
                 <LogIn className="h-4 w-4" />
                 Login
               </Button>
+              </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button className="bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-lg shadow-blue-500/25 flex items-center gap-2">
+             <Link href="/signup"> <Button className="bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-lg shadow-blue-500/25 flex items-center gap-2">
                 <UserPlus className="h-4 w-4" />
                 Sign Up
-              </Button>
+              </Button></Link>
             </motion.div>
           </div>
           <button
