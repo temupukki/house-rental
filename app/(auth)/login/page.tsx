@@ -414,7 +414,7 @@ export default function LoginPage() {
                       </span>
                     ) : (
                       <span className="flex items-center justify-center gap-2">
-                        Sign In to Dashboard
+                        Sign In 
                         <LogIn className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </span>
                     )}

@@ -386,7 +386,7 @@ const route = useRouter();
                               ? "border-red-300"
                               : "border-gray-200"
                           } rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 placeholder:text-gray-400`}
-                          placeholder="John Smith"
+                          placeholder="Abebe kebede"
                         />
                         {!errors.fullName && formData.fullName && (
                           <Check className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-emerald-500" />
@@ -426,7 +426,7 @@ const route = useRouter();
                           className={`w-full px-4 py-3.5 bg-white border ${
                             errors.email ? "border-red-300" : "border-gray-200"
                           } rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 placeholder:text-gray-400`}
-                          placeholder="john@example.com"
+                          placeholder="abebe@example.com"
                         />
                         {!errors.email && formData.email && (
                           <Check className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-emerald-500" />
