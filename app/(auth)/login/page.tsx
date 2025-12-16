@@ -272,7 +272,7 @@ export default function LoginPage() {
                         className={`w-full px-4 py-3.5 bg-white border ${
                           errors.email ? "border-red-300" : "border-gray-200"
                         } rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-200 placeholder:text-gray-400`}
-                        placeholder="john@example.com"
+                        placeholder="abebe@example.com"
                       />
                       {!errors.email && email && (
                         <div className="absolute right-4 top-1/2 transform -translate-y-1/2">

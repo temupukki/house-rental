@@ -4,16 +4,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ReactNode, useState } from "react";
 import { Exo_2 } from "next/font/google";
-import { 
-  Menu, 
+import {
+  Menu,
   X,
   ChevronDown,
   User,
   LogIn,
-  UserPlus
+  UserPlus,
+  LogOut,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
 
 const exo2 = Exo_2({
   subsets: ["latin"],
@@ -34,12 +39,10 @@ const navItems: NavItem[] = [
   {
     label: "Properties",
     href: "#properties",
- 
   },
   {
     label: "About",
     href: "#about",
-  
   },
   {
     label: "Contact",
@@ -47,17 +50,37 @@ const navItems: NavItem[] = [
   },
 ];
 
-const { data: session, error } = await authClient.getSession()
+const { data: session, error } = await authClient.getSession();
 
 export default function DashNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  if (typeof window !== 'undefined') {
-    window.addEventListener('scroll', () => {
+  const [loading, setLoading] = useState(false);
+  const route = useRouter();
+  const handleSignout = async () => {
+    setLoading(true);
+    await authClient.signOut({
+      fetchOptions: {
+        onRequest: (ctx) => {
+          const toastID = toast.loading("Creating out...");
+          toast.dismiss(toastID);
+        },
+        onSuccess: () => {
+          setLoading(false);
+          route.push("/")
+
+        },
+      },
+    });
+  };
+  if (typeof window !== "undefined") {
+    window.addEventListener("scroll", () => {
       setIsScrolled(window.scrollY > 20);
     });
   }
+
+  const fullname = session?.user?.name || "";
 
   return (
     <motion.header
@@ -65,14 +88,13 @@ export default function DashNavbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, type: "spring" }}
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg shadow-black/5' 
-          : 'bg-white'
+        isScrolled
+          ? "bg-white/95 backdrop-blur-md shadow-lg shadow-black/5"
+          : "bg-white"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-     
           <Link href="/" className="flex items-center space-x-3 group">
             <motion.div
               whileHover={{ scale: 1.1, rotate: 5 }}
@@ -93,15 +115,19 @@ export default function DashNavbar() {
                 </span>
                 <span className="text-gray-900">Living</span>
               </h1>
-              <p className="text-xs text-gray-500 font-medium">Premium Real Estate</p>
+              <p className="text-xs text-gray-500 font-medium">
+                Premium Real Estate
+              </p>
             </div>
           </Link>
           <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (
-              <div 
-                key={item.href} 
+              <div
+                key={item.href}
                 className="relative"
-                onMouseEnter={() => item.submenu && setActiveSubmenu(item.label)}
+                onMouseEnter={() =>
+                  item.submenu && setActiveSubmenu(item.label)
+                }
                 onMouseLeave={() => setActiveSubmenu(null)}
               >
                 <Link href={item.href}>
@@ -110,15 +136,17 @@ export default function DashNavbar() {
                     whileTap={{ scale: 0.95 }}
                     className={`flex items-center gap-2 px-4 py-3 rounded-lg font-medium transition-colors duration-300 ${
                       activeSubmenu === item.label
-                        ? 'text-blue-600 bg-blue-50'
-                        : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                        ? "text-blue-600 bg-blue-50"
+                        : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
                     }`}
                   >
                     {item.label}
                     {item.submenu && (
-                      <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${
-                        activeSubmenu === item.label ? 'rotate-180' : ''
-                      }`} />
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform duration-300 ${
+                          activeSubmenu === item.label ? "rotate-180" : ""
+                        }`}
+                      />
                     )}
                   </motion.div>
                 </Link>
@@ -149,13 +177,30 @@ export default function DashNavbar() {
           </nav>
           <div className="hidden lg:flex items-center space-x-3">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <p>{session.user.name}</p> 
+              <Link href="/dashboard/profile">
+                <button className="bg-primary text-white shadow-lg shadow-blue-500/25 flex items-center gap-2 p-2 rounded-lg ">
+                  {fullname}
+                </button>
+              </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-             <Link href="/signup"> <Button className="bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-lg shadow-blue-500/25 flex items-center gap-2">
-                <UserPlus className="h-4 w-4" />
-                Sign Up
-              </Button></Link>
+              <Button
+                onClick={handleSignout}
+                disabled={loading}
+                className="bg-primary text-white shadow-lg shadow-blue-500/25 flex items-center gap-2"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Signing out...
+                  </>
+                ) : (
+                  <>
+                    <LogOut className="h-4 w-4" />
+                    Sign out
+                  </>
+                )}
+              </Button>
             </motion.div>
           </div>
           <button
@@ -188,12 +233,10 @@ export default function DashNavbar() {
                       <div className="flex items-center gap-3">
                         <span className="font-medium">{item.label}</span>
                       </div>
-                      {item.submenu && (
-                        <ChevronDown className="h-4 w-4" />
-                      )}
+                      {item.submenu && <ChevronDown className="h-4 w-4" />}
                     </div>
                   </Link>
-    
+
                   {item.submenu && (
                     <div className="ml-8 space-y-1">
                       {item.submenu.map((subItem) => (
@@ -207,10 +250,10 @@ export default function DashNavbar() {
                   )}
                 </div>
               ))}
-     
+
               <div className="pt-4 space-y-3">
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="w-full py-6 flex items-center justify-center gap-2"
                 >
                   <LogIn className="h-5 w-5" />
