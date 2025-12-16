@@ -1,3 +1,5 @@
+import DashFooter from "@/components/DashFooter";
+import DashNavbar from "@/components/DashNavbar";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -25,8 +27,11 @@ export default function dashboardLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white`}
+
       >
+        <DashNavbar/>
         {children}
+        <DashFooter/>
       </body>
     </html>
   );

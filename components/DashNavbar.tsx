@@ -13,6 +13,7 @@ import {
   UserPlus
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { authClient } from "@/lib/auth-client";
 
 const exo2 = Exo_2({
   subsets: ["latin"],
@@ -45,6 +46,8 @@ const navItems: NavItem[] = [
     href: "#contact",
   },
 ];
+
+const { data: session, error } = await authClient.getSession()
 
 export default function DashNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -146,15 +149,7 @@ export default function DashNavbar() {
           </nav>
           <div className="hidden lg:flex items-center space-x-3">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link href="/login">
-              <Button 
-                variant="outline" 
-                className="flex items-center gap-2 border-gray-300 hover:border-blue-500 hover:text-blue-600"
-              >
-                <LogIn className="h-4 w-4" />
-                Login
-              </Button>
-              </Link>
+                <p>{session.user.name}</p> 
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
              <Link href="/signup"> <Button className="bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-lg shadow-blue-500/25 flex items-center gap-2">
