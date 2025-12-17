@@ -25,9 +25,11 @@ import {
   Star,
   TrendingUp,
   Award,
+  Loader2,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -38,6 +40,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [loading,setLoading]=useState(false);
 
   const features = [
     {
@@ -115,10 +118,14 @@ export default function LoginPage() {
   };
 
   const handleSocialLogin = async (provider: string) => {
+    setLoading(true);
+     const toastID = toast.loading("Processing...");
     await authClient.signIn.social({
       provider: "google",
+      
       callbackURL: "/dashboard", 
     });
+     toast.dismiss(toastID);
   };
 
   if (isSuccess) {
@@ -433,24 +440,22 @@ export default function LoginPage() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-1 gap-3">
                     <button
                       type="button"
                       onClick={() => handleSocialLogin("google")}
+                      disabled={loading}
                       className="group flex items-center justify-center gap-3 py-3.5 px-4 border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200"
                     >
-                      <Google className="w-5 h-5 text-red-500" />
-                      <span className="font-medium text-gray-700">Google</span>
+                         {loading ? (
+                                        <>
+                                          <Loader2 className="h-4 w-4 animate-spin" />
+                                          Processing...
+                                        </>
+                                      ) :(
+                      <><Google className="w-5 h-5 text-red-500" /><span className="font-medium text-gray-700">Google</span></>)}
                     </button>
 
-                    <button
-                      type="button"
-                      onClick={() => handleSocialLogin("github")}
-                      className="group flex items-center justify-center gap-3 py-3.5 px-4 border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200"
-                    >
-                      <Github className="w-5 h-5 text-gray-800" />
-                      <span className="font-medium text-gray-700">GitHub</span>
-                    </button>
                   </div>
 
                   <div className="text-center pt-4">
