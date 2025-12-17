@@ -2,6 +2,7 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { BedDouble, Bath, Expand, BadgeInfo } from "lucide-react";
+import { useState } from "react";
 type Property = {
   id: string;
   title: string;
@@ -94,8 +95,16 @@ const properties: Property[] = [
 ];
 
 export default function prope() {
+  const [selectedProduct, setSelectedProduct]= useState<Property | null>(null)
+     if (selectedProduct) {
+    return (
+      <div className="z-20 text-8xl text-red-500">
+        
+      </div>
+    )}
   return (
     <div>
+      
       <div className="grid grid-cols-3   mx-53 my-18  ">
         {properties.map((property) => (
           <Card
@@ -161,6 +170,7 @@ export default function prope() {
             </CardContent>
             <CardFooter>
               <motion.button
+                onClick={()=>setSelectedProduct(property)}
                 animate={{
                   scale: [1, 1.08, 1],
                 }}
@@ -183,6 +193,8 @@ export default function prope() {
           </Card>
         ))}
       </div>
+
+  
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Exo_2 } from "next/font/google";
 import {
   Menu,
@@ -18,7 +18,6 @@ import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-
 
 const exo2 = Exo_2({
   subsets: ["latin"],
@@ -58,6 +57,11 @@ export default function DashNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [loading, setLoading] = useState(false);
   const route = useRouter();
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    setUserName(session?.user?.name || "User");
+  }, []);
   const handleSignout = async () => {
     setLoading(true);
     await authClient.signOut({
@@ -68,19 +72,11 @@ export default function DashNavbar() {
         },
         onSuccess: () => {
           setLoading(false);
-          route.push("/")
-
+          route.push("/");
         },
       },
     });
   };
-  if (typeof window !== "undefined") {
-    window.addEventListener("scroll", () => {
-      setIsScrolled(window.scrollY > 20);
-    });
-  }
-
-  const fullname = session?.user?.name || "";
 
   return (
     <motion.header
@@ -179,7 +175,7 @@ export default function DashNavbar() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link href="/dashboard/profile">
                 <button className="bg-primary text-white shadow-lg shadow-blue-500/25 flex items-center gap-2 p-2 rounded-lg ">
-                  {fullname}
+                  {userName}
                 </button>
               </Link>
             </motion.div>

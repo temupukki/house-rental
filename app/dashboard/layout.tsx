@@ -24,15 +24,10 @@ export default function dashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white`}
-
-      >
+    <div>
         <DashNavbar/>
         {children}
         <DashFooter/>
-      </body>
-    </html>
+     </div>
   );
 }
