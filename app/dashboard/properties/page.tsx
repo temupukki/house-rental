@@ -1,8 +1,9 @@
 "use client";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { BedDouble, Bath, Expand, BadgeInfo } from "lucide-react";
+import { BedDouble, Bath, Expand, BadgeInfo, ChevronLeft } from "lucide-react";
 import { useState } from "react";
+import { property } from "zod";
 type Property = {
   id: string;
   title: string;
@@ -98,8 +99,12 @@ export default function prope() {
   const [selectedProduct, setSelectedProduct]= useState<Property | null>(null)
      if (selectedProduct) {
     return (
-      <div className="z-20 text-8xl text-red-500">
-        
+      <div className="z-20  ">
+        <button onClick={()=>setSelectedProduct(null)} className="flex flex-row space-x-1.5  ml-16 bg-primary text-white pl-2 pr-4 py-2 text-l  font-meduim rounded-lg ">
+          <ChevronLeft />Back to list</button>
+          <div className="ml-28 mt-10 ">
+          <button  className={`${selectedProduct.status === 'for-sale' ? "bg-red-500" : "bg-green-400"} px-11  py-2 font-semibold text-white  text-[23px] rounded-lg `}>{selectedProduct.status === 'for-sale' ? "For sale" : "For rent"}</button>
+          </div>
       </div>
     )}
   return (
