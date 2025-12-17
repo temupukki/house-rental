@@ -54,6 +54,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { p } from "framer-motion/client";
+import Link from "next/link";
 
 const caveat = Caveat({
   subsets: ["latin"],
@@ -451,6 +452,7 @@ export default function Home() {
                 </div>
               </CardContent>
               <CardFooter>
+                <Link href="/login">
                 <motion.button
                   animate={{
                     scale: [1, 1.08, 1], 
@@ -465,11 +467,12 @@ export default function Home() {
                     scale: 1.12, 
                     transition: { duration: 0.2 },
                   }}
-                  whileTap={{scale:1.2}}
+                  whileTap={{scale:0.6}}
                   className="px-4 py-2 rounded-md bg-primary text-white font-medium mb-4"
                 >
                   See Details
                 </motion.button>
+                </Link>
               </CardFooter>
             </Card>
           ))}

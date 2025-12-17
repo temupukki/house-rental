@@ -56,6 +56,7 @@ import { Input } from "@/components/ui/input";
 import { p } from "framer-motion/client";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
+import Link from "next/link";
 
 const caveat = Caveat({
   subsets: ["latin"],
@@ -139,7 +140,7 @@ export default function dashboard() {
       description: "",
     },
   });
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
 
   type FormValues = z.infer<typeof formSchema>;
 
@@ -160,25 +161,25 @@ export default function dashboard() {
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid" />
         <Card className="relative border-none bg-transparent backdrop-blur-sm flex flex-col items-center justify-center h-[85vh] px-4 md:px-8">
           <div className="text-center space-y-8 max-w-6xl">
-         <div className="py-8">
-      <h1
-        className={`${exo2.className} text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight`}
-      >
-        {loading ? (
-          "Loading..."
-        ) : (
-          <>
-            Welcome back,{" "}
-            <span className="block bg-linear-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-              {fullname}.
-            </span>
-          </>
-        )}
-      </h1>
-      <p className="mt-2 text-gray-400 text-lg">
-        Here’s what’s happening with your properties today.
-      </p>
-    </div>
+            <div className="py-8">
+              <h1
+                className={`${exo2.className} text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight`}
+              >
+                {loading ? (
+                  "Loading..."
+                ) : (
+                  <>
+                    Welcome back,{" "}
+                    <span className="block bg-linear-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+                      {fullname}.
+                    </span>
+                  </>
+                )}
+              </h1>
+              <p className="mt-2 text-gray-400 text-lg">
+                Here’s what’s happening with your properties today.
+              </p>
+            </div>
 
             <p
               className={`${caveat.className} text-2xl md:text-3xl text-gray-300 max-w-3xl mx-auto leading-relaxed`}
@@ -461,9 +462,10 @@ export default function dashboard() {
                 </div>
               </CardContent>
               <CardFooter>
+                <Link href="/dashboard/properties">
                 <motion.button
                   animate={{
-                    scale: [1, 1.08, 1], 
+                    scale: [1, 1.08, 1],
                   }}
                   transition={{
                     duration: 0.6,
@@ -472,14 +474,15 @@ export default function dashboard() {
                     ease: "easeInOut",
                   }}
                   whileHover={{
-                    scale: 1.12, 
+                    scale: 1.12,
                     transition: { duration: 0.2 },
                   }}
-                  whileTap={{scale:1.2}}
+                  whileTap={{ scale: 1.2 }}
                   className="px-4 py-2 rounded-md bg-primary text-white font-medium mb-4"
                 >
                   See Details
                 </motion.button>
+                </Link>
               </CardFooter>
             </Card>
           ))}
