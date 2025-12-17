@@ -54,6 +54,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { p } from "framer-motion/client";
+import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
 
 const caveat = Caveat({
   subsets: ["latin"],
@@ -127,7 +129,7 @@ const formSchema = z.object({
     .min(10, { message: "descrtion mustbe atleast 10 chars " })
     .max(160, { message: "The limit is 160 cahracters" }),
 });
-
+const { data: session, error } = await authClient.getSession();
 export default function dashboard() {
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -137,6 +139,7 @@ export default function dashboard() {
       description: "",
     },
   });
+  const [loading,setLoading]=useState(false)
 
   type FormValues = z.infer<typeof formSchema>;
 
@@ -150,25 +153,32 @@ export default function dashboard() {
   function onSubmit(values: any) {
     console.log("Submitted:", values);
   }
+  const fullname = session?.user?.name || "";
   return (
     <div className="bg-white min-h-screen">
       <div className="relative bg-linear-to-r from-gray-900 via-gray-800 to-gray-900 mx-4 md:mx-10 mt-4 rounded-3xl overflow-hidden">
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid" />
         <Card className="relative border-none bg-transparent backdrop-blur-sm flex flex-col items-center justify-center h-[85vh] px-4 md:px-8">
           <div className="text-center space-y-8 max-w-6xl">
-            <div className="space-y-4">
-              <Badge className="bg-white/10 text-white border-white/20 backdrop-blur-sm px-6 py-2 text-lg">
-                Premium Living Spaces
-              </Badge>
-              <h1
-                className={`${exo2.className} text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight`}
-              >
-                Find a home that
-                <span className="block bg-linear-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-                  suits your lifestyle.
-                </span>
-              </h1>
-            </div>
+         <div className="py-8">
+      <h1
+        className={`${exo2.className} text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight`}
+      >
+        {loading ? (
+          "Loading..."
+        ) : (
+          <>
+            Welcome back,{" "}
+            <span className="block bg-linear-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+              {fullname}.
+            </span>
+          </>
+        )}
+      </h1>
+      <p className="mt-2 text-gray-400 text-lg">
+        Here’s what’s happening with your properties today.
+      </p>
+    </div>
 
             <p
               className={`${caveat.className} text-2xl md:text-3xl text-gray-300 max-w-3xl mx-auto leading-relaxed`}
