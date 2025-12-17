@@ -7,7 +7,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { BedDouble, Bath, Expand, BadgeInfo, ChevronLeft, Camera, HardHat, MoveVertical, SquareParking } from "lucide-react";
+import {
+  BedDouble,
+  Bath,
+  Expand,
+  BadgeInfo,
+  ChevronLeft,
+  Camera,
+  HardHat,
+  MoveVertical,
+  SquareParking,
+} from "lucide-react";
 import { useState } from "react";
 import { property } from "zod";
 type Property = {
@@ -27,6 +37,9 @@ type Property = {
   elevator: Boolean;
   parking: boolean;
   wifi: boolean;
+  ownerName: string;
+  ownerEmail: string;
+  ownerPhone: string;
   education: string[];
   health: string[];
   area: number;
@@ -47,13 +60,17 @@ const properties: Property[] = [
     area: 95,
     isFeatured: true,
     supportimage: [],
-    desccription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    desccription:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     floor: 0,
     constructionYear: 2020,
     elevator: true,
     parking: false,
     wifi: false,
     education: [],
+    ownerName: "Abebe kebede",
+    ownerEmail: "abebe@gmail.com",
+    ownerPhone: "09833446437",
     health: [],
   },
   {
@@ -76,6 +93,9 @@ const properties: Property[] = [
     parking: false,
     wifi: false,
     education: [],
+    ownerName: "Abebe kebede",
+    ownerEmail: "abebe@gmail.com",
+    ownerPhone: "09833446437",
     health: [],
   },
   {
@@ -97,6 +117,9 @@ const properties: Property[] = [
     elevator: false,
     parking: false,
     wifi: false,
+    ownerName: "Abebe kebede",
+    ownerEmail: "abebe@gmail.com",
+    ownerPhone: "09833446437",
     education: [],
     health: [],
   },
@@ -150,54 +173,157 @@ export default function prope() {
           </div>
           <div className="grid grid-cols-[70%_30%] my-8 ">
             <div>
-              <img src={selectedProduct.mainImage} alt="Main image" 
-              className="h-180  w-270 rounded-xl"
+              <img
+                src={selectedProduct.mainImage}
+                alt="Main image"
+                className="h-180  w-270 rounded-xl"
               />
             </div>
             <div className=" grid grid-rows-2 ">
               <div>
-              <img src={selectedProduct.mainImage} alt="Support images"  className="h-87 w-100 rounded-xl "/>
-              <span className="z-10 absolute ml-39 -mt-48 text-white font-bold text-3xl"><Camera className="ml-7 h-13 w-14 " />Show all</span>
-                </div>
-                <div className="mt-3">
-                  <img src={selectedProduct.mainImage} alt="Support images"  className="h-87 w-100 rounded-xl "/>
-
-                </div>
+                <img
+                  src={selectedProduct.mainImage}
+                  alt="Support images"
+                  className="h-87 w-100 rounded-xl "
+                />
+                <span className="z-10 absolute ml-39 -mt-48 text-white font-bold text-3xl">
+                  <Camera className="ml-7 h-13 w-14 " />
+                  Show all
+                </span>
+              </div>
+              <div className="mt-3">
+                <img
+                  src={selectedProduct.mainImage}
+                  alt="Support images"
+                  className="h-87 w-100 rounded-xl "
+                />
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-[70%_30%] my-8 ">
             <div>
-              <h1 className="text-4xl font-semibold tracking-[1px] mb-10 mt-16 ">Description</h1>
+              <h1 className="text-4xl font-semibold tracking-[1px] mb-10 mt-16 ">
+                Description
+              </h1>
               <p className="text-xl mb-16">{selectedProduct.desccription}</p>
-              <p className="text-4xl font-semibold tracking-[1px] mb-10 ">Property details</p>
+              <p className="text-4xl font-semibold tracking-[1px] mb-10 ">
+                Property details
+              </p>
               <div className="grid grid-cols-2">
                 <div>
-                <p className="text-2xl text-gray-700 font-sans flex flex-row  gap-2.5"><Expand  className="-mt-1 w-9 h-9 mr-2"/>Total area <span className="text-black font-medium mt-1 text-2xl ml-64">{selectedProduct.area} sq.m</span></p>
-                 <hr className="my-6 w-130" />
-                  <p className="text-2xl text-gray-700 font-sans flex flex-row  gap-2.5"><BedDouble   className="-mt-1 w-9 h-9 mr-2"/>Bedrooms <span className="text-black font-medium mt-1 text-2xl ml-80">{selectedProduct.bedrooms} </span></p>
-                 <hr className="my-6 w-130" />
-                 <p className="text-2xl text-gray-700 font-sans flex flex-row  gap-2.5"><Bath  className="-mt-1 w-9 h-9 mr-2"/>Bathrooms <span className="text-black font-medium mt-1 text-2xl ml-78">{selectedProduct.bathrooms}</span></p>
-                 <hr className="my-6 w-130" />
-                <p className="text-2xl text-gray-700 font-sans flex flex-row  gap-2.5"><HardHat  className="-mt-1 w-9 h-9 mr-2"/>Construction year<span className="text-black font-medium mt-1 text-2xl ml-48">{selectedProduct.constructionYear}</span></p>
-                 <hr className="my-6 w-130" />
-
-
+                  <p className="text-2xl text-gray-700 font-sans flex flex-row  gap-2.5">
+                    <Expand className="-mt-1 w-9 h-9 mr-2" />
+                    Total area{" "}
+                    <span className="text-black font-medium mt-1 text-2xl ml-64">
+                      {selectedProduct.area} sq.m
+                    </span>
+                  </p>
+                  <hr className="my-6 w-130" />
+                  <p className="text-2xl text-gray-700 font-sans flex flex-row  gap-2.5">
+                    <BedDouble className="-mt-1 w-9 h-9 mr-2" />
+                    Bedrooms{" "}
+                    <span className="text-black font-medium mt-1 text-2xl ml-80">
+                      {selectedProduct.bedrooms}{" "}
+                    </span>
+                  </p>
+                  <hr className="my-6 w-130" />
+                  <p className="text-2xl text-gray-700 font-sans flex flex-row  gap-2.5">
+                    <Bath className="-mt-1 w-9 h-9 mr-2" />
+                    Bathrooms{" "}
+                    <span className="text-black font-medium mt-1 text-2xl ml-78">
+                      {selectedProduct.bathrooms}
+                    </span>
+                  </p>
+                  <hr className="my-6 w-130" />
+                  <p className="text-2xl text-gray-700 font-sans flex flex-row  gap-2.5">
+                    <HardHat className="-mt-1 w-9 h-9 mr-2" />
+                    Construction year
+                    <span className="text-black font-medium mt-1 text-2xl ml-48">
+                      {selectedProduct.constructionYear}
+                    </span>
+                  </p>
+                  <hr className="my-6 w-130" />
                 </div>
                 <div>
-                   <p className="text-2xl text-gray-700 font-sans flex flex-row  gap-2.5"><MoveVertical  className="-mt-1 w-9 h-9 mr-2"/>Elevator <span className="text-black font-medium mt-1 text-2xl ml-82">{selectedProduct.elevator === true ? "Yes" : "No"} </span></p>
-                 <hr className="my-6 w-130" />
-                   <p className="text-2xl text-gray-700 font-sans flex flex-row  gap-2.5"><SquareParking   className="-mt-1 w-9 h-9 mr-2"/>Parking <span className="text-black font-medium mt-1 text-2xl ml-84">{selectedProduct.parking === true ? "Yes" : "No"} </span></p>
-                 <hr className="my-6 w-130" />
-                
-
+                  <p className="text-2xl text-gray-700 font-sans flex flex-row  gap-2.5">
+                    <MoveVertical className="-mt-1 w-9 h-9 mr-2" />
+                    Elevator{" "}
+                    <span className="text-black font-medium mt-1 text-2xl ml-82">
+                      {selectedProduct.elevator === true ? "Yes" : "No"}{" "}
+                    </span>
+                  </p>
+                  <hr className="my-6 w-130" />
+                  <p className="text-2xl text-gray-700 font-sans flex flex-row  gap-2.5">
+                    <SquareParking className="-mt-1 w-9 h-9 mr-2" />
+                    Parking{" "}
+                    <span className="text-black font-medium mt-1 text-2xl ml-84">
+                      {selectedProduct.parking === true ? "Yes" : "No"}{" "}
+                    </span>
+                  </p>
+                  <hr className="my-6 w-130" />
                 </div>
-                 
-
               </div>
-
-
             </div>
+            <div>
+              <Card className="bg-linear-to-r from-blue-950  to-gray-900 text-white">
+                <CardHeader className="font-medium text-3xl ml-6">
+                  Contact agent
+                </CardHeader>
+                <div className="flex flex-row">
+                  <div>
+                    <img
+                      src={selectedProduct.mainImage}
+                      alt="Profilephoto"
+                      className="w-23 h-22 rounded-full ml-9 "
+                    />
+                  </div>
+                  <div className="mt-1">
+                    <h1 className=" ml-9 font-sans font-semibold text-xl">
+                      {selectedProduct.ownerName}
+                    </h1>
+                    <p className="ml-9 text-gray-300">
+                      {selectedProduct.ownerPhone}
+                    </p>
+                    <p className="ml-9 text-gray-300 ">
+                      {selectedProduct.ownerEmail}
+                    </p>
+                  </div>
+                </div>
+                <form className="space-y-4 -ml-6">
+                  <div className="text-white ml-14 mt-3">
+                    <input
+                      className="border px-4 py-6 rounded-md w-106  text-white bg-white placeholder:text-gray-600 placeholder:text-xl   "
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div className="ml-14 mt-6">
+                    <input
+                      className="border px-4 py-6 rounded-md w-106  text-white bg-white placeholder:text-gray-600 placeholder:text-xl"
+                      placeholder="Your email"
+                    />
+                  </div>
+                   <div className="ml-14 mt-6">
+                    <input
+                      className="border px-4 py-6 rounded-md w-106  text-white bg-white placeholder:text-gray-600 placeholder:text-xl"
+                      placeholder="Your phone number"
+                    />
+                  </div>
+                  <div className="ml-14 mt-6">
+                    <textarea
+                      className="border px-4 py-6 rounded-md w-106  h-49 text-white bg-white placeholder:text-gray-600 placeholder:text-xl"
+                      placeholder="Your message"
+                    />
+                  </div>
 
+                  <button
+                    type="submit"
+                    className="bg-blue-600 text-white px-6 py-4  ml-14 mt-1 font-medium text-xl rounded-lg"
+                  >
+                    Send message
+                  </button>
+                </form>
+              </Card>
+            </div>
           </div>
         </div>
       </div>
