@@ -114,8 +114,11 @@ export default function LoginPage() {
     });
   };
 
-  const handleSocialLogin = (provider: string) => {
-    alert(`Sign in with ${provider} would be implemented here`);
+  const handleSocialLogin = async (provider: string) => {
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/dashboard", 
+    });
   };
 
   if (isSuccess) {
