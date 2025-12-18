@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { Building, Building2, House, Store } from "lucide-react";
 import { useState } from "react";
-import { set } from "zod";
+
 
 export default function owner() {
   const [step, setStep] = useState(1);
@@ -90,22 +90,20 @@ export default function owner() {
           </h1>
           <div className="space-y-3 mx-90 mt-12.5">
             <Card className="text-2xl font-semibold  hover:border-black border-gray-300 hover:bg-gray-100 pl-10 py-17">
-                For rent
+              For rent
             </Card>
             <Card className="text-2xl font-semibold  hover:border-black border-gray-300 hover:bg-gray-100 pl-10 py-17">
-                For sale
+              For sale
             </Card>
           </div>
         </div>
       )}
-       {step === 3 && (
+      {step === 3 && (
         <div>
           <h1 className=" mt-13 text-5xl font-semibold text-gray-800 flex flex-col items-center ">
             Where is your place located?
           </h1>
-          <div className="space-y-3 mx-90 mt-12.5">
-           
-          </div>
+          <div className="space-y-3 mx-90 mt-12.5"></div>
         </div>
       )}
       <hr className="w-[1680px] mt-16" />
