@@ -127,6 +127,8 @@ const properties: Property[] = [
 
 export default function prope() {
   const [selectedProduct, setSelectedProduct] = useState<Property | null>(null);
+  const [post,setPost]=useState(false);
+ 
   if (selectedProduct) {
     return (
       <div className="z-20  ">
@@ -331,6 +333,7 @@ export default function prope() {
   }
   return (
     <div>
+     
       <div className="grid grid-cols-3   mx-53 my-18  ">
         {properties.map((property) => (
           <Card

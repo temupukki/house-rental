@@ -13,6 +13,7 @@ import {
   UserPlus,
   LogOut,
   Loader2,
+  Hotel,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
@@ -62,6 +63,7 @@ export default function DashNavbar() {
   useEffect(() => {
     setUserName(session?.user?.name || "User");
   }, []);
+  const userNamel = userName.charAt(0);
   const handleSignout = async () => {
     setLoading(true);
     await authClient.signOut({
@@ -172,14 +174,29 @@ export default function DashNavbar() {
             ))}
           </nav>
           <div className="hidden lg:flex items-center space-x-3">
+            <Link href="/dahsboard/post">
+              <motion.p
+                animate={{ scale: [1, 1.06, 1.0] }}
+                transition={{
+                  duration: 0.7,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  ease: "easeInOut",
+                }}
+                className={`${exo2.className} text-xl font-meduim mr-7 flex flex-row`}
+              >
+                <Hotel className="mr-2" />
+                Make me host!
+              </motion.p>
+            </Link>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link href="/dashboard/profile">
-                <button className="bg-primary text-white shadow-lg shadow-blue-500/25 flex items-center gap-2 p-2 rounded-lg ">
-                  {userName}
+                <button className="uppercase font-medium text-[18px] bg-amber-950 text-white shadow-lg shadow-blue-500/25 flex items-center gap-2 px-6 py-4 rounded-full  ">
+                  {userNamel}
                 </button>
               </Link>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            {/*  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 onClick={handleSignout}
                 disabled={loading}
@@ -197,7 +214,7 @@ export default function DashNavbar() {
                   </>
                 )}
               </Button>
-            </motion.div>
+            </motion.div> */}
           </div>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
