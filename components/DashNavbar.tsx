@@ -174,7 +174,7 @@ export default function DashNavbar() {
             ))}
           </nav>
           <div className="hidden lg:flex items-center space-x-3">
-            <Link href="/dahsboard/post">
+            <Link href="/dashboard/post">
               <motion.p
                 animate={{ scale: [1, 1.06, 1.0] }}
                 transition={{
@@ -183,6 +183,11 @@ export default function DashNavbar() {
                   repeatType: "loop",
                   ease: "easeInOut",
                 }}
+                 whileHover={{
+                  scale: 1.12,
+                  transition: { duration: 0.2 },
+                }}
+                whileTap={{ scale: 0.6 }}
                 className={`${exo2.className} text-xl font-meduim mr-7 flex flex-row`}
               >
                 <Hotel className="mr-2" />
