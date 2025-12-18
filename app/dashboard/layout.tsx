@@ -27,7 +27,7 @@ export default function postLayout({
     <div>
         <LordNavbar/>
         {children}
-        <DashFooter/>
+        
      </div>
   );
 }

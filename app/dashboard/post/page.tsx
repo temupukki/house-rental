@@ -1,8 +1,89 @@
-"use client"
-export default function owner(){
-    return(
-        <div>
-            Abeb beso belana mote manye mn tllachu manye
+"use client";
+
+import { Card } from "@/components/ui/card";
+import { Building, Building2, House, Store } from "lucide-react";
+import { useState } from "react";
+import { set } from "zod";
+
+export default function owner() {
+    const [step,setStep]= useState(1);
+    const nextStep=()=>{
+        setStep((prev)=>(prev+1))
+    }
+      const backStep=()=>{
+        setStep((prev)=>(prev-1))
+    }
+  return (
+    <div>
+      <h1 className=" mt-13 text-5xl font-semibold text-gray-800 flex flex-col items-center ">
+        Which of these best describes your place?
+      </h1>
+      <div className="grid grid-cols-3 mx-90 mt-12.5">
+        <div className="mx-3">
+          <Card className="px-5 py-7 ">
+            <House className="text-gray-800 w-20 h-14" />
+            <p className="text-gray-700 text-xl ml-4 -mt-5">House</p>
+          </Card>
         </div>
-    )
+        <div className="mx-3">
+          <Card className="px-5 py-7 ">
+            <Building  className="text-gray-800 w-20 h-14" />
+            <p className="text-gray-700 text-xl ml-4 -mt-5">Apartment</p>
+          </Card>
+        </div>
+        <div className="mx-3">
+          <Card className="px-5 py-7 ">
+            <Building2  className="text-gray-800 w-20 h-14" />
+            <p className="text-gray-700 text-xl ml-4 -mt-5">Condo</p>
+          </Card>
+        </div>
+      </div>
+      <div className="grid grid-cols-3 mx-90 mt-6">
+        <div className="mx-3">
+          <Card className="px-5 py-7 ">
+            <Store  className="text-gray-800 w-20 h-14" />
+            <p className="text-gray-700 text-xl ml-4 -mt-5">Shop</p>
+          </Card>
+        </div>
+        <div className="mx-3">
+          <Card className="px-5 py-7 ">
+            <House className="text-gray-800 w-20 h-14" />
+            <p className="text-gray-700 text-xl ml-4 -mt-5">House</p>
+          </Card>
+        </div>
+        <div className="mx-3">
+          <Card className="px-5 py-7 ">
+            <House className="text-gray-800 w-20 h-14" />
+            <p className="text-gray-700 text-xl ml-4 -mt-5">House</p>
+          </Card>
+        </div>
+      </div>
+      <div className="grid grid-cols-3 mx-90  mt-6 mb-14">
+        <div className="mx-3">
+          <Card className="px-5 py-7 ">
+            <House className="text-gray-800 w-20 h-14" />
+            <p className="text-gray-700 text-xl ml-4 -mt-5">House</p>
+          </Card>
+        </div>
+        <div className="mx-3">
+          <Card className="px-5 py-7 ">
+            <House className="text-gray-800 w-20 h-14" />
+            <p className="text-gray-700 text-xl ml-4 -mt-5">House</p>
+          </Card>
+        </div>
+        <div className="mx-3">
+          <Card className="px-5 py-7 ">
+            <House className="text-gray-800 w-20 h-14" />
+            <p className="text-gray-700 text-xl ml-4 -mt-5">House</p>
+          </Card>
+        </div>
+      </div>
+      <hr  className="w-[1680px] mt-6"/>
+      <div className="flex flex-row justify-between ">
+        <button onClick={backStep} className="text-black underline font-semibold ml-28 my-10 text-2xl ">Back</button>
+        <button onClick={nextStep} className="text-white bg-primary h-11 my-10 text-2xl font-semibold rounded-xl pt-2 pb-4 px-10 mr-25">Next</button>
+
+      </div>
+    </div>
+  );
 }

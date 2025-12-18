@@ -209,7 +209,7 @@ export default function LordNavbar() {
         </div>
         
       </div>
-      <hr  className="w-[1900px] mt-3"/>
+      <hr  className="w-[1680px] mt-3"/>
 
       <AnimatePresence>
         {isMenuOpen && (
