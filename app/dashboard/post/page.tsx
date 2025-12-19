@@ -1,6 +1,9 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Building, Building2, House, Store } from "lucide-react";
 import { useState } from "react";
 
@@ -104,6 +107,25 @@ export default function owner() {
             Where is your place located?
           </h1>
           <div className="space-y-3 mx-90 mt-12.5"></div>
+        </div>
+      )}
+         {step === 4 && (
+        <div>
+          <h1 className=" mt-13 text-5xl font-semibold text-gray-800 flex flex-col items-center ">
+            Property details
+          </h1>
+          <div className="space-y-3 mx-90 mt-12.5">
+            <Label className="text-xl text-medium">Property title</Label>
+            <Input className="py-3 " placeholder="Enter your property title"/>
+             <Label className="text-xl text-medium">Property description </Label>
+            <Textarea className="py-3 " placeholder="Enter your property description"/>
+             <Label className="text-xl text-medium">Property title</Label>
+            <Input className="py-3 " placeholder="Enter your property title"/>
+             <Label className="text-xl text-medium">Property title</Label>
+            <Input className="py-3 " placeholder="Enter your property title"/>
+            
+            
+          </div>
         </div>
       )}
       <hr className="w-[1680px] mt-16" />
