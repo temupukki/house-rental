@@ -112,7 +112,7 @@ export default function owner() {
          {step === 4 && (
         <div>
           <h1 className=" mt-13 text-5xl font-semibold text-gray-800 flex flex-col items-center ">
-            Property details
+            Property detail
           </h1>
           <div className="space-y-3 mx-90 mt-12.5">
             <Label className="text-xl text-medium">Property title</Label>
