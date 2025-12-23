@@ -33,5 +33,8 @@ export async function POST(req:Request){
            
         )
     }
+    catch(err){
+        console.log(err);
+    }
     
 }
