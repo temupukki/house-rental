@@ -27,6 +27,8 @@ import { Button } from "react-day-picker";
 import { date } from "zod";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { select } from "framer-motion/client";
+import { toast } from "sonner";
 function formatDate(date: Date | undefined) {
   if (!date) {
     return "";
@@ -68,6 +70,33 @@ export default function owner() {
   });
   const [ownphone, setOwnphone] = useState("");
   const [area, setArea] = useState("");
+  const propertydata = {
+    selected,
+    status,
+    title,
+    description,
+    shared,
+    condate,
+    ownname: ownpro.name,
+    ownemail: ownpro.email,
+    ownphone,
+    area,
+  };
+  const ppost = async () => {
+    try {
+      const res = await fetch("api/propost", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(propertydata),
+      });
+      if (!res.ok) throw new Error("Failed to submit");
+      rou.push("/dashboard")
+      toast.success("The property is saved successfully");
+    } catch (err: any) {
+      toast.error(err);
+    }
+  };
+
   const rou = useRouter();
   useEffect(() => {
     if (session?.user) {
@@ -79,13 +108,7 @@ export default function owner() {
   }, [session]);
 
   const nextStep = () => {
-    setStep((prev) => {
-      if (prev === 6) {
-        rou.push("/dashboard");
-      }
-
-      return prev + 1;
-    });
+  setStep((prev)=>prev+1)
   };
   const backStep = () => {
     setStep((prev) => prev - 1);
@@ -430,12 +453,23 @@ export default function owner() {
         >
           Back
         </button>
-        <button
-          onClick={nextStep}
-          className="text-white bg-primary h-11 my-10 text-2xl font-semibold rounded-xl pt-2 pb-4 px-10 mr-25"
-        >
-          {step === 6 ? "Finish " : "Next"}
-        </button>
+        {step < 6 && (
+          <button
+            onClick={nextStep}
+            className="bg-blue-600 text-white px-4 py-2"
+          >
+            Next
+          </button>
+        )}
+
+        {step === 6 && (
+          <button
+            onClick={ppost}
+            className="bg-green-600 text-white px-4 py-2"
+          >
+            Finish
+          </button>
+        )}
       </div>
     </div>
   );
