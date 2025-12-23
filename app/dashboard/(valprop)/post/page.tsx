@@ -81,6 +81,9 @@ export default function owner() {
     ownemail: ownpro.email,
     ownphone,
     area,
+    price,
+    bedroom,
+    bathroom
   };
   const ppost = async () => {
     try {
@@ -89,7 +92,9 @@ export default function owner() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(propertydata),
       });
+      
       if (!res.ok) throw new Error("Failed to submit");
+      const data = await res.json();
       rou.push("/dashboard")
       toast.success("The property is saved successfully");
     } catch (err: any) {

@@ -76,11 +76,11 @@ model Property{
   type String
   title String
   description String
-  location String
+  location String?
   price Float
   status String
-  mainImage String
-  supportImage String
+  mainImage String?
+  supportImage String?
   constructionYear DateTime
   bedrooms Int
   bathrooms Int
