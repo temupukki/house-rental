@@ -73,6 +73,7 @@ model Verification {
 }
 model Property{
   id String @id 
+  type String
   title String
   description String
   location String

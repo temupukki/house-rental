@@ -113,38 +113,7 @@ export default function owner() {
                 <p className="text-gray-700 text-xl ml-4 -mt-5">Shop</p>
               </Card>
             </div>
-            <div className="mx-3">
-              <Card className="px-5 py-7 ">
-                <House className="text-gray-800 w-20 h-14" />
-                <p className="text-gray-700 text-xl ml-4 -mt-5">House</p>
-              </Card>
-            </div>
-            <div className="mx-3">
-              <Card className="px-5 py-7 ">
-                <House className="text-gray-800 w-20 h-14" />
-                <p className="text-gray-700 text-xl ml-4 -mt-5">House</p>
-              </Card>
-            </div>
-          </div>
-          <div className="grid grid-cols-3 mx-90  mt-6 mb-14">
-            <div className="mx-3">
-              <Card className="px-5 py-7 ">
-                <House className="text-gray-800 w-20 h-14" />
-                <p className="text-gray-700 text-xl ml-4 -mt-5">House</p>
-              </Card>
-            </div>
-            <div className="mx-3">
-              <Card className="px-5 py-7 ">
-                <House className="text-gray-800 w-20 h-14" />
-                <p className="text-gray-700 text-xl ml-4 -mt-5">House</p>
-              </Card>
-            </div>
-            <div className="mx-3">
-              <Card className="px-5 py-7 ">
-                <House className="text-gray-800 w-20 h-14" />
-                <p className="text-gray-700 text-xl ml-4 -mt-5">House</p>
-              </Card>
-            </div>
+          
           </div>
         </div>
       )}
