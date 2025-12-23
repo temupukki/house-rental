@@ -5,18 +5,40 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Building, Building2, House, Store } from "lucide-react";
+import { Building, Building2, House, Minus, Plus, Store } from "lucide-react";
 import { useState } from "react";
-
 
 export default function owner() {
   const [step, setStep] = useState(1);
+  const [bedroom, setBedroom] = useState(0);
+  const [bathroom, setBathroom] = useState(0);
+  const [price, setPrice] = useState(3000);
+
   const nextStep = () => {
     setStep((prev) => prev + 1);
   };
   const backStep = () => {
     setStep((prev) => prev - 1);
   };
+  const plusBed = () => {
+    setBedroom((prev) => prev + 1);
+  };
+  const minusBed = () => {
+    setBedroom((prev) => (prev > 0 ? prev - 1 : 0));
+  };
+  const plusBath = () => {
+    setBathroom((prev) => prev + 1);
+  };
+  const minusBath = () => {
+    setBathroom((prev) => (prev > 0 ? prev - 1 : 0));
+  };
+  const plusPrice = () => {
+    setPrice((prev) => prev + 1000);
+  };
+  const minusPrice = () => {
+    setPrice((prev) => (prev > 4000 ? prev - 500 : 3000));
+  };
+
   return (
     <div>
       {step === 1 && (
@@ -110,40 +132,114 @@ export default function owner() {
           <div className="space-y-3 mx-90 mt-12.5"></div>
         </div>
       )}
-         {step === 4 && (
+      {step === 4 && (
         <div>
           <h1 className=" mt-13 text-5xl font-semibold text-gray-800 flex flex-col items-center ">
             Property detail
           </h1>
           <div className="space-y-3 mx-90 mt-12.5">
             <Label className="text-xl text-medium">Property title</Label>
-            <Input className="py-7 " placeholder="Enter your property title"/>
-             <Label className="text-xl text-medium">Property description </Label>
-            <Textarea className="py-3 h-80 " placeholder="Enter your property description"/>
-             
+            <Input className="py-7 " placeholder="Enter your property title" />
+            <Label className="text-xl text-medium">Property description </Label>
+            <Textarea
+              className="py-3 h-80 "
+              placeholder="Enter your property description"
+            />
           </div>
         </div>
       )}
-       {step === 5 && (
+      {step === 5 && (
         <div>
           <h1 className=" mt-13 text-5xl font-semibold text-gray-800 flex flex-col items-center ">
             Property Details
           </h1>
-          <div className="space-y-3 mx-90 mt-12.5">
+          <div className="space-y-6 mx-90 mt-12.5 ">
             <Label className="text-xl text-medium">Bedrooms</Label>
-            <Input className="py-7 " placeholder="Enter property Number of Bedrooms"/>
-             <Label className="text-xl text-medium">Bathrooms </Label>
-              <Input className="py-7 " placeholder="Enter property Number of Bathrooms"/>
-               <div className="flex items-center gap-3 pl-3">
+            <div className="flex flex-row ">
+              <button
+                onClick={minusBed}
+                className="bg-red-500 mx-1 rounded-sm text-white px-1.5"
+              >
+                <Minus />
+              </button>
+              <Input
+                className="py-4  w-20"
+                placeholder="Enter property Number of Bedrooms"
+                value={bedroom}
+                type="number"
+                min="0"
+                onChange={(e)=>setBedroom(Number(e.target.value))}
+              />
+
+              <button
+                onClick={plusBed}
+                className="bg-green-500 mx-1 rounded-sm text-white px-1.5"
+              >
+                <Plus />
+              </button>
+            </div>
+
+            <Label className="text-xl text-medium">Bathrooms </Label>
+            <div className="flex flex-row">
+              <button
+                onClick={minusBath}
+                className="bg-red-500 mx-1 rounded-sm text-white px-1.5"
+              >
+                <Minus />
+              </button>
+              <Input
+                className="py-4 w-20 "
+                placeholder="Enter property Number of Bathrooms"
+                value={bathroom}
+                type="number"
+                min="0"
+                onChange={(e)=>setBathroom(Number(e.target.value))}
+              />
+              <button
+                onClick={plusBath}
+                className="bg-green-500 mx-1 rounded-sm text-white px-1.5"
+              >
+                <Plus />
+              </button>
+            </div>
+            <div className="flex items-center gap-3 pl-3">
               <Checkbox id="shared" />
-               <Label htmlFor="shared" className="text-black ">Shared</Label>
-               </div>
-               <p className="italic pl-3 "><span className="font-bold">NB</span>:  If property bathroom is shared check shared box . </p>
+              <Label htmlFor="shared" className="text-black ">
+                Shared
+              </Label>
+            </div>
+            <p className="italic pl-3 ">
+              <span className="font-bold">NB</span>: If property bathroom is
+              shared check shared box .{" "}
+            </p>
 
-             <Label className="text-xl text-medium">Property price</Label> 
-            <Input className="py-7 " placeholder="Enter property price"/>
-
-
+            <Label className="text-xl text-medium">Property price</Label>
+            <div className="flex flex-row">
+              <button
+                onClick={minusPrice}
+                className="bg-red-500 mx-1 rounded-sm text-white px-1.5"
+              >
+                <Minus />
+              </button>
+              <Input
+                className="py-4 w-30 "
+                placeholder="Enter property price"
+                type="number"
+                min="3000"
+                value={price}
+                onChange={(e) => setPrice(Number(e.target.value))}
+              />
+              <button
+                onClick={plusPrice}
+                className="bg-green-500 mx-1 rounded-sm text-white px-1.5"
+              >
+                <Plus />
+              </button>
+            </div>
+            <p className="italic pl-3 ">
+              <span className="font-bold">NB</span>: If the property is for rent
+              enter the price per month
+            </p>
           </div>
         </div>
       )}
