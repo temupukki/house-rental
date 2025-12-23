@@ -5,10 +5,22 @@ import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
 import { setDate, setMonth } from "date-fns";
-import { Building, Building2, CalendarIcon, House, Minus, Plus, Store } from "lucide-react";
+import {
+  Building,
+  Building2,
+  CalendarIcon,
+  House,
+  Minus,
+  Plus,
+  Store,
+} from "lucide-react";
 import React from "react";
 import { useState } from "react";
 import { Button } from "react-day-picker";
@@ -16,19 +28,19 @@ import { date } from "zod";
 import { useRouter } from "next/navigation";
 function formatDate(date: Date | undefined) {
   if (!date) {
-    return ""
+    return "";
   }
   return date.toLocaleDateString("en-US", {
     day: "2-digit",
     month: "long",
     year: "numeric",
-  })
+  });
 }
 function isValidDate(date: Date | undefined) {
   if (!date) {
-    return false
+    return false;
   }
-  return !isNaN(date.getTime())
+  return !isNaN(date.getTime());
 }
 
 export default function owner() {
@@ -36,25 +48,23 @@ export default function owner() {
   const [bedroom, setBedroom] = useState(0);
   const [bathroom, setBathroom] = useState(0);
   const [price, setPrice] = useState(3000);
-    const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
   const [date, setDate] = React.useState<Date | undefined>(
     new Date("2025-06-01")
-  )
-  const [month, setMonth] = React.useState<Date | undefined>(date)
-  const [value, setValue] = React.useState(formatDate(date))
+  );
+  const [month, setMonth] = React.useState<Date | undefined>(date);
+  const [value, setValue] = React.useState(formatDate(date));
+  const [selected, setSelected] = useState("");
   const rou = useRouter();
 
   const nextStep = () => {
-  
-    setStep((prev) => 
-    {
-      if(prev === 6){
-        rou.push("/dashboard")
-      
+    setStep((prev) => {
+      if (prev === 6) {
+        rou.push("/dashboard");
       }
-    
-     return  prev + 1});
-    
+
+      return prev + 1;
+    });
   };
   const backStep = () => {
     setStep((prev) => prev - 1);
@@ -88,19 +98,34 @@ export default function owner() {
 
           <div className="grid grid-cols-3 mx-90 mt-12.5">
             <div className="mx-3">
-              <Card className="px-5 py-7 ">
-                <House className="text-gray-800 w-20 h-14" />
+              <Card
+                onClick={() => setSelected("house")}
+                className={`px-5 py-7 hover:bg-gray-200 hover:border-black ${
+                  selected === "house" ? "bg-gray-200 border-black" : ""
+                }`}
+              >
+                <House className="text-gray-800 w-20 h-14 " />
                 <p className="text-gray-700 text-xl ml-4 -mt-5">House</p>
               </Card>
             </div>
             <div className="mx-3">
-              <Card className="px-5 py-7 ">
+              <Card
+                onClick={() => setSelected("apartment")}
+                className={`px-5 py-7 hover:bg-gray-200 hover:border-black ${
+                  selected === "apartment" ? "bg-gray-200 border-black" : ""
+                }`}
+              >
                 <Building className="text-gray-800 w-20 h-14" />
                 <p className="text-gray-700 text-xl ml-4 -mt-5">Apartment</p>
               </Card>
             </div>
             <div className="mx-3">
-              <Card className="px-5 py-7 ">
+              <Card
+                onClick={() => setSelected("condo")}
+                className={`px-5 py-7 hover:bg-gray-200 hover:border-black ${
+                  selected === "condo" ? "bg-gray-200 border-black" : ""
+                }`}
+              >
                 <Building2 className="text-gray-800 w-20 h-14" />
                 <p className="text-gray-700 text-xl ml-4 -mt-5">Condo</p>
               </Card>
@@ -108,12 +133,16 @@ export default function owner() {
           </div>
           <div className="grid grid-cols-3 mx-90 mt-6">
             <div className="mx-3">
-              <Card className="px-5 py-7 ">
+              <Card
+                onClick={() => setSelected("shop")}
+                className={`px-5 py-7 hover:bg-gray-200 hover:border-black ${
+                  selected === "shop" ? "bg-gray-200 border-black" : ""
+                }`}
+              >
                 <Store className="text-gray-800 w-20 h-14" />
                 <p className="text-gray-700 text-xl ml-4 -mt-5">Shop</p>
               </Card>
             </div>
-          
           </div>
         </div>
       )}
@@ -248,14 +277,13 @@ export default function owner() {
               <span className="font-bold">NB</span>: If the property is for rent
               enter the price per month
             </p>
-             <Label className="px-1"> Area</Label>
-              <Input
-                className="py-4 w-30 "
-                placeholder="Enter property area in m²"
-                type="number"
-                min="10"
-               
-              />
+            <Label className="px-1"> Area</Label>
+            <Input
+              className="py-4 w-30 "
+              placeholder="Enter property area in m²"
+              type="number"
+              min="10"
+            />
             <div className="flex flex-col gap-3">
               <Label htmlFor="date" className="px-1">
                 Subscription Date
@@ -285,7 +313,6 @@ export default function owner() {
                   <PopoverTrigger asChild>
                     <Button
                       id="date-picker"
-                      
                       className="absolute top-1/2 right-2 size-6 -translate-y-1/2"
                     >
                       <CalendarIcon className="size-3.5" />
@@ -325,11 +352,20 @@ export default function owner() {
           <div className="space-y-3 mx-90 mt-12.5">
             <Label className="text-xl text-medium">Owner(Agent) Name</Label>
             <Input className="py-7 " placeholder="Enter Owner(Agent) Name" />
-              <Label className="text-xl text-medium">Owner(Agent) Phone number </Label>
-            <Input className="py-7 " placeholder="Enter Owner(Agent) phone number" type="number" />
+            <Label className="text-xl text-medium">
+              Owner(Agent) Phone number{" "}
+            </Label>
+            <Input
+              className="py-7 "
+              placeholder="Enter Owner(Agent) phone number"
+              type="number"
+            />
             <Label className="text-xl text-medium">Owner(Agent) Email</Label>
-            <Input className="py-7 " placeholder="Enter Owner(Agent) Email" type="email" />
-          
+            <Input
+              className="py-7 "
+              placeholder="Enter Owner(Agent) Email"
+              type="email"
+            />
           </div>
         </div>
       )}
@@ -345,10 +381,9 @@ export default function owner() {
           onClick={nextStep}
           className="text-white bg-primary h-11 my-10 text-2xl font-semibold rounded-xl pt-2 pb-4 px-10 mr-25"
         >
-          {step===6 ? "Finish " : "Next"}
+          {step === 6 ? "Finish " : "Next"}
         </button>
       </div>
-       
     </div>
   );
 }
