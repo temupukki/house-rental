@@ -55,6 +55,7 @@ export default function owner() {
   const [month, setMonth] = React.useState<Date | undefined>(date);
   const [value, setValue] = React.useState(formatDate(date));
   const [selected, setSelected] = useState("");
+  const[status,setStatus]=useState("");
   const rou = useRouter();
 
   const nextStep = () => {
@@ -152,10 +153,10 @@ export default function owner() {
             Is this property for sale or for rent?
           </h1>
           <div className="space-y-3 mx-90 mt-12.5">
-            <Card className="text-2xl font-semibold  hover:border-black border-gray-300 hover:bg-gray-100 pl-10 py-17">
+            <Card onClick={()=>setStatus("for-rent")} className={`text-2xl font-semibold  hover:border-black border-gray-300 hover:bg-gray-200 pl-10 py-17 ${status==="for-rent" ? "bg-gray-200 border-black":""}`}>
               For rent
             </Card>
-            <Card className="text-2xl font-semibold  hover:border-black border-gray-300 hover:bg-gray-100 pl-10 py-17">
+            <Card onClick={()=>setStatus("for-sale")} className={`text-2xl font-semibold  hover:border-black border-gray-300 hover:bg-gray-100 pl-10 py-17 ${status==="for-sale" ? "bg-gray-200 border-black":"" }`}>
               For sale
             </Card>
           </div>
