@@ -1,6 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -116,15 +117,33 @@ export default function owner() {
           </h1>
           <div className="space-y-3 mx-90 mt-12.5">
             <Label className="text-xl text-medium">Property title</Label>
-            <Input className="py-3 " placeholder="Enter your property title"/>
+            <Input className="py-7 " placeholder="Enter your property title"/>
              <Label className="text-xl text-medium">Property description </Label>
-            <Textarea className="py-3 " placeholder="Enter your property description"/>
-             <Label className="text-xl text-medium">Property title</Label>
-            <Input className="py-3 " placeholder="Enter your property title"/>
-             <Label className="text-xl text-medium">Property title</Label>
-            <Input className="py-3 " placeholder="Enter your property title"/>
-            
-            
+            <Textarea className="py-3 h-80 " placeholder="Enter your property description"/>
+             
+          </div>
+        </div>
+      )}
+       {step === 5 && (
+        <div>
+          <h1 className=" mt-13 text-5xl font-semibold text-gray-800 flex flex-col items-center ">
+            Property Details
+          </h1>
+          <div className="space-y-3 mx-90 mt-12.5">
+            <Label className="text-xl text-medium">Bedrooms</Label>
+            <Input className="py-7 " placeholder="Enter property Number of Bedrooms"/>
+             <Label className="text-xl text-medium">Bathrooms </Label>
+              <Input className="py-7 " placeholder="Enter property Number of Bathrooms"/>
+               <div className="flex items-center gap-3 pl-3">
+              <Checkbox id="shared" />
+               <Label htmlFor="shared" className="text-black ">Shared</Label>
+               </div>
+               <p className="italic pl-3 "><span className="font-bold">NB</span>:  If property bathroom is shared check shared box . </p>
+
+             <Label className="text-xl text-medium">Property price</Label> 
+            <Input className="py-7 " placeholder="Enter property price"/>
+
+
           </div>
         </div>
       )}
