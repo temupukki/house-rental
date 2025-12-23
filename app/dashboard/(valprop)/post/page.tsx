@@ -21,11 +21,12 @@ import {
   Plus,
   Store,
 } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button } from "react-day-picker";
 import { date } from "zod";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 function formatDate(date: Date | undefined) {
   if (!date) {
     return "";
@@ -42,6 +43,7 @@ function isValidDate(date: Date | undefined) {
   }
   return !isNaN(date.getTime());
 }
+const { data: session, error } = await authClient.getSession();
 
 export default function owner() {
   const [step, setStep] = useState(1);
@@ -55,8 +57,26 @@ export default function owner() {
   const [month, setMonth] = React.useState<Date | undefined>(date);
   const [value, setValue] = React.useState(formatDate(date));
   const [selected, setSelected] = useState("");
-  const[status,setStatus]=useState("");
+  const [status, setStatus] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [shared, setShared] = useState(false);
+  const [condate, setCondate] = useState("");
+  const [ownpro, setOwnpro] = useState({
+    name: "",
+    email: "",
+  });
+  const [ownphone, setOwnphone] = useState("");
+  const [area, setArea] = useState("");
   const rou = useRouter();
+  useEffect(() => {
+    if (session?.user) {
+      setOwnpro({
+        name: session.user.name ?? "",
+        email: session.user.email ?? "",
+      });
+    }
+  }, [session]);
 
   const nextStep = () => {
     setStep((prev) => {
@@ -153,10 +173,20 @@ export default function owner() {
             Is this property for sale or for rent?
           </h1>
           <div className="space-y-3 mx-90 mt-12.5">
-            <Card onClick={()=>setStatus("for-rent")} className={`text-2xl font-semibold  hover:border-black border-gray-300 hover:bg-gray-200 pl-10 py-17 ${status==="for-rent" ? "bg-gray-200 border-black":""}`}>
+            <Card
+              onClick={() => setStatus("for-rent")}
+              className={`text-2xl font-semibold  hover:border-black border-gray-300 hover:bg-gray-200 pl-10 py-17 ${
+                status === "for-rent" ? "bg-gray-200 border-black" : ""
+              }`}
+            >
               For rent
             </Card>
-            <Card onClick={()=>setStatus("for-sale")} className={`text-2xl font-semibold  hover:border-black border-gray-300 hover:bg-gray-100 pl-10 py-17 ${status==="for-sale" ? "bg-gray-200 border-black":"" }`}>
+            <Card
+              onClick={() => setStatus("for-sale")}
+              className={`text-2xl font-semibold  hover:border-black border-gray-300 hover:bg-gray-100 pl-10 py-17 ${
+                status === "for-sale" ? "bg-gray-200 border-black" : ""
+              }`}
+            >
               For sale
             </Card>
           </div>
@@ -177,9 +207,16 @@ export default function owner() {
           </h1>
           <div className="space-y-3 mx-90 mt-12.5">
             <Label className="text-xl text-medium">Property title</Label>
-            <Input className="py-7 " placeholder="Enter your property title" />
+            <Input
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
+              className="py-7 "
+              placeholder="Enter your property title"
+            />
             <Label className="text-xl text-medium">Property description </Label>
             <Textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               className="py-3 h-80 "
               placeholder="Enter your property description"
             />
@@ -241,7 +278,11 @@ export default function owner() {
               </button>
             </div>
             <div className="flex items-center gap-3 pl-3">
-              <Checkbox id="shared" />
+              <Checkbox
+                id="shared"
+                checked={shared}
+                onCheckedChange={(checked) => setShared(!!checked)}
+              />
               <Label htmlFor="shared" className="text-black ">
                 Shared
               </Label>
@@ -280,6 +321,8 @@ export default function owner() {
             </p>
             <Label className="px-1"> Area</Label>
             <Input
+              value={area}
+              onChange={(e) => setArea(e.target.value)}
               className="py-4 w-30 "
               placeholder="Enter property area in m²"
               type="number"
@@ -287,12 +330,12 @@ export default function owner() {
             />
             <div className="flex flex-col gap-3">
               <Label htmlFor="date" className="px-1">
-                Subscription Date
+                Construction Date
               </Label>
               <div className="relative flex gap-2">
                 <Input
                   id="date"
-                  value={value}
+                  value={condate}
                   placeholder="June 01, 2025"
                   className="bg-background py-3"
                   onChange={(e) => {
@@ -352,17 +395,26 @@ export default function owner() {
           </h1>
           <div className="space-y-3 mx-90 mt-12.5">
             <Label className="text-xl text-medium">Owner(Agent) Name</Label>
-            <Input className="py-7 " placeholder="Enter Owner(Agent) Name" />
+            <Input
+              value={ownpro.name}
+              onChange={(e) => setOwnpro({ ...ownpro, name: ownpro.name })}
+              className="py-7  "
+              placeholder="Enter Owner(Agent) Name"
+            />
             <Label className="text-xl text-medium">
               Owner(Agent) Phone number{" "}
             </Label>
             <Input
+              value={ownphone}
+              onChange={(e) => setOwnphone(e.target.value)}
               className="py-7 "
               placeholder="Enter Owner(Agent) phone number"
               type="number"
             />
             <Label className="text-xl text-medium">Owner(Agent) Email</Label>
             <Input
+              value={ownpro.email}
+              onChange={(e) => setOwnpro({ ...ownpro, email: ownpro.email })}
               className="py-7 "
               placeholder="Enter Owner(Agent) Email"
               type="email"

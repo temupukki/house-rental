@@ -84,6 +84,7 @@ model Property{
   constructionYear DateTime
   bedrooms Int
   bathrooms Int
+  isBathroomshared Boolean
   area Int
   ownerName String
   ownerEmail String
