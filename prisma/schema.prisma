@@ -71,3 +71,24 @@ model Verification {
   @@index([identifier])
   @@map("verification")
 }
+model Property{
+  id String @id 
+  title String
+  description String
+  location String
+  price Float
+  status String
+  mainImage String
+  supportImage String
+  constructionYear DateTime
+  bedrooms Int
+  bathrooms Int
+  area Int
+  ownerName String
+  ownerEmail String
+  ownerPhone String
+
+
+
+
+}

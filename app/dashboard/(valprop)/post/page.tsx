@@ -279,6 +279,14 @@ export default function owner() {
               <span className="font-bold">NB</span>: If the property is for rent
               enter the price per month
             </p>
+             <Label className="px-1"> Area</Label>
+              <Input
+                className="py-4 w-30 "
+                placeholder="Enter property area in m²"
+                type="number"
+                min="10"
+               
+              />
             <div className="flex flex-col gap-3">
               <Label htmlFor="date" className="px-1">
                 Subscription Date
