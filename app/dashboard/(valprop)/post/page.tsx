@@ -13,6 +13,7 @@ import React from "react";
 import { useState } from "react";
 import { Button } from "react-day-picker";
 import { date } from "zod";
+import { useRouter } from "next/navigation";
 function formatDate(date: Date | undefined) {
   if (!date) {
     return ""
@@ -41,9 +42,19 @@ export default function owner() {
   )
   const [month, setMonth] = React.useState<Date | undefined>(date)
   const [value, setValue] = React.useState(formatDate(date))
+  const rou = useRouter();
 
   const nextStep = () => {
-    setStep((prev) => prev + 1);
+  
+    setStep((prev) => 
+    {
+      if(prev === 6){
+        rou.push("/dashboard")
+      
+      }
+    
+     return  prev + 1});
+    
   };
   const backStep = () => {
     setStep((prev) => prev - 1);
@@ -329,6 +340,22 @@ export default function owner() {
           </div>
         </div>
       )}
+      {step === 6 && (
+        <div>
+          <h1 className=" mt-13 text-5xl font-semibold text-gray-800 flex flex-col items-center ">
+            Property Owner(Agent) Details
+          </h1>
+          <div className="space-y-3 mx-90 mt-12.5">
+            <Label className="text-xl text-medium">Owner(Agent) Name</Label>
+            <Input className="py-7 " placeholder="Enter Owner(Agent) Name" />
+              <Label className="text-xl text-medium">Owner(Agent) Phone number </Label>
+            <Input className="py-7 " placeholder="Enter Owner(Agent) phone number" type="number" />
+            <Label className="text-xl text-medium">Owner(Agent) Email</Label>
+            <Input className="py-7 " placeholder="Enter Owner(Agent) Email" type="email" />
+          
+          </div>
+        </div>
+      )}
       <hr className="w-[1680px] mt-16" />
       <div className="flex flex-row justify-between ">
         <button
@@ -341,25 +368,10 @@ export default function owner() {
           onClick={nextStep}
           className="text-white bg-primary h-11 my-10 text-2xl font-semibold rounded-xl pt-2 pb-4 px-10 mr-25"
         >
-          Next
+          {step===6 ? "Finish " : "Next"}
         </button>
       </div>
-       {step ===5 && (
-        <div>
-          <h1 className=" mt-13 text-5xl font-semibold text-gray-800 flex flex-col items-center ">
-            Property detail
-          </h1>
-          <div className="space-y-3 mx-90 mt-12.5">
-            <Label className="text-xl text-medium">Property title</Label>
-            <Input className="py-7 " placeholder="Enter your property title" />
-            <Label className="text-xl text-medium">Property description </Label>
-            <Textarea
-              className="py-3 h-80 "
-              placeholder="Enter your property description"
-            />
-          </div>
-        </div>
-      )}
+       
     </div>
   );
 }
