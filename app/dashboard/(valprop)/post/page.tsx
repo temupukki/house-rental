@@ -13,9 +13,15 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { setDate, setMonth } from "date-fns";
 import {
+  ArrowDownUp,
+  Bath,
+  BedDouble,
   Building,
   Building2,
+  Calendar1,
   CalendarIcon,
+  ChartCandlestick,
+  Expand,
   House,
   Minus,
   Plus,
@@ -256,9 +262,10 @@ const [condate, setCondate] = useState<string | null>(null)
           <h1 className=" mt-13 text-5xl font-semibold text-gray-800 flex flex-col items-center ">
             Property Details
           </h1>
-          <div className="space-y-6 mx-90 mt-12.5 ">
-            <Label className="text-xl text-medium">Bedrooms</Label>
-            <div className="flex flex-row ">
+         <div className="grid grid-cols-2">
+          <div className="space-y-3 ml-90 mt-12.5 ">
+            <Label className="text-xl text-medium mb-3"><BedDouble className="ml-2" />Bedrooms</Label>
+            <div className="flex flex-row mb-8">
               <button
                 onClick={minusBed}
                 className="bg-red-500 mx-1 rounded-sm text-white px-1.5"
@@ -266,7 +273,7 @@ const [condate, setCondate] = useState<string | null>(null)
                 <Minus />
               </button>
               <Input
-                className="py-4  w-20"
+                className="py-4  w-20 border-gray-400"
                 placeholder="Enter property Number of Bedrooms"
                 value={bedroom}
                 type="number"
@@ -282,8 +289,8 @@ const [condate, setCondate] = useState<string | null>(null)
               </button>
             </div>
 
-            <Label className="text-xl text-medium">Bathrooms </Label>
-            <div className="flex flex-row">
+            <Label className="text-xl text-medium"><Bath className="ml-2 "/>Bathrooms </Label>
+            <div className="flex flex-row mb-8">
               <button
                 onClick={minusBath}
                 className="bg-red-500 mx-1 rounded-sm text-white px-1.5"
@@ -291,7 +298,7 @@ const [condate, setCondate] = useState<string | null>(null)
                 <Minus />
               </button>
               <Input
-                className="py-4 w-20 "
+                className="py-4 w-20 border-gray-400 "
                 placeholder="Enter property Number of Bathrooms"
                 value={bathroom}
                 type="number"
@@ -305,23 +312,24 @@ const [condate, setCondate] = useState<string | null>(null)
                 <Plus />
               </button>
             </div>
-            <div className="flex items-center gap-3 pl-3">
+            <div className="flex items-center gap-3 pl-2">
               <Checkbox
                 id="shared"
                 checked={shared}
                 onCheckedChange={(checked) => setShared(!!checked)}
+                className="border-gray-800"
               />
               <Label htmlFor="shared" className="text-black ">
                 Shared
               </Label>
             </div>
-            <p className="italic pl-3 ">
+            <p className="italic pl-2 mb-8 ">
               <span className="font-bold">NB</span>: If property bathroom is
               shared check shared box .{" "}
             </p>
 
-            <Label className="text-xl text-medium">Property price</Label>
-            <div className="flex flex-row">
+            <Label className="text-xl mb-3 "><ChartCandlestick className="pl-2"/>Property price</Label>
+            <div className="flex flex-row mb-6">
               <button
                 onClick={minusPrice}
                 className="bg-red-500 mx-1 rounded-sm text-white px-1.5"
@@ -329,7 +337,7 @@ const [condate, setCondate] = useState<string | null>(null)
                 <Minus />
               </button>
               <Input
-                className="py-4 w-30 "
+                className="py-4 w-30 border-gray-400 "
                 placeholder="Enter property price"
                 type="number"
                 min="3000"
@@ -343,21 +351,25 @@ const [condate, setCondate] = useState<string | null>(null)
                 <Plus />
               </button>
             </div>
-            <p className="italic pl-3 ">
+            <p className="italic pl-2 mb-8 ">
               <span className="font-bold">NB</span>: If the property is for rent
               enter the price per month
             </p>
-            <Label className="px-1"> Area</Label>
+            <Label className="px-1 text-xl "> <Expand className="pl-1"/>Area</Label>
             <Input
               value={area}
               onChange={(e) => setArea(e.target.value)}
-              className="py-4 w-30 "
-              placeholder="Enter property area in m²"
+              className="py-4 w-30 border-gray-400  "
+              placeholder="In m²"
+              
               type="number"
               min="10"
             />
+               <p className="italic pl-2 mb-8 ">
+              <span className="font-bold">NB</span>: The area of property must be in m²
+            </p>
             <div className="flex flex-col gap-3">
-              <Label htmlFor="date" className="px-1">
+              <Label htmlFor="date" className="px-1 text-2xl"><Calendar1  className="pl-1"/>
                 Construction Date
               </Label>
               <div className="relative flex gap-2">
@@ -365,7 +377,7 @@ const [condate, setCondate] = useState<string | null>(null)
                   id="date"
                   value={condate ??""}
                   placeholder="June 01, 2025"
-                  className="bg-background py-3"
+                  className="bg-background py-3 border-gray-400"
                   onChange={(e) => {
                     const date = new Date(e.target.value);
                     setValue(e.target.value);
@@ -413,6 +425,18 @@ const [condate, setCondate] = useState<string | null>(null)
                 </Popover>
               </div>
             </div>
+          </div>
+          <div>
+            <div className="space-y-3 ml-30 mt-12.5 ">
+              <div className="flex items-center gap-3 pl-2">
+             <Label className="flex flex-row "><ArrowDownUp className="pl-1 " />Elevator </Label>
+            </div>
+            
+           
+            
+          </div>
+
+          </div>
           </div>
         </div>
       )}
