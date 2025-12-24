@@ -87,7 +87,7 @@ export default function owner() {
   };
   const ppost = async () => {
     try {
-      const res = await fetch("api/propost", {
+      const res = await fetch("/api/propost", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(propertydata),
