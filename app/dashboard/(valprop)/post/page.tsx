@@ -461,7 +461,7 @@ export default function owner() {
         {step < 6 && (
           <button
             onClick={nextStep}
-            className="bg-blue-600 text-white px-4 py-2"
+            className="bg-primary mr-28 my-10 rounded-lg text-white px-6 text-xl font-medium py-3"
           >
             Next
           </button>
@@ -470,7 +470,7 @@ export default function owner() {
         {step === 6 && (
           <button
             onClick={ppost}
-            className="bg-green-600 text-white px-4 py-2"
+            className="bg-green-600 mr-28 my-10 rounded-lg text-white px-6 text-xl font-medium py-32"
           >
             Finish
           </button>

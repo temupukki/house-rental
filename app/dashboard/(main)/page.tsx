@@ -54,7 +54,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { p } from "framer-motion/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 
@@ -132,6 +132,14 @@ const formSchema = z.object({
 });
 const { data: session, error } = await authClient.getSession();
 export default function dashboard() {
+   const [mounted, setMounted] = useState(false)
+  const [fullname, setFullname] = useState("")
+
+  useEffect(() => {
+    setMounted(true)
+    setFullname(session?.user?.name|| "")
+  }, [])
+  if (!mounted) return null
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -154,7 +162,6 @@ export default function dashboard() {
   function onSubmit(values: any) {
     console.log("Submitted:", values);
   }
-  const fullname = session?.user?.name || "";
   return (
     <div className="bg-white min-h-screen">
       <div className="relative bg-linear-to-r from-gray-900 via-gray-800 to-gray-900 mx-4 md:mx-10 mt-4 rounded-3xl overflow-hidden">
