@@ -81,11 +81,11 @@ model Property{
   status String
   mainImage String?
   supportImage String?
-  constructionYear DateTime
+  constructionYear DateTime?
   bedrooms Int
   bathrooms Int
   isBathroomshared Boolean
-  area Int
+  area String
   ownerName String
   ownerEmail String
   ownerPhone String

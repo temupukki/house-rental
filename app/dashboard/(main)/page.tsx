@@ -139,7 +139,6 @@ export default function dashboard() {
     setMounted(true)
     setFullname(session?.user?.name|| "")
   }, [])
-  if (!mounted) return null
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -162,6 +161,8 @@ export default function dashboard() {
   function onSubmit(values: any) {
     console.log("Submitted:", values);
   }
+    if (!mounted) return null
+
   return (
     <div className="bg-white min-h-screen">
       <div className="relative bg-linear-to-r from-gray-900 via-gray-800 to-gray-900 mx-4 md:mx-10 mt-4 rounded-3xl overflow-hidden">

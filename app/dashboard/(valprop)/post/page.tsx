@@ -63,7 +63,7 @@ export default function owner() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [shared, setShared] = useState(false);
-  const [condate, setCondate] = useState("");
+const [condate, setCondate] = useState<string | null>(null)
   const [ownpro, setOwnpro] = useState({
     name: "",
     email: "",
@@ -363,7 +363,7 @@ export default function owner() {
               <div className="relative flex gap-2">
                 <Input
                   id="date"
-                  value={condate}
+                  value={condate ??""}
                   placeholder="June 01, 2025"
                   className="bg-background py-3"
                   onChange={(e) => {
