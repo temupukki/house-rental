@@ -29,7 +29,7 @@ type Property = {
   status: string;
   mainImage: string;
   supportimage: string[];
-  desccription: string;
+  description: string;
   bedrooms: number;
   bathrooms: number;
   floor: number;
@@ -142,7 +142,7 @@ export default function prope() {
               <h1 className="text-4xl font-semibold tracking-[1px] mb-10 mt-16 ">
                 Description
               </h1>
-              <p className="text-xl mb-16">{selectedProduct.desccription}</p>
+              <p className="text-xl mb-16">{selectedProduct.description}</p>
               <p className="text-4xl font-semibold tracking-[1px] mb-10 ">
                 Property details
               </p>

@@ -2,13 +2,20 @@ import { NextResponse } from "next/server";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { email } from "zod";
 import owner from "@/app/dashboard/(valprop)/post/page";
+import { auth } from "@/lib/auth";
 
 const prisma = new PrismaClient();
+
 export async function POST(req: Request) {
+const session=  await auth.api.getSession({
+    
+    headers: req.headers, 
+});
   try {
     const body = await req.json();
     const newRecord = await prisma.property.create({
       data: {
+        propacc:String(session?.user?.id),
         title: body.title,
         status: body.status,
         type: body.selected,
