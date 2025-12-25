@@ -25,6 +25,7 @@ import {
   House,
   Minus,
   Plus,
+  SquareParking,
   Store,
 } from "lucide-react";
 import React, { useEffect } from "react";
@@ -76,6 +77,8 @@ const [condate, setCondate] = useState<string | null>(null)
   });
   const [ownphone, setOwnphone] = useState("");
   const [area, setArea] = useState("");
+  const [elevator,setElevator]=useState("NO")
+  const[Parking,setParking]=useState("NO")
   const propertydata = {
     selected,
     status,
@@ -89,7 +92,9 @@ const [condate, setCondate] = useState<string | null>(null)
     area,
     price,
     bedroom,
-    bathroom
+    bathroom,
+    elevator,
+    Parking
   };
   const ppost = async () => {
     try {
@@ -429,11 +434,18 @@ const [condate, setCondate] = useState<string | null>(null)
           <div>
             <div className="space-y-3 ml-30 mt-12.5 ">
               <div className="flex items-center gap-3 pl-2">
-             <Label className="flex flex-row "><ArrowDownUp className="pl-1 " />Elevator </Label>
+             <Label className="flex flex-row  text-xl  "><ArrowDownUp className="pl-1 " />Elevator </Label>
+             
             </div>
-            
-           
-            
+            <button onClick={()=>setElevator("YES")} className="text-xl rounded-lg border-3 hover:bg-green-400 hover:text-white ml-2 py-2 px-4 mr-3">Yes</button>
+            <button onClick={()=>setElevator("NO")} className="text-xl rounded-lg border-3 hover:bg-red-400 hover:text-white ml-2 py-2 px-4">No</button>
+              <div className="flex items-center gap-3 pl-2">
+             <Label className="flex flex-row  text-xl  "><SquareParking  className="pl-1 " />Parking </Label>
+             
+            </div>
+            <button onClick={()=>setParking("YES")} className="text-xl rounded-lg border-3 hover:bg-green-400 hover:text-white ml-2 py-2 px-4 mr-3">Yes</button>
+            <button onClick={()=>setParking("NO")} className="text-xl rounded-lg border-3 hover:bg-red-400 hover:text-white ml-2 py-2 px-4">No</button>
+ 
           </div>
 
           </div>

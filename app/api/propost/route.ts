@@ -22,6 +22,8 @@ export async function POST(req: Request) {
         price: body.price,
         bedrooms: body.bedroom,
         bathrooms: body.bathroom,
+        elevator:body.elevator,
+        Parking:body.Parking
       },
     });
         return NextResponse.json({ status: 201 })

@@ -89,6 +89,8 @@ model Property{
   ownerName String
   ownerEmail String
   ownerPhone String
+  elevator String
+  Parking String
 
 
 
