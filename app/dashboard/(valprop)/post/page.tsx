@@ -70,15 +70,15 @@ export default function owner() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [shared, setShared] = useState(false);
-const [condate, setCondate] = useState<string | null>(null)
+  const [condate, setCondate] = useState<string | null>(null);
   const [ownpro, setOwnpro] = useState({
     name: "",
     email: "",
   });
   const [ownphone, setOwnphone] = useState("");
   const [area, setArea] = useState("");
-  const [elevator,setElevator]=useState("NO")
-  const[Parking,setParking]=useState("NO")
+  const [elevator, setElevator] = useState("NO");
+  const [Parking, setParking] = useState("NO");
   const propertydata = {
     selected,
     status,
@@ -94,7 +94,7 @@ const [condate, setCondate] = useState<string | null>(null)
     bedroom,
     bathroom,
     elevator,
-    Parking
+    Parking,
   };
   const ppost = async () => {
     try {
@@ -103,10 +103,10 @@ const [condate, setCondate] = useState<string | null>(null)
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(propertydata),
       });
-      
+
       if (!res.ok) throw new Error("Failed to submit");
       const data = await res.json();
-      rou.push("/dashboard")
+      rou.push("/dashboard");
       toast.success("The property is saved successfully");
     } catch (err: any) {
       toast.error(err);
@@ -124,7 +124,7 @@ const [condate, setCondate] = useState<string | null>(null)
   }, [session]);
 
   const nextStep = () => {
-  setStep((prev)=>prev+1)
+    setStep((prev) => prev + 1);
   };
   const backStep = () => {
     setStep((prev) => prev - 1);
@@ -267,188 +267,182 @@ const [condate, setCondate] = useState<string | null>(null)
           <h1 className=" mt-13 text-5xl font-semibold text-gray-800 flex flex-col items-center ">
             Property Details
           </h1>
-         <div className="grid grid-cols-2">
-          <div className="space-y-3 ml-90 mt-12.5 ">
-            <Label className="text-xl text-medium mb-3"><BedDouble className="ml-2" />Bedrooms</Label>
-            <div className="flex flex-row mb-8">
-              <button
-                onClick={minusBed}
-                className="bg-red-500 mx-1 rounded-sm text-white px-1.5"
-              >
-                <Minus />
-              </button>
-              <Input
-                className="py-4  w-20 border-gray-400"
-                placeholder="Enter property Number of Bedrooms"
-                value={bedroom}
-                type="number"
-                min="0"
-                onChange={(e) => setBedroom(Number(e.target.value))}
-              />
-
-              <button
-                onClick={plusBed}
-                className="bg-green-500 mx-1 rounded-sm text-white px-1.5"
-              >
-                <Plus />
-              </button>
-            </div>
-
-            <Label className="text-xl text-medium"><Bath className="ml-2 "/>Bathrooms </Label>
-            <div className="flex flex-row mb-8">
-              <button
-                onClick={minusBath}
-                className="bg-red-500 mx-1 rounded-sm text-white px-1.5"
-              >
-                <Minus />
-              </button>
-              <Input
-                className="py-4 w-20 border-gray-400 "
-                placeholder="Enter property Number of Bathrooms"
-                value={bathroom}
-                type="number"
-                min="0"
-                onChange={(e) => setBathroom(Number(e.target.value))}
-              />
-              <button
-                onClick={plusBath}
-                className="bg-green-500 mx-1 rounded-sm text-white px-1.5"
-              >
-                <Plus />
-              </button>
-            </div>
-            <div className="flex items-center gap-3 pl-2">
-              <Checkbox
-                id="shared"
-                checked={shared}
-                onCheckedChange={(checked) => setShared(!!checked)}
-                className="border-gray-800"
-              />
-              <Label htmlFor="shared" className="text-black ">
-                Shared
+          <div className="grid grid-cols-2">
+            <div className="space-y-3 ml-90 mt-12.5 ">
+              <Label className="text-xl text-medium mb-3">
+                <BedDouble className="ml-2" />
+                Bedrooms
               </Label>
-            </div>
-            <p className="italic pl-2 mb-8 ">
-              <span className="font-bold">NB</span>: If property bathroom is
-              shared check shared box .{" "}
-            </p>
-
-            <Label className="text-xl mb-3 "><ChartCandlestick className="pl-2"/>Property price</Label>
-            <div className="flex flex-row mb-6">
-              <button
-                onClick={minusPrice}
-                className="bg-red-500 mx-1 rounded-sm text-white px-1.5"
-              >
-                <Minus />
-              </button>
-              <Input
-                className="py-4 w-30 border-gray-400 "
-                placeholder="Enter property price"
-                type="number"
-                min="3000"
-                value={price}
-                onChange={(e) => setPrice(Number(e.target.value))}
-              />
-              <button
-                onClick={plusPrice}
-                className="bg-green-500 mx-1 rounded-sm text-white px-1.5"
-              >
-                <Plus />
-              </button>
-            </div>
-            <p className="italic pl-2 mb-8 ">
-              <span className="font-bold">NB</span>: If the property is for rent
-              enter the price per month
-            </p>
-            <Label className="px-1 text-xl "> <Expand className="pl-1"/>Area</Label>
-            <Input
-              value={area}
-              onChange={(e) => setArea(e.target.value)}
-              className="py-4 w-30 border-gray-400  "
-              placeholder="In m²"
-              
-              type="number"
-              min="10"
-            />
-               <p className="italic pl-2 mb-8 ">
-              <span className="font-bold">NB</span>: The area of property must be in m²
-            </p>
-            <div className="flex flex-col gap-3">
-              <Label htmlFor="date" className="px-1 text-2xl"><Calendar1  className="pl-1"/>
-                Construction Date
-              </Label>
-              <div className="relative flex gap-2">
+              <div className="flex flex-row mb-8">
+                <button
+                  onClick={minusBed}
+                  className="bg-red-500 mx-1 rounded-sm text-white px-1.5"
+                >
+                  <Minus />
+                </button>
                 <Input
-                  id="date"
-                  value={condate ??""}
-                  placeholder="June 01, 2025"
-                  className="bg-background py-3 border-gray-400"
-                  onChange={(e) => {
-                    const date = new Date(e.target.value);
-                    setValue(e.target.value);
-                    if (isValidDate(date)) {
-                      setDate(date);
-                      setMonth(date);
-                    }
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === "ArrowDown") {
-                      e.preventDefault();
-                      setOpen(true);
-                    }
-                  }}
+                  className="py-4  w-20 border-gray-400"
+                  placeholder="Enter property Number of Bedrooms"
+                  value={bedroom}
+                  type="number"
+                  min="0"
+                  onChange={(e) => setBedroom(Number(e.target.value))}
                 />
-                <Popover open={open} onOpenChange={setOpen}>
-                  <PopoverTrigger asChild>
-                    <Button
-                      id="date-picker"
-                      className="absolute top-1/2 right-2 size-6 -translate-y-1/2"
-                    >
-                      <CalendarIcon className="size-3.5" />
-                      <span className="sr-only">Select date</span>
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent
-                    className="w-auto overflow-hidden p-0"
-                    align="end"
-                    alignOffset={-8}
-                    sideOffset={10}
-                  >
-                    <Calendar
-                      mode="single"
-                      selected={date}
-                      captionLayout="dropdown"
-                      month={month}
-                      onMonthChange={setMonth}
-                      onSelect={(date) => {
-                        setDate(date);
-                        setValue(formatDate(date));
-                        setOpen(false);
-                      }}
-                    />
-                  </PopoverContent>
-                </Popover>
+
+                <button
+                  onClick={plusBed}
+                  className="bg-green-500 mx-1 rounded-sm text-white px-1.5"
+                >
+                  <Plus />
+                </button>
+              </div>
+
+              <Label className="text-xl text-medium">
+                <Bath className="ml-2 " />
+                Bathrooms{" "}
+              </Label>
+              <div className="flex flex-row mb-8">
+                <button
+                  onClick={minusBath}
+                  className="bg-red-500 mx-1 rounded-sm text-white px-1.5"
+                >
+                  <Minus />
+                </button>
+                <Input
+                  className="py-4 w-20 border-gray-400 "
+                  placeholder="Enter property Number of Bathrooms"
+                  value={bathroom}
+                  type="number"
+                  min="0"
+                  onChange={(e) => setBathroom(Number(e.target.value))}
+                />
+                <button
+                  onClick={plusBath}
+                  className="bg-green-500 mx-1 rounded-sm text-white px-1.5"
+                >
+                  <Plus />
+                </button>
+              </div>
+              <div className="flex items-center gap-3 pl-2">
+                <Checkbox
+                  id="shared"
+                  checked={shared}
+                  onCheckedChange={(checked) => setShared(!!checked)}
+                  className="border-gray-800"
+                />
+                <Label htmlFor="shared" className="text-black ">
+                  Shared
+                </Label>
+              </div>
+              <p className="italic pl-2 mb-8 ">
+                <span className="font-bold">NB</span>: If property bathroom is
+                shared check shared box .{" "}
+              </p>
+
+              <Label className="text-xl mb-3 ">
+                <ChartCandlestick className="pl-2" />
+                Property price
+              </Label>
+              <div className="flex flex-row mb-6">
+                <button
+                  onClick={minusPrice}
+                  className="bg-red-500 mx-1 rounded-sm text-white px-1.5"
+                >
+                  <Minus />
+                </button>
+                <Input
+                  className="py-4 w-30 border-gray-400 "
+                  placeholder="Enter property price"
+                  type="number"
+                  min="3000"
+                  value={price}
+                  onChange={(e) => setPrice(Number(e.target.value))}
+                />
+                <button
+                  onClick={plusPrice}
+                  className="bg-green-500 mx-1 rounded-sm text-white px-1.5"
+                >
+                  <Plus />
+                </button>
+              </div>
+              <p className="italic pl-2 mb-8 ">
+                <span className="font-bold">NB</span>: If the property is for
+                rent enter the price per month
+              </p>
+              <Label className="px-1 text-xl ">
+                {" "}
+                <Expand className="pl-1" />
+                Area
+              </Label>
+              <Input
+                value={area}
+                onChange={(e) => setArea(e.target.value)}
+                className="py-4 w-30 border-gray-400  "
+                placeholder="In m²"
+                type="number"
+                min="10"
+              />
+              <p className="italic pl-2 mb-8 ">
+                <span className="font-bold">NB</span>: The area of property must
+                be in m²
+              </p>
+              <div className="flex flex-col gap-3">
+                <Input
+                  value={condate??}
+                  onChange={(e)=>setCondate(e.target.value)}
+                  className="py-4 w-40 border-gray-400  "
+                  placeholder="September,2023"
+                />
               </div>
             </div>
-          </div>
-          <div>
-            <div className="space-y-3 ml-30 mt-12.5 ">
-              <div className="flex items-center gap-3 pl-2">
-             <Label className="flex flex-row  text-xl  "><ArrowDownUp className="pl-1 " />Elevator </Label>
-             
+            <div>
+              <div className="space-y-3 ml-30 mt-12.5 ">
+                <div className="flex items-center gap-3 pl-2">
+                  <Label className="flex flex-row  text-xl  ">
+                    <ArrowDownUp className="pl-1 " />
+                    Elevator{" "}
+                  </Label>
+                </div>
+                <button
+                  onClick={() => setElevator("YES")}
+                  className={` ${
+                    elevator === "YES" ? "bg-green-700 text-white" : ""
+                  } text-xl rounded-lg border-3 hover:bg-black hover:text-white ml-2 py-2 px-4 mr-3`}
+                >
+                  Yes
+                </button>
+                <button
+                  onClick={() => setElevator("NO")}
+                  className={` ${
+                    elevator === "NO" ? "bg-red-700 text-white" : ""
+                  } text-xl rounded-lg border-3 hover:bg-black hover:text-white ml-2 py-2 px-4 mr-3`}
+                >
+                  No
+                </button>
+                <div className="flex items-center gap-3 pl-2">
+                  <Label className="flex flex-row  text-xl  ">
+                    <SquareParking className="pl-1 " />
+                    Parking{" "}
+                  </Label>
+                </div>
+                <button
+                  onClick={() => setParking("YES")}
+                  className={` ${
+                    Parking === "YES" ? "bg-green-700 text-white" : ""
+                  } text-xl rounded-lg border-3 hover:bg-black hover:text-white ml-2 py-2 px-4 mr-3`}
+                >
+                  Yes
+                </button>
+                <button
+                  onClick={() => setParking("NO")}
+                  className={` ${
+                    Parking === "NO" ? "bg-red-700 text-white" : ""
+                  } text-xl rounded-lg border-3 hover:bg-black hover:text-white ml-2 py-2 px-4 mr-3`}
+                >
+                  No
+                </button>
+              </div>
             </div>
-          <button onClick={() => setElevator("YES")} className={` ${elevator=== "YES" ? "bg-green-700 text-white" : ""} text-xl rounded-lg border-3 hover:bg-black hover:text-white ml-2 py-2 px-4 mr-3`}>Yes</button>
-          <button onClick={() => setElevator("NO")} className={` ${elevator=== "NO" ? "bg-red-700 text-white" : ""} text-xl rounded-lg border-3 hover:bg-black hover:text-white ml-2 py-2 px-4 mr-3`}>No</button>
-              <div className="flex items-center gap-3 pl-2">
-             <Label className="flex flex-row  text-xl  "><SquareParking  className="pl-1 " />Parking </Label>
-             
-            </div>
-            <button onClick={()=> setParking("YES")} className={` ${Parking==="YES" ? "bg-green-700 text-white" : ""} text-xl rounded-lg border-3 hover:bg-black hover:text-white ml-2 py-2 px-4 mr-3`}>Yes</button>
-            <button onClick={()=> setParking("NO")} className={` ${Parking==="NO" ? "bg-red-700 text-white" : ""} text-xl rounded-lg border-3 hover:bg-black hover:text-white ml-2 py-2 px-4 mr-3`}>No</button>
- 
-          </div>
-
-          </div>
           </div>
         </div>
       )}
@@ -506,7 +500,7 @@ const [condate, setCondate] = useState<string | null>(null)
         {step === 6 && (
           <button
             onClick={ppost}
-            className="bg-green-600 mr-28 my-10 rounded-lg text-white px-6 text-xl font-medium py-32"
+            className="bg-green-600 mr-28 my-10 rounded-lg text-white px-6 text-xl font-medium py-3"
           >
             Finish
           </button>

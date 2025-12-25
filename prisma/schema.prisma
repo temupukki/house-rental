@@ -83,7 +83,7 @@ model Property{
   status String
   mainImage String?
   supportImage String?
-  constructionYear DateTime?
+  constructionYear String?
   bedrooms Int
   bathrooms Int
   isBathroomshared Boolean
