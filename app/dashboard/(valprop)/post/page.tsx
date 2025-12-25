@@ -245,18 +245,18 @@ const [condate, setCondate] = useState<string | null>(null)
             Property detail
           </h1>
           <div className="space-y-3 mx-90 mt-12.5">
-            <Label className="text-xl text-medium">Property title</Label>
+            <Label className="text-xl text-medium ">Property title</Label>
             <Input
               onChange={(e) => setTitle(e.target.value)}
               value={title}
-              className="py-7 "
+              className="py-7 border-gray-400 "
               placeholder="Enter your property title"
             />
             <Label className="text-xl text-medium">Property description </Label>
             <Textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="py-3 h-80 "
+              className="py-3 h-80 border-gray-400 "
               placeholder="Enter your property description"
             />
           </div>
@@ -437,14 +437,14 @@ const [condate, setCondate] = useState<string | null>(null)
              <Label className="flex flex-row  text-xl  "><ArrowDownUp className="pl-1 " />Elevator </Label>
              
             </div>
-            <button onClick={()=>setElevator("YES")} className="text-xl rounded-lg border-3 hover:bg-green-400 hover:text-white ml-2 py-2 px-4 mr-3">Yes</button>
-            <button onClick={()=>setElevator("NO")} className="text-xl rounded-lg border-3 hover:bg-red-400 hover:text-white ml-2 py-2 px-4">No</button>
+          <button onClick={() => setElevator("YES")} className={` ${elevator=== "YES" ? "bg-green-700 text-white" : ""} text-xl rounded-lg border-3 hover:bg-black hover:text-white ml-2 py-2 px-4 mr-3`}>Yes</button>
+          <button onClick={() => setElevator("NO")} className={` ${elevator=== "NO" ? "bg-red-700 text-white" : ""} text-xl rounded-lg border-3 hover:bg-black hover:text-white ml-2 py-2 px-4 mr-3`}>No</button>
               <div className="flex items-center gap-3 pl-2">
              <Label className="flex flex-row  text-xl  "><SquareParking  className="pl-1 " />Parking </Label>
              
             </div>
-            <button onClick={()=>setParking("YES")} className="text-xl rounded-lg border-3 hover:bg-green-400 hover:text-white ml-2 py-2 px-4 mr-3">Yes</button>
-            <button onClick={()=>setParking("NO")} className="text-xl rounded-lg border-3 hover:bg-red-400 hover:text-white ml-2 py-2 px-4">No</button>
+            <button onClick={()=> setParking("YES")} className={` ${Parking==="YES" ? "bg-green-700 text-white" : ""} text-xl rounded-lg border-3 hover:bg-black hover:text-white ml-2 py-2 px-4 mr-3`}>Yes</button>
+            <button onClick={()=> setParking("NO")} className={` ${Parking==="NO" ? "bg-red-700 text-white" : ""} text-xl rounded-lg border-3 hover:bg-black hover:text-white ml-2 py-2 px-4 mr-3`}>No</button>
  
           </div>
 
