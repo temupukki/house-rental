@@ -70,7 +70,7 @@ export default function owner() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [shared, setShared] = useState(false);
-  const [condate, setCondate] = useState<string | null>(null);
+  const [condate, setCondate] = useState("");
   const [ownpro, setOwnpro] = useState({
     name: "",
     email: "",
@@ -388,7 +388,7 @@ export default function owner() {
               </p>
               <div className="flex flex-col gap-3">
                 <Input
-                  value={condate??}
+                  value={condate}
                   onChange={(e)=>setCondate(e.target.value)}
                   className="py-4 w-40 border-gray-400  "
                   placeholder="September,2023"
