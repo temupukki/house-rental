@@ -77,8 +77,8 @@ export default function owner() {
   });
   const [ownphone, setOwnphone] = useState("");
   const [area, setArea] = useState("");
-  const [elevator, setElevator] = useState("NO");
-  const [Parking, setParking] = useState("NO");
+  const [elevator, setElevator] = useState("");
+  const [Parking, setParking] = useState("");
   const propertydata = {
     selected,
     status,
