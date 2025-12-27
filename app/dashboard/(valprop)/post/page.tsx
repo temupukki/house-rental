@@ -153,7 +153,7 @@ export default function owner() {
       {step === 1 && (
         <div>
           <h1 className=" mt-13 text-5xl font-semibold text-gray-800 flex flex-col items-center ">
-            Which of these best describes your place?
+            Which of these best describes your place ?
           </h1>
 
           <div className="grid grid-cols-3 mx-90 mt-12.5">
