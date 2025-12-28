@@ -36,6 +36,7 @@ import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { select } from "framer-motion/client";
 import { toast } from "sonner";
+import SimpleMap from "@/components/SimpleMap";
 function formatDate(date: Date | undefined) {
   if (!date) {
     return "";
@@ -236,7 +237,9 @@ export default function owner() {
           <h1 className=" mt-13 text-5xl font-semibold text-gray-800 flex flex-col items-center ">
             Where is your place located?
           </h1>
-          <div className="space-y-3 mx-90 mt-12.5"></div>
+          <div className="space-y-3 mx-90 mt-12.5">
+            <SimpleMap></SimpleMap>
+          </div>
         </div>
       )}
       {step === 4 && (
