@@ -1,5 +1,4 @@
 "use client";
-
 import {
   MapContainer,
   TileLayer,
@@ -21,6 +20,10 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
+interface LocationPickerProps {
+  onConfirm: (location: { position: [number, number]; name: string }) => void;
+}
 
 const createCustomIcon = (color: string = "#3B82F6") => {
   return L.divIcon({
@@ -136,7 +139,7 @@ async function searchPlaces(query: string) {
   }
 }
 
-export default function LocationPicker() {
+export default function LocationPicker({ onConfirm }: LocationPickerProps) {
   const [userLocation, setUserLocation] = useState<{
     position: [number, number];
     name: string;
@@ -256,9 +259,11 @@ export default function LocationPicker() {
 
   const confirmLocation = () => {
     if (selectedLocation) {
-      console.log("📍 Location saved:", selectedLocation);
+     
+      onConfirm(selectedLocation);
+      
 
-      alert(`✅ Location saved!\n\n${selectedLocation.name}`);
+     
     }
   };
 
@@ -280,9 +285,9 @@ export default function LocationPicker() {
     }
   };
 
-  const userIcon = createCustomIcon("#10B981"); // Green
-  const selectedIcon = createCustomIcon("#EF4444"); // Red
-  const searchIcon = createCustomIcon("#8B5CF6"); // Purple
+  const userIcon = createCustomIcon("#10B981"); 
+  const selectedIcon = createCustomIcon("#EF4444"); 
+  const searchIcon = createCustomIcon("#8B5CF6"); 
 
   const mapCenter = userLocation?.position || [40.7128, -74.006];
 
@@ -422,10 +427,10 @@ export default function LocationPicker() {
                 </p>
                 <button
                   onClick={confirmLocation}
-                  className="w-full flex items-center justify-center gap-2 bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 px-6 rounded-xl font-semibold transition-all transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
+                  className="w-full flex items-center justify-center gap-2 bg-primary text-white py-3 px-6 rounded-xl font-semibold transition-all transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
                 >
                   <CheckCircle className="w-5 h-5" />
-                  Save This Location
+                  Select This Location
                 </button>
               </div>
             </div>
@@ -485,7 +490,7 @@ export default function LocationPicker() {
               <Marker position={userLocation.position} icon={userIcon}>
                 <Popup>
                   <div className="font-bold text-green-700">
-                    📍 Your Location
+                    Your Location
                   </div>
                   <div className="text-gray-800 mt-1 max-w-xs">
                     {userLocation.name}
@@ -494,12 +499,12 @@ export default function LocationPicker() {
               </Marker>
             )}
 
-            {/* Selected location marker */}
+         
             {selectedLocation && (
               <Marker position={selectedLocation.position} icon={selectedIcon}>
                 <Popup>
                   <div className="font-bold text-red-700">
-                    📍 Selected Place
+                    Selected Place
                   </div>
                   <div className="text-gray-800 mt-1 max-w-xs">
                     {selectedLocation.name}
@@ -516,7 +521,7 @@ export default function LocationPicker() {
               >
                 <Popup>
                   <div className="font-bold text-purple-700">
-                    🔍 Search Result
+                     Search Result
                   </div>
                   <div className="text-gray-800 mt-1 max-w-xs">
                     {result.display_name.split(",")[0]}

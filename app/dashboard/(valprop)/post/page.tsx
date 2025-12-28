@@ -36,7 +36,13 @@ import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { select } from "framer-motion/client";
 import { toast } from "sonner";
-import SimpleMap from "@/components/SimpleMap";
+import LocationPicker from "@/components/SimpleMap";
+const handleConfirm = (data: any) => {
+    console.log("Success! Data received:", data);
+    toast.success("Location Sucessfully Selected!");
+   
+
+  };
 function formatDate(date: Date | undefined) {
   if (!date) {
     return "";
@@ -80,6 +86,14 @@ export default function owner() {
   const [area, setArea] = useState("");
   const [elevator, setElevator] = useState("");
   const [Parking, setParking] = useState("");
+  const [savedLocation, setSavedLocation] = useState<any>(null);
+
+  const handleLocationSelected = (data: any) => {
+    console.log("Received in Parent:", data);
+    setSavedLocation(data);
+    
+    
+  };
   const propertydata = {
     selected,
     status,
@@ -238,7 +252,7 @@ export default function owner() {
             Where is your place located?
           </h1>
           <div className="space-y-3 mx-90 mt-12.5">
-            <SimpleMap></SimpleMap>
+          <LocationPicker onConfirm={handleConfirm} /> 
           </div>
         </div>
       )}
