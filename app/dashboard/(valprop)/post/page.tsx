@@ -37,12 +37,7 @@ import { authClient } from "@/lib/auth-client";
 import { select } from "framer-motion/client";
 import { toast } from "sonner";
 import LocationPicker from "@/components/SimpleMap";
-const handleConfirm = (data: any) => {
-    console.log("Success! Data received:", data);
-    toast.success("Location Sucessfully Selected!");
-   
 
-  };
 function formatDate(date: Date | undefined) {
   if (!date) {
     return "";
@@ -87,13 +82,14 @@ export default function owner() {
   const [elevator, setElevator] = useState("");
   const [Parking, setParking] = useState("");
   const [savedLocation, setSavedLocation] = useState<any>(null);
+  const handleConfirm = (data: any) => {
+    console.log("Success! Data received:", data);
+    toast.success("Location Sucessfully Selected!");
+     setSavedLocation(data);
+     setStep((prev)=>prev+1)
 
-  const handleLocationSelected = (data: any) => {
-    console.log("Received in Parent:", data);
-    setSavedLocation(data);
-    
-    
   };
+
   const propertydata = {
     selected,
     status,
@@ -110,6 +106,9 @@ export default function owner() {
     bathroom,
     elevator,
     Parking,
+    locationName: savedLocation?.name,
+    locationLat:savedLocation?.position[0],
+    locationLgd:savedLocation?.position[1]
   };
   const ppost = async () => {
     try {

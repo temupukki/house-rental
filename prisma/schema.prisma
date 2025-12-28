@@ -78,7 +78,9 @@ model Property{
   type String
   title String
   description String
-  location String?
+  locationName String?
+  locationLat Float?
+  locationLgd Float?
   price Float
   status String
   mainImage String?

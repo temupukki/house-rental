@@ -30,7 +30,10 @@ const session=  await auth.api.getSession({
         bedrooms: body.bedroom,
         bathrooms: body.bathroom,
         elevator:body.elevator,
-        Parking:body.Parking
+        Parking:body.Parking,
+        locationName:body.locationName,
+        locationLat:body.locationLat,
+        locationLgd:body.locationLgd
       },
     });
         return NextResponse.json({ status: 201 })
