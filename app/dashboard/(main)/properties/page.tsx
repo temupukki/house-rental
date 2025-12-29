@@ -18,6 +18,7 @@ import {
   MoveVertical,
   SquareParking,
   MapPinHouse,
+  Navigation,
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -45,6 +46,9 @@ type Property = {
   education: string[];
   health: string[];
   area: number;
+  locationLat: number;
+  locationLgd: number;
+  locationName: string;
   isFeatured: boolean;
 };
 
@@ -91,7 +95,7 @@ export default function prope() {
                 {selectedProduct.title}
               </h1>
               <p className="mt-4 text-gray-700 text-3xl font-meduim">
-                {selectedProduct.location}
+                {selectedProduct.locationName}
               </p>
             </div>
             <div>
@@ -129,15 +133,37 @@ export default function prope() {
                   Show all
                 </span>
               </div>
-              <div className="mt-3">
-                <Card>
-                  <Link
-                    href="https://www.google.com/maps?q=12.59707480619531,37.45011114570507"
-                  > <MapPinHouse /> Goto location</Link>
-                  <img 
-  src="https://maps.googleapis.com/maps/api/staticmap?center=11.5721,37.3614&zoom=14&size=600x400&markers=color:red|11.5721,37.3614&key=YOUR_API_KEY" 
-  alt="Map location"></img>
-                </Card>
+              <div className="mt-3 relative mr-1">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRILgSLpiEhBp5xJUstAht1v_nstVSzXJKegg&s"
+                  alt="Location placeholder"
+                  className="w-full h-full rounded-3xl "
+                />
+                <Link
+                  href={`https://www.google.com/maps?q=${selectedProduct.locationLat},${selectedProduct.locationLgd}`}
+                  className="absolute top-76 left-3 z-20 bg-white/80 px-3 py-1 rounded-md shadow-md flex items-center space-x-2 hover:bg-white"
+                >
+                  
+                  <motion.span
+                    animate={{
+                      scale: [1, 1.08, 1],
+                    }}
+                    transition={{
+                      duration: 0.6,
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      ease: "easeInOut",
+                    }}
+                    whileHover={{
+                      scale: 1.12,
+                      transition: { duration: 0.2 },
+                    }}
+                    whileTap={{ scale: 0.6 }}
+                    className="text-sm font-semibold text-gray-800 flex flex-row "
+                  ><Navigation className="w-5 h-5 text-blue-600 mr-1" />
+                    Goto location
+                  </motion.span>
+                </Link>
               </div>
             </div>
           </div>
