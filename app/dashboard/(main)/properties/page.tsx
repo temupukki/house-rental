@@ -17,7 +17,9 @@ import {
   HardHat,
   MoveVertical,
   SquareParking,
+  MapPinHouse,
 } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { property } from "zod";
 type Property = {
@@ -48,22 +50,21 @@ type Property = {
 
 export default function prope() {
   const [selectedProduct, setSelectedProduct] = useState<Property | null>(null);
-  const [post,setPost]=useState(false);
-  const[properties,setProperties]=useState<Property[]>([]);
-  useEffect(()=>{
-    async function fetchproperties(){
-      try{
+  const [post, setPost] = useState(false);
+  const [properties, setProperties] = useState<Property[]>([]);
+  useEffect(() => {
+    async function fetchproperties() {
+      try {
         const res = await fetch("/api/propost");
         const data = await res.json();
         setProperties(data);
-      }
-      catch(err){
-         console.log(err);
+      } catch (err) {
+        console.log(err);
       }
     }
-    fetchproperties()
-  },[])
- 
+    fetchproperties();
+  }, []);
+
   if (selectedProduct) {
     return (
       <div className="z-20  ">
@@ -129,11 +130,14 @@ export default function prope() {
                 </span>
               </div>
               <div className="mt-3">
-                <img
-                  src={selectedProduct.mainImage}
-                  alt="Support images"
-                  className="h-87 w-100 rounded-xl "
-                />
+                <Card>
+                  <Link
+                    href="https://www.google.com/maps?q=12.59707480619531,37.45011114570507"
+                  > <MapPinHouse /> Goto location</Link>
+                  <img 
+  src="https://maps.googleapis.com/maps/api/staticmap?center=11.5721,37.3614&zoom=14&size=600x400&markers=color:red|11.5721,37.3614&key=YOUR_API_KEY" 
+  alt="Map location"></img>
+                </Card>
               </div>
             </div>
           </div>
@@ -239,7 +243,7 @@ export default function prope() {
                       placeholder="Your email"
                     />
                   </div>
-                   <div className="ml-14 mt-6">
+                  <div className="ml-14 mt-6">
                     <input
                       className="border px-4 py-6 rounded-md w-106  text-white bg-white placeholder:text-gray-600 placeholder:text-xl"
                       placeholder="Your phone number"
@@ -268,94 +272,94 @@ export default function prope() {
   }
   return (
     <div>
-     
       <div className="grid grid-cols-3   mx-53 my-18  ">
-        {Array.isArray(properties) && properties.map((property) => (
-          <Card
-            key={property.id}
-            className="overflow-hidden p-0 rounded-sm w-100 "
-          >
-            <span
-              className={`absolute m-4 px-4 py-1 text-sm rounded-lg font-semibold z-10 ${
-                property.status === "for-sale"
-                  ? "bg-red-600 text-white"
-                  : "bg-green-600 text-white"
-              }`}
+        {Array.isArray(properties) &&
+          properties.map((property) => (
+            <Card
+              key={property.id}
+              className="overflow-hidden p-0 rounded-sm w-100 "
             >
-              {property.status === "for-sale" ? "For Sale" : "For Rent"}
-            </span>
-            <img
-              src={property.mainImage}
-              alt="property image"
-              className="h-40 w-full object-cover"
-            />
-
-            <CardHeader>
-              <CardTitle className="text-lg">{property.title}</CardTitle>
-              <p className="text-sm text-muted-foreground">
-                {property.location}
-              </p>
-            </CardHeader>
-
-            <CardContent>
-              <div>
-                <span className="font-bold text-primary ">
-                  {property.price} {property.priceUnit}
-                </span>
-                <hr className="my-3" />
-                <div className="text-sm text-black flex gap-14.5 mt-3">
-                  <span className="flex gap-1.5">
-                    <BedDouble />
-                    {property.bedrooms}
-                  </span>
-                  <span className="flex gap-1.5">
-                    <Bath />
-                    {property.bathrooms}
-                  </span>
-                  <span className="flex gap-1.5">
-                    <Expand />
-                    {property.area}
-                  </span>
-                  <motion.button
-                    className="-ml-4"
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.94 }}
-                    whileInView={{ scale: 1.1 }}
-                  >
-                    <BadgeInfo />
-                  </motion.button>
-                </div>
-                <div className="flex flex-col-4 gap-7.5 text-sm mt-1">
-                  <p>Bedrooms</p>
-                  <p>Bathrooms</p>
-                  <p>Total area</p>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter>
-              <motion.button
-                onClick={() => setSelectedProduct(property)}
-                animate={{
-                  scale: [1, 1.08, 1],
-                }}
-                transition={{
-                  duration: 0.6,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  ease: "easeInOut",
-                }}
-                whileHover={{
-                  scale: 1.12,
-                  transition: { duration: 0.2 },
-                }}
-                whileTap={{ scale: 0.6 }}
-                className="px-4 py-2 rounded-md bg-primary text-white font-medium mb-4"
+              <span
+                className={`absolute m-4 px-4 py-1 text-sm rounded-lg font-semibold z-10 ${
+                  property.status === "for-sale"
+                    ? "bg-red-600 text-white"
+                    : "bg-green-600 text-white"
+                }`}
               >
-                See Details
-              </motion.button>
-            </CardFooter>
-          </Card>
-        ))}
+                {property.status === "for-sale" ? "For Sale" : "For Rent"}
+              </span>
+              <img
+                src={property.mainImage}
+                alt="property image"
+                className="h-40 w-full object-cover"
+              />
+
+              <CardHeader>
+                <CardTitle className="text-lg">{property.title}</CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  {property.location}
+                </p>
+              </CardHeader>
+
+              <CardContent>
+                <div>
+                  <span className="font-bold text-primary ">
+                    {property.price} {property.priceUnit}
+                  </span>
+                  <hr className="my-3" />
+                  <div className="text-sm text-black flex gap-14.5 mt-3">
+                    <span className="flex gap-1.5">
+                      <BedDouble />
+                      {property.bedrooms}
+                    </span>
+                    <span className="flex gap-1.5">
+                      <Bath />
+                      {property.bathrooms}
+                    </span>
+                    <span className="flex gap-1.5">
+                      <Expand />
+                      {property.area}
+                    </span>
+                    <motion.button
+                      className="-ml-4"
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.94 }}
+                      whileInView={{ scale: 1.1 }}
+                    >
+                      <BadgeInfo />
+                    </motion.button>
+                  </div>
+                  <div className="flex flex-col-4 gap-7.5 text-sm mt-1">
+                    <p>Bedrooms</p>
+                    <p>Bathrooms</p>
+                    <p>Total area</p>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <motion.button
+                  onClick={() => setSelectedProduct(property)}
+                  animate={{
+                    scale: [1, 1.08, 1],
+                  }}
+                  transition={{
+                    duration: 0.6,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    ease: "easeInOut",
+                  }}
+                  whileHover={{
+                    scale: 1.12,
+                    transition: { duration: 0.2 },
+                  }}
+                  whileTap={{ scale: 0.6 }}
+                  className="px-4 py-2 rounded-md bg-primary text-white font-medium mb-4"
+                >
+                  See Details
+                </motion.button>
+              </CardFooter>
+            </Card>
+          ))}
       </div>
     </div>
   );
