@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect } from 'react'
 import { 
   Search, 
@@ -42,86 +41,26 @@ interface Property {
 }
 
 export default function Listings() {
-  const [properties, setProperties] = useState<Property[]>([
-    {
-      id: '1',
-      title: 'Modern Villa with Ocean View',
-      type: 'villa',
-      price: 1250000,
-      status: 'active',
-      address: '123 Ocean Drive',
-      city: 'Miami',
-      bedrooms: 4,
-      bathrooms: 3,
-      area: 3200,
-      postedDate: '2024-01-15',
-      views: 1245,
-      inquiries: 24,
-      images: ['/property1.jpg'],
-      featured: true,
-      description: 'Luxury villa with panoramic ocean views'
-    },
-    {
-      id: '2',
-      title: 'Downtown Luxury Apartment',
-      type: 'apartment',
-      price: 850000,
-      status: 'pending',
-      address: '456 Main St',
-      city: 'New York',
-      bedrooms: 2,
-      bathrooms: 2,
-      area: 1500,
-      postedDate: '2024-01-10',
-      views: 890,
-      inquiries: 18,
-      images: ['/property2.jpg'],
-      featured: false,
-      description: 'Modern apartment in heart of downtown'
-    },
-    {
-      id: '3',
-      title: 'Suburban Family House',
-      type: 'house',
-      price: 650000,
-      status: 'active',
-      address: '789 Maple Ave',
-      city: 'Austin',
-      bedrooms: 3,
-      bathrooms: 2,
-      area: 2200,
-      postedDate: '2024-01-05',
-      views: 567,
-      inquiries: 12,
-      images: ['/property3.jpg'],
-      featured: true,
-      description: 'Perfect family home in quiet neighborhood'
-    },
-    {
-      id: '4',
-      title: 'Commercial Space for Rent',
-      type: 'commercial',
-      price: 2500000,
-      status: 'draft',
-      address: '101 Business Blvd',
-      city: 'Chicago',
-      bedrooms: 0,
-      bathrooms: 4,
-      area: 5000,
-      postedDate: '2024-01-20',
-      views: 234,
-      inquiries: 8,
-      images: ['/property4.jpg'],
-      featured: false,
-      description: 'Prime commercial space in business district'
-    }
-  ])
+  const [properties, setProperties] = useState<Property[]>([])
+
 
   const [searchTerm, setSearchTerm] = useState('')
   const [filterType, setFilterType] = useState<string>('all')
   const [filterStatus, setFilterStatus] = useState<string>('all')
   const [sortBy, setSortBy] = useState<string>('newest')
   const [selectedProperties, setSelectedProperties] = useState<string[]>([])
+    useEffect(() => {
+    async function fetchproperties() {
+      try {
+        const res = await fetch("/api/propost");
+        const data = await res.json();
+        setProperties(data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    fetchproperties();
+  }, []);
 
   const filteredProperties = properties
     .filter(property => {
