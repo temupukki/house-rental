@@ -22,6 +22,7 @@ import {
 } from 'lucide-react'
 
 interface Property {
+  locationName: any
   id: string
   title: string
   type: 'house' | 'apartment' | 'condo' | 'villa' | 'commercial'
@@ -42,8 +43,6 @@ interface Property {
 
 export default function Listings() {
   const [properties, setProperties] = useState<Property[]>([])
-
-
   const [searchTerm, setSearchTerm] = useState('')
   const [filterType, setFilterType] = useState<string>('all')
   const [filterStatus, setFilterStatus] = useState<string>('all')
@@ -52,7 +51,7 @@ export default function Listings() {
     useEffect(() => {
     async function fetchproperties() {
       try {
-        const res = await fetch("/api/propost");
+        const res = await fetch("/api/listing");
         const data = await res.json();
         setProperties(data);
       } catch (err) {
@@ -65,8 +64,8 @@ export default function Listings() {
   const filteredProperties = properties
     .filter(property => {
       const matchesSearch = property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          property.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          property.city.toLowerCase().includes(searchTerm.toLowerCase())
+                          property.locationName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          property.description.toLowerCase().includes(searchTerm.toLowerCase())
       const matchesType = filterType === 'all' || property.type === filterType
       const matchesStatus = filterStatus === 'all' || property.status === filterStatus
       return matchesSearch && matchesType && matchesStatus

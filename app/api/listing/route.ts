@@ -13,7 +13,7 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const property = await prisma.property.findFirst({
+    const property = await prisma.property.findMany({
       where: {
         propacc: String(session.user.id),
       },
