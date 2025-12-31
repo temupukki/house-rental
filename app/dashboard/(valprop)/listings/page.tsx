@@ -347,7 +347,6 @@ export default function Listings() {
             </div>
           ) : (
             filteredProperties.map((property) => {
-              const StatusIcon = statusConfig[property.status].icon
               return (
                 <div
                   key={property.id}
@@ -361,9 +360,7 @@ export default function Listings() {
                       <div className="md:w-48 h-48 rounded-lg bg-gray-200 flex-shrink-0 overflow-hidden">
                         <div className="w-full h-full bg-gradient-to-br from-blue-100 to-gray-100 flex items-center justify-center">
                           <div className="text-center">
-                            <div className="text-4xl mb-2">
-                              {propertyTypeConfig[property.type].icon}
-                            </div>
+                           
                             <div className="text-gray-600">Property Image</div>
                           </div>
                         </div>
@@ -382,9 +379,7 @@ export default function Listings() {
                               <h3 className="text-lg font-semibold text-gray-900">
                                 {property.title}
                               </h3>
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${propertyTypeConfig[property.type].color}`}>
-                                {propertyTypeConfig[property.type].label}
-                              </span>
+                           
                             </div>
                             
                             <div className="flex items-center text-gray-600 mb-3">
@@ -411,22 +406,7 @@ export default function Listings() {
                               </div>
                             </div>
 
-                            <div className="flex flex-wrap gap-2">
-                              <div className="flex items-center gap-2">
-                                <StatusIcon size={16} className={statusConfig[property.status].color.includes('green') ? 'text-green-600' : ''} />
-                                <span className={`px-2 py-1 rounded text-xs font-medium ${statusConfig[property.status].color}`}>
-                                  {statusConfig[property.status].label}
-                                </span>
-                              </div>
-                              <div className="flex items-center gap-1 text-gray-600 text-sm">
-                                <Eye size={14} />
-                                <span>{property.views.toLocaleString()} views</span>
-                              </div>
-                              <div className="flex items-center gap-1 text-gray-600 text-sm">
-                                <span>•</span>
-                                <span>{property.inquiries} inquiries</span>
-                              </div>
-                            </div>
+                            
                           </div>
 
                         
