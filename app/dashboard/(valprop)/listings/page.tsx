@@ -382,10 +382,7 @@ export default function Listings() {
                            
                             </div>
                             
-                            <div className="flex items-center text-gray-600 mb-3">
-                              <MapPin size={16} className="mr-1" />
-                              <span>{property.address}, {property.city}</span>
-                            </div>
+                           
 
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                               <div className="flex items-center">
