@@ -491,6 +491,9 @@ export default function Listings() {
               <button className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
                 2
               </button>
+               <button className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                3
+              </button>
               <button className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
                 Next
               </button>
