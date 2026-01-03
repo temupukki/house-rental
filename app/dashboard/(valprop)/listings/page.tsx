@@ -345,7 +345,7 @@ export default function Listings() {
                             <div className="flex items-center gap-2">
                               <button
                                 onClick={() => {
-                                  /* Edit functionality */
+                                  
                                 }}
                                 className="p-2 rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200"
                                 title="Edit property"
