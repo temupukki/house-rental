@@ -75,8 +75,7 @@ export default function Listings() {
           return b.price - a.price
         case 'price-low':
           return a.price - b.price
-        case 'views':
-          return b.views - a.views
+       
         case 'newest':
           return new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
         default:
@@ -113,11 +112,7 @@ export default function Listings() {
     ))
   }
 
-  const handleToggleFeatured = (id: string) => {
-    setProperties(properties.map(prop => 
-      prop.id === id ? { ...prop, featured: !prop.featured } : prop
-    ))
-  }
+ 
 
   const handleSelectAll = () => {
     if (selectedProperties.length === filteredProperties.length) {
@@ -184,8 +179,7 @@ export default function Listings() {
     pending: properties.filter(p => p.status === 'pending').length,
     sold: properties.filter(p => p.status === 'sold').length,
     totalValue: properties.reduce((sum, prop) => sum + prop.price, 0),
-    totalViews: properties.reduce((sum, prop) => sum + prop.views, 0),
-    totalInquiries: properties.reduce((sum, prop) => sum + prop.inquiries, 0)
+  
   }
 
   return (
@@ -226,16 +220,8 @@ export default function Listings() {
             <div className="text-2xl font-bold text-gray-900">{formatCurrency(stats.totalValue)}</div>
             <div className="text-xs text-gray-500 mt-1">Market value</div>
           </div>
-          <div className="bg-white p-4 rounded-xl shadow-sm border">
-            <div className="text-sm text-gray-500 mb-1">Total Views</div>
-            <div className="text-2xl font-bold text-blue-600">{stats.totalViews.toLocaleString()}</div>
-            <div className="text-xs text-gray-500 mt-1">Property views</div>
-          </div>
-          <div className="bg-white p-4 rounded-xl shadow-sm border">
-            <div className="text-sm text-gray-500 mb-1">Inquiries</div>
-            <div className="text-2xl font-bold text-purple-600">{stats.totalInquiries}</div>
-            <div className="text-xs text-gray-500 mt-1">Total leads</div>
-          </div>
+         
+         
           <div className="bg-white p-4 rounded-xl shadow-sm border">
             <div className="text-sm text-gray-500 mb-1">Pending</div>
             <div className="text-2xl font-bold text-yellow-600">{stats.pending}</div>
@@ -351,23 +337,19 @@ export default function Listings() {
                   key={property.id}
                   className={`bg-white rounded-xl border shadow-sm overflow-hidden hover:shadow-md transition-shadow ${
                     selectedProperties.includes(property.id) ? 'ring-2 ring-blue-500' : ''
-                  } ${property.featured ? 'border-l-4 border-l-blue-500' : ''}`}
+                  } `}
                 >
                   <div className="p-4 md:p-6">
                     <div className="flex flex-col md:flex-row gap-4">
-                      {/* Property Image */}
-                      <div className="md:w-48 h-48 rounded-lg bg-gray-200 flex-shrink-0 overflow-hidden">
-                        <div className="w-full h-full bg-gradient-to-br from-blue-100 to-gray-100 flex items-center justify-center">
+                     
+                      <div className="md:w-48 h-48 rounded-lg bg-gray-200 shrink-0 overflow-hidden">
+                        <div className="w-full h-full bg-linear-to-br from-blue-100 to-gray-100 flex items-center justify-center">
                           <div className="text-center">
                            
                             <div className="text-gray-600">Property Image</div>
                           </div>
                         </div>
-                        {property.featured && (
-                          <div className="absolute top-4 left-4 bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium">
-                            Featured
-                          </div>
-                        )}
+                      
                       </div>
 
                     
@@ -424,13 +406,7 @@ export default function Listings() {
                                 className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                               />
                               
-                              <button
-                                onClick={() => handleToggleFeatured(property.id)}
-                                className={`p-2 rounded-lg ${property.featured ? 'bg-blue-100 text-blue-600' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
-                                title={property.featured ? 'Remove from featured' : 'Mark as featured'}
-                              >
-                                <TrendingUp size={18} />
-                              </button>
+                           
 
                               <button
                                 onClick={() => handleToggleStatus(property.id, property.status === 'active' ? 'draft' : 'active')}
