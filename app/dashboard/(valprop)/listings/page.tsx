@@ -1,55 +1,54 @@
-"use client"
-import { useState, useEffect } from 'react'
-import { 
-  Search, 
-  Filter, 
-  Edit, 
-  Trash2, 
-  Eye, 
-  EyeOff, 
-  Plus, 
+"use client";
+import { useState, useEffect } from "react";
+import {
+  Search,
+  Filter,
+  Edit,
+  Trash2,
+  Eye,
+  EyeOff,
+  Plus,
   MoreVertical,
   Calendar,
   DollarSign,
   Bed,
   Bath,
-  Square,
+  Expand,
   MapPin,
   CheckCircle,
   XCircle,
   TrendingUp,
   TrendingDown,
- 
-} from 'lucide-react'
-import Link from 'next/link'
+} from "lucide-react";
+import Link from "next/link";
 
 interface Property {
-  locationName: any
-  id: string
-  title: string
-  type: string
-  price: number
-  status: string
-  address: string
-  city: string
-  bedrooms: number
-  bathrooms: number
-  area: number
-  postedDate: string
+  locationName: any;
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  status: string;
+  address: string;
+  city: string;
+  bedrooms: number;
+  bathrooms: number;
+  area: number;
+  postedDate: string;
 
-  images: string[]
+  images: string[];
 
-  description: string
+  description: string;
 }
 
 export default function Listings() {
-  const [properties, setProperties] = useState<Property[]>([])
-  const [searchTerm, setSearchTerm] = useState('')
-  const [filterType, setFilterType] = useState<string>('all')
-  const [filterStatus, setFilterStatus] = useState<string>('all')
-  const [sortBy, setSortBy] = useState<string>('newest')
-  const [selectedProperties, setSelectedProperties] = useState<string[]>([])
-    useEffect(() => {
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterType, setFilterType] = useState<string>("all");
+  const [filterStatus, setFilterStatus] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<string>("newest");
+  const [selectedProperties, setSelectedProperties] = useState<string[]>([]);
+  useEffect(() => {
     async function fetchproperties() {
       try {
         const res = await fetch("/api/listing");
@@ -63,160 +62,133 @@ export default function Listings() {
   }, []);
 
   const filteredProperties = properties
-    .filter(property => {
-      const matchesSearch = property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          property.locationName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          property.description.toLowerCase().includes(searchTerm.toLowerCase())
-      const matchesType = filterType === 'all' || property.type === filterType
-      const matchesStatus = filterStatus === 'all' || property.status === filterStatus
-      return matchesSearch && matchesType && matchesStatus
+    .filter((property) => {
+      const matchesSearch =
+        property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        property.locationName
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        property.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesType = filterType === "all" || property.type === filterType;
+      const matchesStatus =
+        filterStatus === "all" || property.status === filterStatus;
+      return matchesSearch && matchesType && matchesStatus;
     })
     .sort((a, b) => {
       switch (sortBy) {
-        case 'price-high':
-          return b.price - a.price
-        case 'price-low':
-          return a.price - b.price
-       
-        case 'newest':
-          return new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
-        default:
-          return 0
-      }
-    })
-  const handleDeleteProperty = (id: string) => {
-    if (confirm('Are you sure you want to delete this property?')) {
-      setProperties(properties.filter(prop => prop.id !== id))
-    }
-  }
+        case "price-high":
+          return b.price - a.price;
+        case "price-low":
+          return a.price - b.price;
 
-  const handleToggleStatus = (id: string, newStatus: Property['status']) => {
-    setProperties(properties.map(prop => 
-      prop.id === id ? { ...prop, status: newStatus } : prop
-    ))
-  }
+        case "newest":
+          return (
+            new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
+          );
+        default:
+          return 0;
+      }
+    });
+  const handleDeleteProperty = (id: string) => {
+    if (confirm("Are you sure you want to delete this property?")) {
+      setProperties(properties.filter((prop) => prop.id !== id));
+    }
+  };
+
+
+
+
 
  
 
-  const handleSelectAll = () => {
-    if (selectedProperties.length === filteredProperties.length) {
-      setSelectedProperties([])
-    } else {
-      setSelectedProperties(filteredProperties.map(prop => prop.id))
-    }
-  }
-
-  const handleSelectProperty = (id: string) => {
-    setSelectedProperties(prev => 
-      prev.includes(id) 
-        ? prev.filter(propId => propId !== id)
-        : [...prev, id]
-    )
-  }
-
-  const handleBulkAction = (action: 'delete' | 'activate' | 'deactivate') => {
-    if (selectedProperties.length === 0) return
-
-    switch (action) {
-      case 'delete':
-        if (confirm(`Delete ${selectedProperties.length} selected properties?`)) {
-          setProperties(properties.filter(prop => !selectedProperties.includes(prop.id)))
-          setSelectedProperties([])
-        }
-        break
-      case 'activate':
-        setProperties(properties.map(prop => 
-          selectedProperties.includes(prop.id) ? { ...prop, status: 'active' } : prop
-        ))
-        break
-      case 'deactivate':
-        setProperties(properties.map(prop => 
-          selectedProperties.includes(prop.id) ? { ...prop, status: 'draft' } : prop
-        ))
-        break
-    }
-  }
 
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'ETB',
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "ETB",
       minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount)
-  }
-
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    })
-  }
-
+    return new Date(dateString).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
 
   const stats = {
     total: properties.length,
-    rent: properties.filter(p => p.status === 'for-rent').length,
-    sale: properties.filter(p => p.status === 'for-sale').length,
-    sold: properties.filter(p => p.status === 'sold').length,
+    rent: properties.filter((p) => p.status === "for-rent").length,
+    sale: properties.filter((p) => p.status === "for-sale").length,
+    sold: properties.filter((p) => p.status === "sold").length,
     totalValue: properties.reduce((sum, prop) => sum + prop.price, 0),
-  
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-6">
- 
       <div className="mb-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Property Listings</h1>
-            <p className="text-gray-600 mt-1">Manage your properties and listings</p>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
+              Property Listings
+            </h1>
+            <p className="text-gray-600 mt-1">
+              Manage your properties and listings
+            </p>
           </div>
           <div className="flex items-center gap-3">
-            
-            <Link href='/dashboard/post'><button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
-              <Plus size={18} />
-              Add New Property
-            </button></Link>
+            <Link href="/dashboard/post">
+              <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+                <Plus size={18} />
+                Add New Property
+              </button>
+            </Link>
           </div>
         </div>
 
-    
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
           <div className="bg-white p-4 rounded-xl shadow-sm border">
             <div className="text-sm text-gray-500 mb-1">Total Properties</div>
-            <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
+            <div className="text-2xl font-bold text-gray-900">
+              {stats.total}
+            </div>
             <div className="text-xs text-gray-500 mt-1">All listings</div>
           </div>
           <div className="bg-white p-4 rounded-xl shadow-sm border">
             <div className="text-sm text-gray-500 mb-1">For Rent</div>
-            <div className="text-2xl font-bold text-green-600">{stats.rent}</div>
+            <div className="text-2xl font-bold text-green-600">
+              {stats.rent}
+            </div>
             <div className="text-xs text-gray-500 mt-1">listed for rent</div>
           </div>
-            <div className="bg-white p-4 rounded-xl shadow-sm border">
+          <div className="bg-white p-4 rounded-xl shadow-sm border">
             <div className="text-sm text-gray-500 mb-1">For Sale</div>
-            <div className="text-2xl font-bold text-green-600">{stats.sale}</div>
+            <div className="text-2xl font-bold text-green-600">
+              {stats.sale}
+            </div>
             <div className="text-xs text-gray-500 mt-1">listed for Sale</div>
           </div>
           <div className="bg-white p-4 rounded-xl shadow-sm border">
             <div className="text-sm text-gray-500 mb-1">Total Value</div>
-            <div className="text-2xl font-bold text-gray-900">{formatCurrency(stats.totalValue)}</div>
+            <div className="text-2xl font-bold text-gray-900">
+              {formatCurrency(stats.totalValue)}
+            </div>
             <div className="text-xs text-gray-500 mt-1">Market value</div>
           </div>
-         
-         
-         
         </div>
 
         <div className="bg-white p-4 rounded-xl shadow-sm border mb-6">
           <div className="flex flex-col lg:flex-row gap-4">
-   
             <div className="flex-1">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                <Search
+                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  size={20}
+                />
                 <input
                   type="text"
                   placeholder="Search properties by title, address, or city..."
@@ -227,7 +199,6 @@ export default function Listings() {
               </div>
             </div>
 
-          
             <div className="flex flex-wrap gap-3">
               <select
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -248,10 +219,8 @@ export default function Listings() {
                 onChange={(e) => setFilterStatus(e.target.value)}
               >
                 <option value="all">All Status</option>
-                <option value="active">Active</option>
-                <option value="pending">Pending</option>
-                <option value="sold">Sold</option>
-                <option value="draft">Draft</option>
+                <option value="for-rent">For rent</option>
+                <option value="for-sale">For sale</option>
               </select>
 
               <select
@@ -262,7 +231,6 @@ export default function Listings() {
                 <option value="newest">Newest First</option>
                 <option value="price-high">Price: High to Low</option>
                 <option value="price-low">Price: Low to High</option>
-                <option value="views">Most Views</option>
               </select>
             </div>
           </div>
@@ -274,26 +242,7 @@ export default function Listings() {
                   <span className="font-medium text-blue-900">
                     {selectedProperties.length} properties selected
                   </span>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => handleBulkAction('activate')}
-                      className="px-3 py-1 bg-green-100 text-green-800 rounded text-sm hover:bg-green-200"
-                    >
-                      Activate
-                    </button>
-                    <button
-                      onClick={() => handleBulkAction('deactivate')}
-                      className="px-3 py-1 bg-gray-100 text-gray-800 rounded text-sm hover:bg-gray-200"
-                    >
-                      Draft
-                    </button>
-                    <button
-                      onClick={() => handleBulkAction('delete')}
-                      className="px-3 py-1 bg-red-100 text-red-800 rounded text-sm hover:bg-red-200"
-                    >
-                      Delete
-                    </button>
-                  </div>
+                
                 </div>
                 <button
                   onClick={() => setSelectedProperties([])}
@@ -310,7 +259,9 @@ export default function Listings() {
           {filteredProperties.length === 0 ? (
             <div className="text-center py-12 bg-white rounded-xl border">
               <div className="text-gray-400 mb-2">No properties found</div>
-              <div className="text-gray-500">Try adjusting your filters or add a new property</div>
+              <div className="text-gray-500">
+                Try adjusting your filters or add a new property
+              </div>
             </div>
           ) : (
             filteredProperties.map((property) => {
@@ -318,92 +269,84 @@ export default function Listings() {
                 <div
                   key={property.id}
                   className={`bg-white rounded-xl border shadow-sm overflow-hidden hover:shadow-md transition-shadow ${
-                    selectedProperties.includes(property.id) ? 'ring-2 ring-blue-500' : ''
+                    selectedProperties.includes(property.id)
+                      ? "ring-2 ring-blue-500"
+                      : ""
                   } `}
                 >
                   <div className="p-4 md:p-6">
                     <div className="flex flex-col md:flex-row gap-4">
-                     
                       <div className="md:w-48 h-48 rounded-lg bg-gray-200 shrink-0 overflow-hidden">
                         <div className="w-full h-full bg-linear-to-br from-blue-100 to-gray-100 flex items-center justify-center">
                           <div className="text-center">
-                           
                             <div className="text-gray-600">Property Image</div>
                           </div>
                         </div>
-                      
                       </div>
 
-                    
                       <div className="flex-1">
                         <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                           <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-2">
-                              <h3 className="text-lg font-semibold text-gray-900">
+                            <div className="flex items-center gap-3 mb-6 ml-4">
+                              <h3 className="font-semibold text-gray-900 text-2xl">
                                 {property.title}
                               </h3>
-                           
-                            </div>
-                            
-                           
-
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                              <div className="flex items-center">
-                                <Bed size={18} className="text-gray-400 mr-2" />
-                                <span className="text-gray-700">{property.bedrooms} beds</span>
-                              </div>
-                              <div className="flex items-center">
-                                <Bath size={18} className="text-gray-400 mr-2" />
-                                <span className="text-gray-700">{property.bathrooms} baths</span>
-                              </div>
-                              <div className="flex items-center">
-                                <Square size={18} className="text-gray-400 mr-2" />
-                                <span className="text-gray-700">{property.area.toLocaleString()} sqft</span>
-                              </div>
-                              <div className="flex items-center">
-                                <Calendar size={18} className="text-gray-400 mr-2" />
-                                <span className="text-gray-700">{formatDate(property.postedDate)}</span>
-                              </div>
                             </div>
 
-                            
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4 ml-4">
+                              <div className="flex items-center">
+                                <Bed size={28} className="text-gray-400 mr-2" />
+                                <span className="text-gray-700 text-lg">
+                                  {property.bedrooms} beds
+                                </span>
+                              </div>
+                              <div className="flex items-center">
+                                <Bath
+                                  size={28}
+                                  className="text-gray-400 mr-2"
+                                />
+                                <span className="text-gray-700 text-lg">
+                                  {property.bathrooms} baths
+                                </span>
+                              </div>
+                              <div className="flex items-center">
+                                <Expand
+                                  size={28}
+                                  className="text-gray-400 mr-2"
+                                />
+                                <span className="text-gray-700 text-lg">
+                                  {property.area.toLocaleString()} sqft
+                                </span>
+                              </div>
+                              <div className="flex items-center">
+                                <Calendar
+                                  size={28}
+                                  className="text-gray-400 mr-2"
+                                />
+                                <span className="text-gray-700 text-lg">
+                                  {formatDate(property.postedDate)}
+                                </span>
+                              </div>
+                            </div>
                           </div>
 
-                        
                           <div className="flex flex-col items-end gap-4">
                             <div className="text-right">
                               <div className="text-2xl font-bold text-gray-900">
                                 {formatCurrency(property.price)}
                               </div>
                               <div className="text-sm text-gray-500">
-                                {property.type === 'commercial' ? 'For Sale' : 'Market Price'}
+                                {property.type === "commercial"
+                                  ? "For Sale"
+                                  : "Market Price"}
                               </div>
                             </div>
 
                             <div className="flex items-center gap-2">
-                              <input
-                                type="checkbox"
-                                checked={selectedProperties.includes(property.id)}
-                                onChange={() => handleSelectProperty(property.id)}
-                                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                              />
-                              
-                           
-
                               <button
-                                onClick={() => handleToggleStatus(property.id, property.status === 'active' ? 'draft' : 'active')}
-                                className={`p-2 rounded-lg ${
-                                  property.status === 'active' 
-                                    ? 'bg-green-100 text-green-600 hover:bg-green-200' 
-                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                                }`}
-                                title={property.status === 'active' ? 'Deactivate' : 'Activate'}
-                              >
-                                {property.status === 'active' ? <EyeOff size={18} /> : <Eye size={18} />}
-                              </button>
-
-                              <button
-                                onClick={() => {/* Edit functionality */}}
+                                onClick={() => {
+                                  /* Edit functionality */
+                                }}
                                 className="p-2 rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200"
                                 title="Edit property"
                               >
@@ -411,15 +354,13 @@ export default function Listings() {
                               </button>
 
                               <button
-                                onClick={() => handleDeleteProperty(property.id)}
+                                onClick={() =>
+                                  handleDeleteProperty(property.id)
+                                }
                                 className="p-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200"
                                 title="Delete property"
                               >
                                 <Trash2 size={18} />
-                              </button>
-
-                              <button className="p-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200">
-                                <MoreVertical size={18} />
                               </button>
                             </div>
                           </div>
@@ -428,7 +369,7 @@ export default function Listings() {
                     </div>
                   </div>
                 </div>
-              )
+              );
             })
           )}
         </div>
@@ -436,7 +377,8 @@ export default function Listings() {
         {filteredProperties.length > 0 && (
           <div className="mt-8 flex items-center justify-between">
             <div className="text-gray-600">
-              Showing {filteredProperties.length} of {properties.length} properties
+              Showing {filteredProperties.length} of {properties.length}{" "}
+              properties
             </div>
             <div className="flex gap-2">
               <button className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
@@ -448,7 +390,7 @@ export default function Listings() {
               <button className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
                 2
               </button>
-               <button className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+              <button className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
                 3
               </button>
               <button className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
@@ -459,5 +401,5 @@ export default function Listings() {
         )}
       </div>
     </div>
-  )
+  );
 }
