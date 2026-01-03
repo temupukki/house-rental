@@ -25,19 +25,18 @@ interface Property {
   locationName: any
   id: string
   title: string
-  type: 'house' | 'apartment' | 'condo' | 'villa' | 'commercial'
+  type: string
   price: number
-  status: 'active' | 'pending' | 'sold' | 'draft'
+  status: string
   address: string
   city: string
   bedrooms: number
   bathrooms: number
   area: number
   postedDate: string
-  views: number
-  inquiries: number
+
   images: string[]
-  featured: boolean
+
   description: string
 }
 
