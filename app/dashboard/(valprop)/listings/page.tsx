@@ -18,8 +18,10 @@ import {
   CheckCircle,
   XCircle,
   TrendingUp,
-  TrendingDown
+  TrendingDown,
+ 
 } from 'lucide-react'
+import Link from 'next/link'
 
 interface Property {
   locationName: any
@@ -82,24 +84,6 @@ export default function Listings() {
           return 0
       }
     })
-
- 
-  const propertyTypeConfig = {
-    house: { label: 'House', color: 'bg-blue-100 text-blue-800', icon: '🏠' },
-    apartment: { label: 'Apartment', color: 'bg-green-100 text-green-800', icon: '🏢' },
-    condo: { label: 'Condo', color: 'bg-purple-100 text-purple-800', icon: '🏘️' },
-    villa: { label: 'Villa', color: 'bg-yellow-100 text-yellow-800', icon: '🏰' },
-    commercial: { label: 'Commercial', color: 'bg-red-100 text-red-800', icon: '🏬' }
-  }
-
-
-  const statusConfig = {
-    active: { label: 'Active', color: 'bg-green-100 text-green-800', icon: CheckCircle },
-    pending: { label: 'Pending', color: 'bg-yellow-100 text-yellow-800', icon: Eye },
-    sold: { label: 'Sold', color: 'bg-gray-100 text-gray-800', icon: DollarSign },
-    draft: { label: 'Draft', color: 'bg-gray-100 text-gray-800', icon: EyeOff }
-  }
-
   const handleDeleteProperty = (id: string) => {
     if (confirm('Are you sure you want to delete this property?')) {
       setProperties(properties.filter(prop => prop.id !== id))
@@ -157,7 +141,7 @@ export default function Listings() {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'ETB',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     }).format(amount)
@@ -175,8 +159,8 @@ export default function Listings() {
 
   const stats = {
     total: properties.length,
-    active: properties.filter(p => p.status === 'active').length,
-    pending: properties.filter(p => p.status === 'pending').length,
+    rent: properties.filter(p => p.status === 'for-rent').length,
+    sale: properties.filter(p => p.status === 'for-sale').length,
     sold: properties.filter(p => p.status === 'sold').length,
     totalValue: properties.reduce((sum, prop) => sum + prop.price, 0),
   
@@ -192,28 +176,30 @@ export default function Listings() {
             <p className="text-gray-600 mt-1">Manage your properties and listings</p>
           </div>
           <div className="flex items-center gap-3">
-            <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2">
-              <Filter size={18} />
-              Export
-            </button>
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+            
+            <Link href='/dashboard/post'><button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
               <Plus size={18} />
               Add New Property
-            </button>
+            </button></Link>
           </div>
         </div>
 
     
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
           <div className="bg-white p-4 rounded-xl shadow-sm border">
             <div className="text-sm text-gray-500 mb-1">Total Properties</div>
             <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
             <div className="text-xs text-gray-500 mt-1">All listings</div>
           </div>
           <div className="bg-white p-4 rounded-xl shadow-sm border">
-            <div className="text-sm text-gray-500 mb-1">Active</div>
-            <div className="text-2xl font-bold text-green-600">{stats.active}</div>
-            <div className="text-xs text-gray-500 mt-1">Currently listed</div>
+            <div className="text-sm text-gray-500 mb-1">For Rent</div>
+            <div className="text-2xl font-bold text-green-600">{stats.rent}</div>
+            <div className="text-xs text-gray-500 mt-1">listed for rent</div>
+          </div>
+            <div className="bg-white p-4 rounded-xl shadow-sm border">
+            <div className="text-sm text-gray-500 mb-1">For Sale</div>
+            <div className="text-2xl font-bold text-green-600">{stats.sale}</div>
+            <div className="text-xs text-gray-500 mt-1">listed for Sale</div>
           </div>
           <div className="bg-white p-4 rounded-xl shadow-sm border">
             <div className="text-sm text-gray-500 mb-1">Total Value</div>
@@ -222,11 +208,7 @@ export default function Listings() {
           </div>
          
          
-          <div className="bg-white p-4 rounded-xl shadow-sm border">
-            <div className="text-sm text-gray-500 mb-1">Pending</div>
-            <div className="text-2xl font-bold text-yellow-600">{stats.pending}</div>
-            <div className="text-xs text-gray-500 mt-1">Under negotiation</div>
-          </div>
+         
         </div>
 
         <div className="bg-white p-4 rounded-xl shadow-sm border mb-6">
