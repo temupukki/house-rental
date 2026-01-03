@@ -61,39 +61,48 @@ export default function Listings() {
     fetchproperties();
   }, []);
 
-  const filteredProperties = properties
-    .filter((property) => {
-      const matchesSearch =
-        property.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        property.locationName
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase()) ||
-        property.description.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesType = filterType === "all" || property.type === filterType;
-      const matchesStatus =
-        filterStatus === "all" || property.status === filterStatus;
-      return matchesSearch && matchesType && matchesStatus;
-    })
-    .sort((a, b) => {
-      switch (sortBy) {
-        case "price-high":
-          return b.price - a.price;
-        case "price-low":
-          return a.price - b.price;
+ if (!properties || !Array.isArray(properties)) {
+  return []; // or handle the error appropriately
+}
 
-        case "newest":
-          return (
-            new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime()
-          );
-        default:
-          return 0;
-      }
-    });
-  const handleDeleteProperty = (id: string) => {
-    if (confirm("Are you sure you want to delete this property?")) {
-      setProperties(properties.filter((prop) => prop.id !== id));
+const filteredProperties = properties
+  .filter((property) => {
+    // Add safety checks for property fields
+    const title = property?.title?.toLowerCase() || '';
+    const location = property?.locationName?.toLowerCase() || '';
+    const description = property?.description?.toLowerCase() || '';
+    
+    const searchLower = (searchTerm || '').toLowerCase();
+    
+    const matchesSearch = 
+      title.includes(searchLower) ||
+      location.includes(searchLower) ||
+      description.includes(searchLower);
+    
+    const matchesType = filterType === "all" || property?.type === filterType;
+    const matchesStatus = filterStatus === "all" || property?.status === filterStatus;
+    
+    return matchesSearch && matchesType && matchesStatus;
+  })
+  .sort((a, b) => {
+    if (!sortBy || sortBy === "default") return 0;
+    
+    switch (sortBy) {
+      case "price-high":
+        return (b?.price || 0) - (a?.price || 0);
+      case "price-low":
+        return (a?.price || 0) - (b?.price || 0);
+      case "newest":
+        const dateA = a?.postedDate ? new Date(a.postedDate).getTime() : 0;
+        const dateB = b?.postedDate ? new Date(b.postedDate).getTime() : 0;
+        return dateB - dateA;
+      default:
+        return 0;
     }
-  };
+  });
+
+
+
 
 
 
@@ -354,9 +363,7 @@ export default function Listings() {
                               </button>
 
                               <button
-                                onClick={() =>
-                                  handleDeleteProperty(property.id)
-                                }
+                               
                                 className="p-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200"
                                 title="Delete property"
                               >
