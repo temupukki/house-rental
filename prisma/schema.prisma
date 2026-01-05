@@ -95,7 +95,7 @@ model Property{
   ownerPhone String
   elevator String
   Parking String
-  currentStatus String
+  currentStatus String @default("ACTIVE")
   createdAt DateTime @default(now())
   modifiesAt DateTime @default(now())
   user        User   @relation(fields: [propacc], references: [id])
