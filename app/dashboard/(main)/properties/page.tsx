@@ -322,8 +322,8 @@ export default function prope() {
 
               <CardHeader>
                 <CardTitle className="text-lg">{property.title}</CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  {property.location}
+                <p className="text-sm  text-black">
+                  {property.locationName}
                 </p>
               </CardHeader>
 

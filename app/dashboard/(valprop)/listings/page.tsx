@@ -62,12 +62,12 @@ export default function Listings() {
   }, []);
 
  if (!properties || !Array.isArray(properties)) {
-  return []; // or handle the error appropriately
+  return []; 
 }
 
 const filteredProperties = properties
   .filter((property) => {
-    // Add safety checks for property fields
+    
     const title = property?.title?.toLowerCase() || '';
     const location = property?.locationName?.toLowerCase() || '';
     const description = property?.description?.toLowerCase() || '';
@@ -100,17 +100,6 @@ const filteredProperties = properties
         return 0;
     }
   });
-
-
-
-
-
-
-
-
- 
-
-
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -353,9 +342,7 @@ const filteredProperties = properties
 
                             <div className="flex items-center gap-2">
                               <button
-                                onClick={() => {
-                                  
-                                }}
+                              
                                 className="p-2 rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200"
                                 title="Edit property"
                               >
