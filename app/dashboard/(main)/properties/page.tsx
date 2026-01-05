@@ -19,11 +19,13 @@ import {
   SquareParking,
   MapPinHouse,
   Navigation,
+  Warehouse,
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { property } from "zod";
 type Property = {
+  type: string;
   id: string;
   title: string;
   location: string;
@@ -346,19 +348,17 @@ export default function prope() {
                       <Expand />
                       {property.area}
                     </span>
-                    <motion.button
-                      className="-ml-4"
-                      whileHover={{ scale: 1.2 }}
-                      whileTap={{ scale: 0.94 }}
-                      whileInView={{ scale: 1.1 }}
-                    >
-                      <BadgeInfo />
-                    </motion.button>
+                    <span className="flex gap-1.5 -ml-4 ">
+                      <Warehouse />
+                      {property.type}
+                    </span>
+                   
                   </div>
                   <div className="flex flex-col-4 gap-7.5 text-sm mt-1">
                     <p>Bedrooms</p>
                     <p>Bathrooms</p>
                     <p>Total area</p>
+                    <p className="ml-4">Type</p>
                   </div>
                 </div>
               </CardContent>
