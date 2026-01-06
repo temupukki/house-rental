@@ -154,7 +154,7 @@ const filteredProperties = properties
             <div className="text-2xl font-bold text-gray-900">
               {stats.total}
             </div>
-            <div className="text-xs text-gray-500 mt-1">All listings</div>
+            <div className="text-xs text-gray-500 mt-1">All listing</div>
           </div>
           <div className="bg-white p-4 rounded-xl shadow-sm border">
             <div className="text-sm text-gray-500 mb-1">For Rent</div>
