@@ -20,6 +20,12 @@ import {
   TrendingUp,
   TrendingDown,
   X,
+  Home,
+  Camera,
+  Info,
+  Send,
+  Upload,
+  Save,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -130,17 +136,7 @@ export default function Listings() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-6 ">
-      {edit && (
-        <div className="bg-gray-300 absolute z-40 top-45 left-65 right-65 h-170 w-300 ">
-          <div className="flex justify-end  h-full w-full mt-2 ">
-            <button onClick={()=>visisbleEdit(false)} className="text-black w-6 h-6 cursor-pointer hover:text-red-600">
-               <X  />
-            </button>
-           
-          </div>
-        </div>
-      )}
-      <div className={`mb-8 ${edit ? "blur-2xl" : ""}`}>
+      <div className={`mb-8 `}>
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
@@ -360,6 +356,397 @@ export default function Listings() {
                                 <Edit size={18} />
                               </button>
                             </div>
+                            {edit && (
+                              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fadeIn">
+                                <div className="bg-linear-to-br from-white to-gray-50 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden border border-gray-200 animate-scaleIn">
+                                  <div className="bg-linear-to-r from-blue-600 via-purple-600 to-indigo-600 p-6">
+                                    <div className="flex justify-between items-center">
+                                      <div>
+                                        <h1 className="text-3xl font-bold text-white mb-1">
+                                          Edit Property Listing
+                                        </h1>
+                                        <p className="text-blue-100">
+                                          Manage your property details
+                                          comprehensively
+                                        </p>
+                                      </div>
+                                      <button
+                                        onClick={() => visisbleEdit(false)}
+                                        className="bg-white/20 hover:bg-white/30 p-3 rounded-xl transition-all duration-300 hover:rotate-90 group"
+                                      >
+                                        <X className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+                                      </button>
+                                    </div>
+
+                                    <div className="flex items-center gap-4 mt-4">
+                                      <span
+                                        className={`px-4 py-1.5 rounded-full text-sm font-semibold ${
+                                          property.status === "For Sale"
+                                            ? "bg-green-100 text-green-800"
+                                            : "bg-blue-100 text-blue-800"
+                                        }`}
+                                      >
+                                        {property.status}
+                                      </span>
+                                    </div>
+                                  </div>
+
+                                  <div className="p-6 overflow-y-auto max-h-[70vh]">
+                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                      <div className="space-y-6">
+                                        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                                          <div className="flex justify-between items-start mb-4">
+                                            <div>
+                                              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                                Property Title
+                                              </label>
+                                              <input
+                                                type="text"
+                                                value={property.title}
+                                                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xl font-bold"
+                                                placeholder="Modern Luxury Villa with Pool"
+                                              />
+                                            </div>
+                                            <div className="text-right">
+                                              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                                Price
+                                              </label>
+                                              <div className="relative">
+                                                <span className="absolute left-3 top-3 text-gray-500">
+                                                  $
+                                                </span>
+                                                <input
+                                                  type="number"
+                                                  value={property.price}
+                                                  className="pl-8 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-48 text-right text-2xl font-bold text-blue-700"
+                                                />
+                                              </div>
+                                              <select className="mt-2 p-2 border rounded-lg text-sm">
+                                                <option>Sale</option>
+                                                <option>Rent</option>
+                                                <option>Lease</option>
+                                                <option>Auction</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                                          <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                                            <Home className="w-5 h-5" />{" "}
+                                            Property Details
+                                          </h3>
+                                          <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                              <label className="block text-sm text-gray-600 mb-1">
+                                                Bedrooms
+                                              </label>
+                                              <div className="flex items-center border rounded-lg p-2">
+                                                <input
+                                                  type="number"
+                                                  min="0"
+                                                  className="w-full outline-none"
+                                                  defaultValue="3"
+                                                />
+                                                <Bed className="w-4 h-4 text-gray-400 ml-2" />
+                                              </div>
+                                            </div>
+                                            <div>
+                                              <label className="block text-sm text-gray-600 mb-1">
+                                                Bathrooms
+                                              </label>
+                                              <div className="flex items-center border rounded-lg p-2">
+                                                <input
+                                                  type="number"
+                                                  min="0"
+                                                  className="w-full outline-none"
+                                                  defaultValue="2"
+                                                />
+                                                <Bath className="w-4 h-4 text-gray-400 ml-2" />
+                                              </div>
+                                            </div>
+                                            <div>
+                                              <label className="block text-sm text-gray-600 mb-1">
+                                                Square Feet
+                                              </label>
+                                              <div className="flex items-center border rounded-lg p-2">
+                                                <input
+                                                  type="number"
+                                                  className="w-full outline-none"
+                                                  defaultValue="2500"
+                                                />
+                                                <span className="text-gray-400 text-sm ml-2">
+                                                  sqft
+                                                </span>
+                                              </div>
+                                            </div>
+                                            <div>
+                                              <label className="block text-sm text-gray-600 mb-1">
+                                                Year Built
+                                              </label>
+                                              <input
+                                                type="number"
+                                                className="w-full border rounded-lg p-2"
+                                                defaultValue="2020"
+                                              />
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                                          <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                                            <MapPin className="w-5 h-5" />{" "}
+                                            Location
+                                          </h3>
+                                          <input
+                                            type="text"
+                                            placeholder="Full Address"
+                                            className="w-full p-3 border border-gray-300 rounded-lg mb-3"
+                                          />
+                                          <div className="grid grid-cols-2 gap-3">
+                                            <input
+                                              type="text"
+                                              placeholder="City"
+                                              className="p-2 border rounded-lg"
+                                            />
+                                            <input
+                                              type="text"
+                                              placeholder="State"
+                                              className="p-2 border rounded-lg"
+                                            />
+                                            <input
+                                              type="text"
+                                              placeholder="ZIP Code"
+                                              className="p-2 border rounded-lg"
+                                            />
+                                            <input
+                                              type="text"
+                                              placeholder="Neighborhood"
+                                              className="p-2 border rounded-lg"
+                                            />
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div className="space-y-6">
+                                        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                                          <h3 className="text-lg font-bold text-gray-800 mb-4">
+                                            Amenities
+                                          </h3>
+                                          <div className="grid grid-cols-2 gap-3">
+                                            {[
+                                              "Swimming Pool",
+                                              "Gym",
+                                              "Parking",
+                                              "Garden",
+                                              "Security",
+                                              "Elevator",
+                                              "Pet Friendly",
+                                              "Balcony",
+                                            ].map((amenity) => (
+                                              <label
+                                                key={amenity}
+                                                className="flex items-center space-x-2 cursor-pointer"
+                                              >
+                                                <input
+                                                  type="checkbox"
+                                                  className="rounded text-blue-600"
+                                                />
+                                                <span className="text-gray-700">
+                                                  {amenity}
+                                                </span>
+                                              </label>
+                                            ))}
+                                          </div>
+                                        </div>
+
+                                        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                                          <h3 className="text-lg font-bold text-gray-800 mb-4">
+                                            Photos & Videos
+                                          </h3>
+                                          <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center">
+                                            <Camera className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                                            <p className="text-gray-600 mb-2">
+                                              Drag & drop property images or
+                                              videos
+                                            </p>
+                                            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                                              Browse Files
+                                            </button>
+                                            <p className="text-sm text-gray-500 mt-2">
+                                              Up to 20 images, 5 videos allowed
+                                            </p>
+                                          </div>
+                                        </div>
+                                        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                                          <h3 className="text-lg font-bold text-gray-800 mb-4">
+                                            Virtual Experience
+                                          </h3>
+                                          <div className="space-y-3">
+                                            <input
+                                              type="url"
+                                              placeholder="3D Tour URL"
+                                              className="w-full p-2 border rounded-lg"
+                                            />
+                                            <input
+                                              type="url"
+                                              placeholder="Video Walkthrough URL"
+                                              className="w-full p-2 border rounded-lg"
+                                            />
+                                            <label className="flex items-center space-x-2">
+                                              <input
+                                                type="checkbox"
+                                                className="rounded"
+                                              />
+                                              <span className="text-gray-700">
+                                                Enable AR View
+                                              </span>
+                                            </label>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div className="mt-6 bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
+                                        Property Description
+                                      </h3>
+                                      <textarea
+                                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                        placeholder="Describe the property features, neighborhood, unique selling points..."
+                                      />
+                                    </div>
+                                    <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                      <div className="bg-linear-to-r from-blue-50 to-indigo-50 p-4 rounded-xl">
+                                        <h4 className="font-bold text-gray-800 mb-2">
+                                          Financial Details
+                                        </h4>
+                                        <div className="space-y-2">
+                                          <div className="flex justify-between">
+                                            <span className="text-gray-600">
+                                              Property Tax:
+                                            </span>
+                                            <input
+                                              type="text"
+                                              className="w-24 text-right border-b"
+                                              defaultValue="$3,200/yr"
+                                            />
+                                          </div>
+                                          <div className="flex justify-between">
+                                            <span className="text-gray-600">
+                                              HOA Fees:
+                                            </span>
+                                            <input
+                                              type="text"
+                                              className="w-24 text-right border-b"
+                                              defaultValue="$250/mo"
+                                            />
+                                          </div>
+                                          <div className="flex justify-between">
+                                            <span className="text-gray-600">
+                                              Insurance:
+                                            </span>
+                                            <input
+                                              type="text"
+                                              className="w-24 text-right border-b"
+                                              defaultValue="$1,500/yr"
+                                            />
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div className="bg-linear-to-r from-green-50 to-emerald-50 p-4 rounded-xl">
+                                        <h4 className="font-bold text-gray-800 mb-2">
+                                          Listing Settings
+                                        </h4>
+                                        <div className="space-y-3">
+                                          <label className="flex items-center justify-between">
+                                            <span className="text-gray-600">
+                                              Featured Listing
+                                            </span>
+                                            <input
+                                              type="checkbox"
+                                              className="toggle toggle-success"
+                                            />
+                                          </label>
+                                          <label className="flex items-center justify-between">
+                                            <span className="text-gray-600">
+                                              Open House
+                                            </span>
+                                            <input
+                                              type="checkbox"
+                                              className="toggle toggle-info"
+                                            />
+                                          </label>
+                                          <label className="flex items-center justify-between">
+                                            <span className="text-gray-600">
+                                              Instant Booking
+                                            </span>
+                                            <input
+                                              type="checkbox"
+                                              className="toggle toggle-warning"
+                                            />
+                                          </label>
+                                        </div>
+                                      </div>
+
+                                      <div className="bg-linear-to-r from-purple-50 to-pink-50 p-4 rounded-xl">
+                                        <h4 className="font-bold text-gray-800 mb-2">
+                                          Agent Information
+                                        </h4>
+                                        <select className="w-full mb-2 p-2 border rounded-lg">
+                                          <option>
+                                            John Doe (Primary Agent)
+                                          </option>
+                                          <option>Jane Smith</option>
+                                          <option>Mike Johnson</option>
+                                        </select>
+                                        <input
+                                          type="text"
+                                          placeholder="Agent Notes"
+                                          className="w-full p-2 border rounded-lg text-sm"
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="border-t border-gray-200 p-6 bg-gray-50">
+                                    <div className="flex justify-between items-center">
+                                      <div className="flex space-x-3">
+                                        <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+                                          <Save className="inline w-4 h-4 mr-2" />
+                                          Save Draft
+                                        </button>
+                                        <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition">
+                                          <EyeOff className="inline w-4 h-4 mr-2" />
+                                          Preview
+                                        </button>
+                                      </div>
+                                      <div className="flex space-x-3">
+                                        <button
+                                          onClick={() => visisbleEdit(false)}
+                                          className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition font-semibold"
+                                        >
+                                          Cancel
+                                        </button>
+                                        <button className="px-6 py-3 bg-linear-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition font-semibold shadow-lg">
+                                          <Upload className="inline w-5 h-5 mr-2" />
+                                          Publish Listing
+                                        </button>
+                                        <button className="px-4 py-3 bg-linear-to-r from-blue-600 to-indigo-700 text-white rounded-lg hover:from-blue-700 hover:to-indigo-800 transition font-semibold shadow-lg">
+                                          <Send className="inline w-5 h-5 mr-2" />
+                                          Schedule
+                                        </button>
+                                      </div>
+                                    </div>
+                                    <div className="mt-4 text-center text-sm text-gray-500">
+                                      <Info className="inline w-4 h-4 mr-1" />
+                                      This listing will be visible on your
+                                      website, MLS, and partner portals
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
