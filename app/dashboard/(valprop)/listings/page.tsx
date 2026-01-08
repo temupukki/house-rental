@@ -44,6 +44,7 @@ interface Property {
 export default function Listings() {
   const [properties, setProperties] = useState<Property[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [edit, visisbleEdit] = useState(false);
   const [filterType, setFilterType] = useState<string>("all");
   const [filterStatus, setFilterStatus] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("newest");
@@ -61,45 +62,45 @@ export default function Listings() {
     fetchproperties();
   }, []);
 
- if (!properties || !Array.isArray(properties)) {
-  return []; 
-}
+  if (!properties || !Array.isArray(properties)) {
+    return [];
+  }
 
-const filteredProperties = properties
-  .filter((property) => {
-    
-    const title = property?.title?.toLowerCase() || '';
-    const location = property?.locationName?.toLowerCase() || '';
-    const description = property?.description?.toLowerCase() || '';
-    
-    const searchLower = (searchTerm || '').toLowerCase();
-    
-    const matchesSearch = 
-      title.includes(searchLower) ||
-      location.includes(searchLower) ||
-      description.includes(searchLower);
-    
-    const matchesType = filterType === "all" || property?.type === filterType;
-    const matchesStatus = filterStatus === "all" || property?.status === filterStatus;
-    
-    return matchesSearch && matchesType && matchesStatus;
-  })
-  .sort((a, b) => {
-    if (!sortBy || sortBy === "default") return 0;
-    
-    switch (sortBy) {
-      case "price-high":
-        return (b?.price || 0) - (a?.price || 0);
-      case "price-low":
-        return (a?.price || 0) - (b?.price || 0);
-      case "newest":
-        const dateA = a?.postedDate ? new Date(a.postedDate).getTime() : 0;
-        const dateB = b?.postedDate ? new Date(b.postedDate).getTime() : 0;
-        return dateB - dateA;
-      default:
-        return 0;
-    }
-  });
+  const filteredProperties = properties
+    .filter((property) => {
+      const title = property?.title?.toLowerCase() || "";
+      const location = property?.locationName?.toLowerCase() || "";
+      const description = property?.description?.toLowerCase() || "";
+
+      const searchLower = (searchTerm || "").toLowerCase();
+
+      const matchesSearch =
+        title.includes(searchLower) ||
+        location.includes(searchLower) ||
+        description.includes(searchLower);
+
+      const matchesType = filterType === "all" || property?.type === filterType;
+      const matchesStatus =
+        filterStatus === "all" || property?.status === filterStatus;
+
+      return matchesSearch && matchesType && matchesStatus;
+    })
+    .sort((a, b) => {
+      if (!sortBy || sortBy === "default") return 0;
+
+      switch (sortBy) {
+        case "price-high":
+          return (b?.price || 0) - (a?.price || 0);
+        case "price-low":
+          return (a?.price || 0) - (b?.price || 0);
+        case "newest":
+          const dateA = a?.postedDate ? new Date(a.postedDate).getTime() : 0;
+          const dateB = b?.postedDate ? new Date(b.postedDate).getTime() : 0;
+          return dateB - dateA;
+        default:
+          return 0;
+      }
+    });
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -127,8 +128,15 @@ const filteredProperties = properties
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-6">
-      <div className="mb-8">
+    <div className="min-h-screen bg-gray-50 p-4 md:p-6 " >
+        {edit && (
+          <div className="bg-gray-300 absolute z-40 top-45 left-65 right-65 h-170 w-300 ">
+              <div className="absolute inset-0 backdrop-blur-md"></div>
+            <X />
+          </div>
+        )}
+      <div className={`mb-8 ${edit ? "blur-2xl" : ""}`}>
+      
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
@@ -240,7 +248,6 @@ const filteredProperties = properties
                   <span className="font-medium text-blue-900">
                     {selectedProperties.length} properties selected
                   </span>
-                
                 </div>
                 <button
                   onClick={() => setSelectedProperties([])}
@@ -342,14 +349,12 @@ const filteredProperties = properties
 
                             <div className="flex items-center gap-2">
                               <button
-                              
+                                onClick={() => visisbleEdit(true)}
                                 className="p-2 rounded-lg bg-blue-100 text-blue-600 hover:bg-blue-200"
                                 title="Edit property"
                               >
                                 <Edit size={18} />
                               </button>
-
-                          
                             </div>
                           </div>
                         </div>
