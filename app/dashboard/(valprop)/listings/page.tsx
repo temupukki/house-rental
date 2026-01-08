@@ -408,26 +408,24 @@ export default function Listings() {
                                                 placeholder="Modern Luxury Villa with Pool"
                                               />
                                             </div>
-                                            <div className="mb-3" >
+                                            <div className="mb-3">
                                               <label className="block text-sm font-semibold text-gray-700 mb-2">
                                                 Price
                                               </label>
-                                              <div className="mb-3" >
-                                                
+                                              <div className="mb-3">
                                                 <Input
                                                   type="number"
                                                   value={property.price}
                                                   className="pl-8 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent w-48  text-2xl font-bold text-blue-700"
                                                 />
                                               </div>
-                                               <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                              <label className="block text-sm font-semibold text-gray-700 mb-1">
                                                 Type
                                               </label>
 
                                               <select className="mt-2 p-2 border rounded-lg text-sm">
                                                 <option>For Sale</option>
                                                 <option>For Rent</option>
-                                            
                                               </select>
                                             </div>
                                           </div>
@@ -494,118 +492,6 @@ export default function Listings() {
                                             </div>
                                           </div>
                                         </div>
-
-                                        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-                                          <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
-                                            <MapPin className="w-5 h-5" />{" "}
-                                            Location
-                                          </h3>
-                                          <input
-                                            type="text"
-                                            placeholder="Full Address"
-                                            className="w-full p-3 border border-gray-300 rounded-lg mb-3"
-                                          />
-                                          <div className="grid grid-cols-2 gap-3">
-                                            <input
-                                              type="text"
-                                              placeholder="City"
-                                              className="p-2 border rounded-lg"
-                                            />
-                                            <input
-                                              type="text"
-                                              placeholder="State"
-                                              className="p-2 border rounded-lg"
-                                            />
-                                            <input
-                                              type="text"
-                                              placeholder="ZIP Code"
-                                              className="p-2 border rounded-lg"
-                                            />
-                                            <input
-                                              type="text"
-                                              placeholder="Neighborhood"
-                                              className="p-2 border rounded-lg"
-                                            />
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                      <div className="space-y-6">
-                                        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-                                          <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                            Amenities
-                                          </h3>
-                                          <div className="grid grid-cols-2 gap-3">
-                                            {[
-                                              "Swimming Pool",
-                                              "Gym",
-                                              "Parking",
-                                              "Garden",
-                                              "Security",
-                                              "Elevator",
-                                              "Pet Friendly",
-                                              "Balcony",
-                                            ].map((amenity) => (
-                                              <label
-                                                key={amenity}
-                                                className="flex items-center space-x-2 cursor-pointer"
-                                              >
-                                                <input
-                                                  type="checkbox"
-                                                  className="rounded text-blue-600"
-                                                />
-                                                <span className="text-gray-700">
-                                                  {amenity}
-                                                </span>
-                                              </label>
-                                            ))}
-                                          </div>
-                                        </div>
-
-                                        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-                                          <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                            Photos & Videos
-                                          </h3>
-                                          <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center">
-                                            <Camera className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                                            <p className="text-gray-600 mb-2">
-                                              Drag & drop property images or
-                                              videos
-                                            </p>
-                                            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                                              Browse Files
-                                            </button>
-                                            <p className="text-sm text-gray-500 mt-2">
-                                              Up to 20 images, 5 videos allowed
-                                            </p>
-                                          </div>
-                                        </div>
-                                        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-                                          <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                            Virtual Experience
-                                          </h3>
-                                          <div className="space-y-3">
-                                            <input
-                                              type="url"
-                                              placeholder="3D Tour URL"
-                                              className="w-full p-2 border rounded-lg"
-                                            />
-                                            <input
-                                              type="url"
-                                              placeholder="Video Walkthrough URL"
-                                              className="w-full p-2 border rounded-lg"
-                                            />
-                                            <label className="flex items-center space-x-2">
-                                              <input
-                                                type="checkbox"
-                                                className="rounded"
-                                              />
-                                              <span className="text-gray-700">
-                                                Enable AR View
-                                              </span>
-                                            </label>
-                                          </div>
-                                        </div>
                                       </div>
                                     </div>
 
@@ -619,96 +505,11 @@ export default function Listings() {
                                       />
                                     </div>
                                     <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                                      <div className="bg-linear-to-r from-blue-50 to-indigo-50 p-4 rounded-xl">
-                                        <h4 className="font-bold text-gray-800 mb-2">
-                                          Financial Details
-                                        </h4>
-                                        <div className="space-y-2">
-                                          <div className="flex justify-between">
-                                            <span className="text-gray-600">
-                                              Property Tax:
-                                            </span>
-                                            <input
-                                              type="text"
-                                              className="w-24 text-right border-b"
-                                              defaultValue="$3,200/yr"
-                                            />
-                                          </div>
-                                          <div className="flex justify-between">
-                                            <span className="text-gray-600">
-                                              HOA Fees:
-                                            </span>
-                                            <input
-                                              type="text"
-                                              className="w-24 text-right border-b"
-                                              defaultValue="$250/mo"
-                                            />
-                                          </div>
-                                          <div className="flex justify-between">
-                                            <span className="text-gray-600">
-                                              Insurance:
-                                            </span>
-                                            <input
-                                              type="text"
-                                              className="w-24 text-right border-b"
-                                              defaultValue="$1,500/yr"
-                                            />
-                                          </div>
-                                        </div>
-                                      </div>
+                                     
 
-                                      <div className="bg-linear-to-r from-green-50 to-emerald-50 p-4 rounded-xl">
-                                        <h4 className="font-bold text-gray-800 mb-2">
-                                          Listing Settings
-                                        </h4>
-                                        <div className="space-y-3">
-                                          <label className="flex items-center justify-between">
-                                            <span className="text-gray-600">
-                                              Featured Listing
-                                            </span>
-                                            <input
-                                              type="checkbox"
-                                              className="toggle toggle-success"
-                                            />
-                                          </label>
-                                          <label className="flex items-center justify-between">
-                                            <span className="text-gray-600">
-                                              Open House
-                                            </span>
-                                            <input
-                                              type="checkbox"
-                                              className="toggle toggle-info"
-                                            />
-                                          </label>
-                                          <label className="flex items-center justify-between">
-                                            <span className="text-gray-600">
-                                              Instant Booking
-                                            </span>
-                                            <input
-                                              type="checkbox"
-                                              className="toggle toggle-warning"
-                                            />
-                                          </label>
-                                        </div>
-                                      </div>
+                                   
 
-                                      <div className="bg-linear-to-r from-purple-50 to-pink-50 p-4 rounded-xl">
-                                        <h4 className="font-bold text-gray-800 mb-2">
-                                          Agent Information
-                                        </h4>
-                                        <select className="w-full mb-2 p-2 border rounded-lg">
-                                          <option>
-                                            John Doe (Primary Agent)
-                                          </option>
-                                          <option>Jane Smith</option>
-                                          <option>Mike Johnson</option>
-                                        </select>
-                                        <input
-                                          type="text"
-                                          placeholder="Agent Notes"
-                                          className="w-full p-2 border rounded-lg text-sm"
-                                        />
-                                      </div>
+                                    
                                     </div>
                                   </div>
                                   <div className="border-t border-gray-200 p-6 bg-gray-50">
