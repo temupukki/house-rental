@@ -19,6 +19,7 @@ import {
   XCircle,
   TrendingUp,
   TrendingDown,
+  X,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -128,15 +129,18 @@ export default function Listings() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-6 " >
-        {edit && (
-          <div className="bg-gray-300 absolute z-40 top-45 left-65 right-65 h-170 w-300 ">
-              <div className="absolute inset-0 backdrop-blur-md"></div>
-            <X />
+    <div className="min-h-screen bg-gray-50 p-4 md:p-6 ">
+      {edit && (
+        <div className="bg-gray-300 absolute z-40 top-45 left-65 right-65 h-170 w-300 ">
+          <div className="flex justify-end  h-full w-full mt-2 ">
+            <button onClick={()=>visisbleEdit(false)} className="text-black w-6 h-6 cursor-pointer hover:text-red-600">
+               <X  />
+            </button>
+           
           </div>
-        )}
+        </div>
+      )}
       <div className={`mb-8 ${edit ? "blur-2xl" : ""}`}>
-      
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
